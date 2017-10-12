@@ -1,0 +1,545 @@
+var express = require('express'),
+  path = require('path'),
+  app = express(),
+  server = require('http').createServer(app).listen(process.env.PORT || 8080),
+  bodyParser = require('body-parser'),
+  request = require('request'),
+  _ = require('underscore');
+
+app.use(express.static(path.join(__dirname, 'app')));
+
+
+var _token;
+var _responseId;
+
+app.use(function (req, res, next) {
+  "use strict";
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
+  res.header('Access-Control-Allow-Headers', 'origin, content-type, unity-token');
+  if (req.method == 'OPTIONS') {
+    res.send(200);
+  } else {
+    next();
+  }
+});
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+var serverKey = 'AAAAogRJ72o:APA91bEeeQ7JM8GdWOOX4ifD1_acP-vpcpX8YKQ6X-7PSRLXINETjBAvNAiwdrqJrWhI8LWSxTyEdTeaw4B7stFyTnMEMPSw4AHxk_W13xigKJcrAAmJzP2DapbUecGfu7rCgAjWuSrk';
+
+//var serverKey = "=AAAAwC9R64E:APA91bF8x_RKTJrsM5CZkrD9Uw_dDyjGK-aAI8EyuCyMzqoRte7F5ioFd2wp1C1-dOsUbQn3K_gKwLBO4Ho1_ztIbJJH4P7eIcNFFU-DrVbYrEcwuGbSEr3ZstzIFSRXfjWd_ZvDikbm";
+var auth = "key=" + serverKey;
+
+
+
+app.post('/api/Notification/DeviceRegister', function (req, res) {
+  var token = req.body.FcmId;
+  console.log('token ' + token);
+
+  if (_token) {
+    console.log("_token exists: " + _token);
+    return;
+  }
+  _token = token;
+  res.send({ result: 'Success' });
+});
+
+app.post('/api/Notification/TopicRegister', function (req, res) {
+  var topic = req.body.topic;
+  console.log('subscribeTopic ' + topic);
+  res.send({ status: 'SUCCESS' });
+});
+
+app.post('/api/Notification/TopicUnregister', function (req, res) {
+  var topic = req.body.topic;
+  console.log('unsubscribeTopic ' + topic);
+  res.send({ status: 'SUCCESS' });
+});
+
+app.get('/api/ping', function (req, res) {
+  res.send({ message: 'pong' });
+});
+
+
+app.get('/api/project', function (req, res) {
+
+  console.log('GET projects called, sending response id ' + _responseId);
+  console.log('Waiting for 30 seconds to simulate get project call');
+
+  setTimeout(function () {
+    var pushMessage = {
+      "notification": {
+        "title": "Get Projects",
+        "body": {
+          "cmsOperation": "GetProjects",
+          "notificationTopic": "NA",
+          "notificationType": 0,
+          "responseId": "1"
+        }
+      },
+      "to": _token
+    }
+    sendFCMNotification(pushMessage);
+
+  }, 30000)
+  res.send({ responseId: "1" });
+
+});
+
+
+var projectData = [
+  { 'id': '1', 'projectName': 'Unity1', 'repoUrl': 'Unity1.com' },
+  { 'id': '2', 'projectName': 'Unity2', 'repoUrl': 'Unity2.com' },
+  { 'id': '3', 'projectName': 'Unity3', 'repoUrl': 'Unity3.com' },
+  { 'id': '4', 'projectName': 'Unity4', 'repoUrl': 'Unity4.com' },
+  { 'id': '5', 'projectName': 'Unity5', 'repoUrl': 'Unity5.com' }
+];
+
+var typeOfContentArray = [
+  { id: '1', name: 'Knowledge Base' },
+  { id: '2', name: 'Tutorials' },
+  { id: '3', name: 'Manuals' },
+  { id: '4', name: 'Script Ref' },
+];
+
+var projectArray = [{
+    _id: 1,
+    status: "",
+    projectName: "Unity Core User Manual"
+  },
+  {
+    _id: 2,
+    status: "",
+    projectName: "Unity Core User Manual 2"
+  },
+  {
+    _id: 3,
+    status: "",
+    projectName: "Unity Core User Manual 3"
+  }];
+
+var sendFCMNotification = function (pushMessage) {
+  console.log(JSON.stringify(pushMessage))
+  request({
+    headers: {
+      'Content-Type': 'application/json',
+      "Authorization": auth
+    },
+    uri: 'https://fcm.googleapis.com/fcm/send',
+    body: JSON.stringify(pushMessage),
+    method: 'POST'
+  }, function (err, res, body) {
+    if (err) {
+      console.error("error in sending push notification " + err);
+    } else {
+      console.info("push notification send successfully" + JSON.stringify(body));
+    }
+  });
+}
+
+app.get('/api/getTypeOfContent', function (req, res) {
+  setTimeout(function () {
+    var pushMessage = {
+      "notification": {
+        "title": "add project",
+        "body": {
+          "cmsOperation": "getTypeOfContent",
+          "notificationTopic": "NA",
+          "notificationType": 0,
+          "responseId": "3"
+        }
+      },
+      "to": _token
+    }
+    sendFCMNotification(pushMessage);
+  }, 10000);
+
+  res.send({ responseId: 3 });
+});
+
+app.get('/api/Response/:respId', function (req, res) {
+  var respId = req.params.respId;
+  var tempData = null;
+  switch (respId) {
+    case "3": //get content type
+      tempData = typeOfContentArray;
+	  res.send({ data: tempData });
+      break;
+    case "11": // repo url exists
+      tempData = false;
+	  res.send({ data: tempData });
+      break;
+    case "10": // repo url not exists
+      tempData = true;
+	  res.send({ data: tempData });
+      break;
+    case "21": // project exists
+      tempData = false;
+	  res.send({ data: tempData });
+      break;
+    case "20": // projects not exists
+      tempData = true;
+	  res.send({ data: tempData });
+      break;
+    case "1": // get project
+     	  res.send({ content: {projects:projectArray }});
+      break;
+    default:
+      break;
+  }
+
+  
+});
+
+
+app.get('/api/validateRepoUrl/:repoUrl', function (req, res) {
+  var repoUrl = req.params.repoUrl;
+  var tempResponseId = null;
+  var tempProject = _.where(projectData, { repoUrl: repoUrl });
+  if (tempProject.length > 0) {
+    tempResponseId = 11;
+  }
+  else {
+    tempResponseId = 10;
+  }
+  setTimeout(function () {
+    var pushMessage = {
+      "notification": {
+        "title": "add project",
+        "body": {
+          "cmsOperation": "validateRepoUrl",
+          "notificationTopic":
+          "NA", "notificationType": 0,
+          "responseId": tempResponseId
+        }
+      },
+      "to": _token
+    }
+    sendFCMNotification(pushMessage);
+  }, 10000);
+
+  res.send({ responseId: tempResponseId });
+
+});
+
+app.get('/api/validateProjectName/:projectName', function (req, res) {
+  var projectName = req.params.projectName;
+  var tempResponseId = null;
+  var tempProject = _.where(projectData, { projectName: projectName });
+  if (tempProject.length > 0) {
+    tempResponseId = 21;
+  }
+  else {
+    tempResponseId = 20;
+  }
+  setTimeout(function () {
+    var pushMessage = {
+      "notification": {
+        "title": "add project",
+        "body": {
+          "cmsOperation": "validateProjectName",
+          "notificationTopic": "NA",
+          "notificationType": 0,
+          "responseId": tempResponseId
+        }
+      },
+      "to": _token
+    }
+    sendFCMNotification(pushMessage);
+  }, 10000);
+  res.send({ responseId: tempResponseId });
+});
+
+
+
+app.post('/api/doLogin', function (req, res) {
+  var userName = req.body.userName;
+  var password = req.body.password;
+  var captchaResponseToken = req.body.captchaResponseToken;
+
+  console.log('doLogin ' + userName + ', ' + password + ', ' + captchaResponseToken);
+
+  request({
+    uri: 'https://www.google.com/recaptcha/api/siteverify',
+    form: {
+      "secret": "6LcTQDIUAAAAAFjWj88FHAHAYB2airDwJ5Wkr4FN",//server staging secret 
+      "response": captchaResponseToken
+    },
+    method: 'POST'
+  }, function (err, response, body) {
+    if (err) {
+      console.error("error in recaptcha " + err);
+    } else {
+      var bodyJSON = JSON.parse(body);
+      console.info("recaptcha successful" + JSON.stringify(bodyJSON) + ', ' + bodyJSON.success);
+      res.send({ status: 0, token: '1wewqe1313s131313131313', profile: { firstName: userName, lastName: userName } });
+    }
+  });
+});
+
+app.post('/connect/token', function (req, res) {
+  var userName = req.body.userName;
+  var password = req.body.password;
+  var captchaResponseToken = req.body.captchaResponseToken;
+
+  console.log('doLogin ' + userName + ', ' + password + ', ' + captchaResponseToken);
+
+  request({
+    uri: 'https://www.google.com/recaptcha/api/siteverify',
+    form: {
+      "secret": "6LcTQDIUAAAAAFjWj88FHAHAYB2airDwJ5Wkr4FN",//server staging secret 
+      "response": captchaResponseToken
+    },
+    method: 'POST'
+  }, function (err, response, body) {
+    if (err) {
+      console.error("error in recaptcha " + err);
+    } else {
+      var bodyJSON = JSON.parse(body);
+      console.info("recaptcha successful" + JSON.stringify(bodyJSON) + ', ' + bodyJSON.success);
+      res.send({ status: 0, token: '1wewqe1313s131313131313', profile: { firstName: userName, lastName: userName } });
+    }
+  });
+});
+
+app.get('/api/node/gdoc/:draftId', function (req, res) {
+  var draftId = req.params.draftId;
+  console.log('draftId ' + draftId);
+  if (!draftId) {
+    res.send({ content: undefined });
+    return;
+  }
+  res.send({ content: 'https://docs.google.com/document/d/1RIHU4GBFX8_3N5_hxSGX1VgvO9mJ7BXfpmvTBBw--Qk/edit#heading=h.ot80o53sptxv' });
+});
+
+app.get('/api/node/html/:draftId', function (req, res) {
+  var draftId = req.params.draftId;
+  console.log('draftId ' + draftId);
+  if (!draftId) {
+    res.send({ content: undefined });
+    return;
+  } else {
+    res.send({ content: ' <h3>Related articles</h3>    <ul>              <li>          <a href="/hc/en-us/articles/206604236-Android-Library-Project-Native-Plugins-not-displaying-properly-in-Inspector-Window">Android Library Project (Native Plugins) not displaying properly in Inspector Window</a>        </li>              <li>          <a href="/hc/en-us/articles/206217436-Why-can-t-I-see-Shadows-on-some-of-my-Android-Devices-">Why can&#39;t I see Shadows on some of my Android Devices?</a>        </li>              <li>          <a href="/hc/en-us/articles/208246446-libhoudini-so-crashes-on-Android-x86-devices">libhoudini.so crashes on Android x86 devices</a>        </li>              <li>          <a href="/hc/en-us/articles/207942813-How-can-I-disable-Bitcode-support-">How can I disable Bitcode support?</a>        </li>              <li>          <a href="/hc/en-us/articles/209933103-Bitcode-Support-in-iOS-tvOS">Bitcode Support in iOS &amp; tvOS</a>        </li>          </ul>' });
+  }
+});
+
+app.get('/api/node/md/:draftId', function (req, res) {
+  var draftId = req.params.draftId;
+  console.log('draftId ' + draftId);
+  if (!draftId) {
+    res.send({ content: undefined });
+    return;
+  }
+  res.send({ content: '### Related articles *   [Android Library Project (Native Plugins) not displaying properly in Inspector Window](/hc/en-us/articles/206604236-Android-Library-Project-Native-Plugins-not-displaying-properly-in-Inspector-Window)*   [Why can\'t I see Shadows on some of my Android Devices?](/hc/en-us/articles/206217436-Why-can-t-I-see-Shadows-on-some-of-my-Android-Devices-)*   [libhoudini.so crashes on Android x86 devices](/hc/en-us/articles/208246446-libhoudini-so-crashes-on-Android-x86-devices)*   [How can I disable Bitcode support?](/hc/en-us/articles/207942813-How-can-I-disable-Bitcode-support-)*   [Bitcode Support in iOS & tvOS](/hc/en-us/articles/209933103-Bitcode-Support-in-iOS-tvOS) ' });
+
+});
+
+app.get('/api/tabs', function (req, res) {
+  var tabData =
+    [
+      { 'title': 'GDoc', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/gdoc', 'displayContentInIframe': true },
+      { 'title': 'HTML', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/html', 'displayContentInIframe': false },
+      { 'title': '.md', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/md', 'displayContentInIframe': false },
+      { 'title': 'preview', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/html', 'displayContentInIframe': false },
+      { 'title': 'history', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/md', 'displayContentInIframe': false }
+    ];
+
+  res.send({ data: tabData });
+});
+
+app.get('/api/tags', function (req, res) {
+  var tagData = [
+    { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
+    { 'id': '2', 'name': 'FR', 'group': 'language', 'color': 'primary' },
+    { 'id': '3', 'name': 'GR', 'group': 'language', 'color': 'primary' },
+    { 'id': '4', 'name': 'CH', 'group': 'language', 'color': 'primary' },
+    { 'id': '5', 'name': 'novice', 'group': 'level', 'color': 'warn' },
+    { 'id': '6', 'name': 'intermediate', 'group': 'level', 'color': 'warn' },
+    { 'id': '7', 'name': 'pro', 'group': 'level', 'color': 'warn' },
+    { 'id': '8', 'name': 'expert', 'group': 'level', 'color': 'warn' },
+    { 'id': '9', 'name': 'coding', 'group': 'type', 'color': 'accent' },
+    { 'id': '10', 'name': 'developement', 'group': 'type', 'color': 'accent' },
+    { 'id': '11', 'name': 'testing', 'group': 'type', 'color': 'accent' },
+    { 'id': '12', 'name': 'production', 'group': 'type', 'color': 'accent' },
+    { 'id': '13', 'name': 'new', 'group': 'stage', 'color': 'primary' },
+    { 'id': '14', 'name': 'draft', 'group': 'stage', 'color': 'primary' },
+    { 'id': '15', 'name': 'review', 'group': 'stage', 'color': 'primary' },
+    { 'id': '16', 'name': 'completed', 'group': 'stage', 'color': 'primary' }
+  ];
+  res.send({ data: tagData });
+});
+
+app.get('/api/draftTags/:draftId', function (req, res) {
+  var draftTags = [
+    { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
+    { 'id': '5', 'name': 'novice', 'group': 'level', 'color': 'warn' },
+    { 'id': '9', 'name': 'coding', 'group': 'type', 'color': 'accent' },
+    { 'id': '13', 'name': 'new', 'group': 'stage', 'color': 'primary' }
+  ];
+  res.send({ data: draftTags });
+});
+
+app.get('/api/project/:id', function (req, res) {
+  var projectId = req.query.id;
+  console.log('project id ' + projectId);
+  var project = {
+    'files':
+    [
+      {
+        'label': 'Working in Unity',
+
+        'expandedIcon': 'fa-folder-open',
+        'collapsedIcon': 'fa-folder',
+        'children': [
+          {
+            'label': 'Basics',
+
+            'expandedIcon': 'fa-folder-open',
+            'collapsedIcon': 'fa-folder',
+            'children': [
+              {
+                'label': 'Downloading and installing Unity',
+
+                'expandedIcon': 'fa-folder-open',
+                'collapsedIcon': 'fa-folder',
+                'children': [
+                  {
+                    'label': 'Deploying Unity offline',
+                    'icon': 'fa-file-word-o',
+                    'data': 'Deploying Unity offline'
+                  }
+                ]
+              },
+              {
+                'label': '2D or 3D projects',
+                'icon': 'fa-file-word-o',
+                'data': '2D or 3D projects'
+              },
+              {
+                'label': 'Getting started',
+
+                'expandedIcon': 'fa-folder-open',
+                'collapsedIcon': 'fa-folder',
+                'children': [
+                  {
+                    'label': 'The Learn tab',
+                    'icon': 'fa-file-word-o',
+                    'data': 'The Learn tab'
+                  }
+                ]
+              },
+              {
+                'label': 'Learning the interface',
+                'icon': 'fa-file-word-o',
+                'data': 'Learning the interface'
+              }
+            ]
+          },
+          {
+            'label': 'Asset Workflow',
+
+            'expandedIcon': 'fa-folder-open',
+            'collapsedIcon': 'fa-folder',
+            'children': [
+              {
+                'label': 'Primitive and Placeholder Objects',
+                'icon': 'fa-file-word-o',
+                'data': 'Primitive and Placeholder Objects'
+              },
+              {
+                'label': 'Importing Assets',
+                'icon': 'fa-file-word-o',
+                'data': 'Importing Assets'
+              },
+              {
+                'label': 'Imort Settings',
+                'icon': 'fa-file-word-o',
+                'data': 'Imort Settings'
+              },
+              {
+                'label': 'Importing from the Asset Store',
+                'icon': 'fa-file-word-o',
+                'data': 'Importing from the Asset Store'
+              },
+              {
+                'label': 'Asset Packages',
+                'icon': 'fa-file-word-o',
+                'data': 'Asset Packages'
+              },
+              {
+                'label': 'Standard Assets',
+                'icon': 'fa-file-word-o',
+                'data': 'Standard Assets'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        'label': '2D',
+
+        'expandedIcon': 'fa-folder-open',
+        'collapsedIcon': 'fa-folder',
+        'children': [
+          {
+            'label': 'Gameplay in 2D',
+            'icon': 'fa-file-image-o',
+            'data': 'Gameplay in 2D'
+          },
+          {
+            'label': 'Sprites',
+
+            'expandedIcon': 'fa-folder-open',
+            'collapsedIcon': 'fa-folder',
+            'children': [
+              {
+                'label': 'Sprite Creator',
+                'icon': 'fa-file-image-o',
+                'data': 'Sprite Creator'
+              },
+              {
+                'label': 'Sprite Editor',
+                'icon': 'fa-file-image-o',
+                'data': 'Sprite Editor'
+              },
+              {
+                'label': 'Sprite Masks',
+                'icon': 'fa-file-image-o',
+                'data': 'Sprite Masks'
+              }
+            ]
+          },
+          {
+            'label': 'Physics Reference 2D',
+
+            'expandedIcon': 'fa-folder-open',
+            'collapsedIcon': 'fa-folder',
+            'children': [
+              {
+                'label': 'Physics 2D Settings',
+                'icon': 'fa-file-image-o',
+                'data': 'Physics 2D Settings'
+              },
+              {
+                'label': 'Rigidbody 2D',
+                'icon': 'fa-file-image-o',
+                'data': 'Rigidbody 2D'
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    distributions: ['5.0', '5.1', '5.2', '5.3', '5.4'],
+    languages: ['English', 'Español', 'Deutsch', 'Française']
+  }
+
+  res.send({ data: project });
+});
+
+console.log('server started');
