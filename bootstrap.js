@@ -65,7 +65,6 @@ app.get('/api/ping', function (req, res) {
     res.send({ message: 'pong' });
 });
 
-
 app.get('/api/project', function (req, res) {
 
     console.log('GET projects called, sending response id ' + _responseId);
@@ -122,39 +121,71 @@ var projectData = [
 var distributions = [
     {
         'distributionId': '5.0',
+        'distributionName':'5.0',
         'isDefault': false,
         'status': 'Completed'
     },
     {
         'distributionId': '5.1',
+        'distributionName': '5.1',
         'isDefault': true,
         'status': 'Completed'
     },
     {
         'distributionId': '5.2',
+        'distributionName': '5.2',
         'isDefault': false,
         'status': 'Completed'
     },
     {
         'distributionId': '5.3',
+        'distributionName': '5.3',
         'isDefault': false,
         'status': 'InProgress'
     },
     {
         'distributionId': '5.4',
+        'distributionName': '5.4',
         'isDefault': false,
         'status': 'Completed'
     },
     {
         'distributionId': '5.5',
+        'distributionName': '5.5',
         'isDefault': false,
         'status': 'Completed'
     }
 ];
 
-var Emptydistributions = [
+var distributionBranches = [
+    {
+        'branchID': '1',
+        'name': 'branch1',
+    },
+    {
+        'branchID': '2',
+        'name': 'branch2',
+    },
+    {
+        'branchID': '3',
+        'name': 'branch3',
+    },
+    {
+        'branchID': '4',
+        'name': 'branch4',
+    },
+    {
+        'branchID': '5',
+        'name': 'branch5',
+    },
+    {
+        'branchID': '6',
+        'name': 'branch6',
+    },
 ];
 
+var Emptydistributions = [
+];
 
 var typeOfContentArray = [
     { id: '1', name: 'Knowledge Base' },
@@ -184,6 +215,32 @@ var projectArray = [{
     projectName: "test1"
 }];
 
+var tagData = [
+    { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
+    { 'id': '2', 'name': 'FR', 'group': 'language', 'color': 'primary' },
+    { 'id': '3', 'name': 'GR', 'group': 'language', 'color': 'primary' },
+    { 'id': '4', 'name': 'CH', 'group': 'language', 'color': 'primary' },
+    { 'id': '5', 'name': 'novice', 'group': 'level', 'color': 'warn' },
+    { 'id': '6', 'name': 'intermediate', 'group': 'level', 'color': 'warn' },
+    { 'id': '7', 'name': 'pro', 'group': 'level', 'color': 'warn' },
+    { 'id': '8', 'name': 'expert', 'group': 'level', 'color': 'warn' },
+    { 'id': '9', 'name': 'coding', 'group': 'type', 'color': 'accent' },
+    { 'id': '10', 'name': 'developement', 'group': 'type', 'color': 'accent' },
+    { 'id': '11', 'name': 'testing', 'group': 'type', 'color': 'accent' },
+    { 'id': '12', 'name': 'production', 'group': 'type', 'color': 'accent' },
+    { 'id': '13', 'name': 'new', 'group': 'stage', 'color': 'primary' },
+    { 'id': '14', 'name': 'draft', 'group': 'stage', 'color': 'primary' },
+    { 'id': '15', 'name': 'review', 'group': 'stage', 'color': 'primary' },
+    { 'id': '16', 'name': 'completed', 'group': 'stage', 'color': 'primary' }
+];
+
+var draftTags = [
+    { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
+    { 'id': '5', 'name': 'novice', 'group': 'level', 'color': 'warn' },
+    { 'id': '9', 'name': 'coding', 'group': 'type', 'color': 'accent' },
+    { 'id': '13', 'name': 'new', 'group': 'stage', 'color': 'primary' }
+];
+
 var TreeDrafts = [
     {
         "documentId": 1,
@@ -193,7 +250,7 @@ var TreeDrafts = [
             "status": "Draft",
             "isSymLink": false,
             "documentId": 1,
-            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "Draft" }, { "id": "2", "name": "Final", "gDocUrl": "Final" }, { "id": "3", "name": "First Notes", "gDocUrl": "First Notes" }, { "id": "4", "name": "WIP", "gDocUrl": "WIP" }],
+
         },
         "children": [
             {
@@ -204,7 +261,7 @@ var TreeDrafts = [
                     "status": "Draft",
                     "isSymLink": false,
                     "documentId": 2,
-                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                 },
                 "children": [
                     {
@@ -215,7 +272,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 3,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": [
                             {
@@ -226,7 +283,7 @@ var TreeDrafts = [
                                     "status": null,
                                     "isSymLink": false,
                                     "documentId": 4790,
-                                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                 },
                                 "children": null
                             },
@@ -238,7 +295,7 @@ var TreeDrafts = [
                                     "status": "Draft",
                                     "isSymLink": true,
                                     "documentId": 7317,
-                                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                 },
                                 "children": null
                             },
@@ -250,7 +307,7 @@ var TreeDrafts = [
                                     "status": "Draft",
                                     "isSymLink": true,
                                     "documentId": 5630,
-                                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                 },
                                 "children": [
                                     {
@@ -261,7 +318,7 @@ var TreeDrafts = [
                                             "status": null,
                                             "isSymLink": false,
                                             "documentId": 920,
-                                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                         },
                                         "children": null
                                     },
@@ -273,7 +330,7 @@ var TreeDrafts = [
                                             "status": "Draft",
                                             "isSymLink": true,
                                             "documentId": 2345,
-                                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                         },
                                         "children": null
                                     }
@@ -287,7 +344,7 @@ var TreeDrafts = [
                                     "status": "Draft",
                                     "isSymLink": true,
                                     "documentId": 9634,
-                                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                 },
                                 "children": null
                             }
@@ -301,7 +358,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 6,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": [
                             {
@@ -312,7 +369,7 @@ var TreeDrafts = [
                                     "status": "Draft",
                                     "isSymLink": false,
                                     "documentId": 5,
-                                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                 },
                                 "children": null
                             },
@@ -324,7 +381,7 @@ var TreeDrafts = [
                                     "status": "Draft",
                                     "isSymLink": false,
                                     "documentId": 4,
-                                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                 },
                                 "children": null
                             },
@@ -336,7 +393,7 @@ var TreeDrafts = [
                                     "status": "Draft",
                                     "isSymLink": false,
                                     "documentId": 7,
-                                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                                 },
                                 "children": null
                             }
@@ -350,7 +407,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 8,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     }
@@ -364,7 +421,7 @@ var TreeDrafts = [
                     "status": "Draft",
                     "isSymLink": false,
                     "documentId": 9,
-                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                 },
                 "children": [
                     {
@@ -375,7 +432,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 10,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     },
@@ -387,7 +444,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 11,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     },
@@ -399,7 +456,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 12,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     },
@@ -411,7 +468,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 13,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     },
@@ -423,7 +480,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 14,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     },
@@ -435,7 +492,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 15,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     }
@@ -451,7 +508,7 @@ var TreeDrafts = [
             "status": "Draft",
             "isSymLink": false,
             "documentId": 16,
-            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
         },
         "children": [
             {
@@ -462,7 +519,7 @@ var TreeDrafts = [
                     "status": "Draft",
                     "isSymLink": false,
                     "documentId": 17,
-                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                 },
                 "children": null
             },
@@ -474,7 +531,7 @@ var TreeDrafts = [
                     "status": "Draft",
                     "isSymLink": false,
                     "documentId": 18,
-                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                 },
                 "children": [
                     {
@@ -485,7 +542,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 19,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     },
@@ -497,7 +554,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 20,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     },
@@ -509,7 +566,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 21,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     }
@@ -523,7 +580,7 @@ var TreeDrafts = [
                     "status": "Draft",
                     "isSymLink": false,
                     "documentId": 22,
-                    "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                 },
                 "children": [
                     {
@@ -534,7 +591,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 23,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     },
@@ -546,7 +603,7 @@ var TreeDrafts = [
                             "status": "Draft",
                             "isSymLink": false,
                             "documentId": 24,
-                            "drafts": [{ "id": "1", "name": "Draft", "gDocUrl": "test" }, { "id": "2", "name": "Final", "gDocUrl": "test" }, { "id": "3", "name": "First Notes", "gDocUrl": "test" }, { "id": "4", "name": "WIP", "gDocUrl": "test" }],
+
                         },
                         "children": null
                     }
@@ -555,6 +612,13 @@ var TreeDrafts = [
         ]
     }
 ]
+
+var drafts =[
+    { "id": "1", "name": "Draft", "gDocUrl": "test" },
+    { "id": "2", "name": "Final", "gDocUrl": "test" },
+    { "id": "3", "name": "First Notes", "gDocUrl": "test" },
+    { "id": "4", "name": "WIP", "gDocUrl": "test" }]
+
 var sendFCMNotification = function (pushMessage) {
     console.log(JSON.stringify(pushMessage))
     request({
@@ -630,6 +694,30 @@ app.get('/api/Response/:respId', function (req, res) {
         case "6": // get Tree Deafts
             res.send({ content: { distributions: distributions } });
             break;
+        case "7"://get distribution Branches
+            res.send({ content: { distributionBranches: distributionBranches } });
+            break;
+        case "8": // distribution Name exists
+            tempData = false;
+            res.send({ data: tempData });
+            break;
+        case "9": // distribution Name not exists
+            tempData = true;
+            res.send({ data: tempData });
+            break;
+        case "12": // get all Tags
+            res.send({ data: tagData });
+            break;
+        case "13": // get Draft Tags
+            res.send({ data: draftTags });
+            break;
+        case "14": // repo url not exists
+            tempData = true;
+            res.send({ data: tempData });
+            break;
+        case "15": // get Node Drafts
+            res.send({ data: drafts });
+            break;
         default:
             break;
     }
@@ -662,6 +750,36 @@ app.get('/api/validateRepoUrl/:repoUrl', function (req, res) {
         }
         sendFCMNotification(pushMessage);
     }, 10000);
+
+    res.send({ responseId: tempResponseId });
+
+});
+
+app.get('/api/Distribution/validateDistributionName/:distributionName', function (req, res) {
+    var distributionName = req.params.distributionName;
+    var tempResponseId = null;
+    var tempDistribution = _.where(distributions, { distributionName: distributionName });
+    if (tempDistribution.length > 0) {
+        tempResponseId = 8;
+    }
+    else {
+        tempResponseId = 9;
+    }
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "add Distribution",
+                "body": {
+                    "cmsOperation": "ValidateDistributionName",
+                    "notificationTopic":
+                    "NA", "notificationType": 0,
+                    "responseId": tempResponseId
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+    }, 5000);
 
     res.send({ responseId: tempResponseId });
 
@@ -778,52 +896,161 @@ app.get('/api/node/md/:draftId', function (req, res) {
 });
 
 app.get('/api/tabs', function (req, res) {
-    var tabData =
-        [
-            { 'title': 'GDoc', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/gdoc', 'displayContentInIframe': true },
-            { 'title': 'HTML', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/html', 'displayContentInIframe': false },
-            { 'title': '.md', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/md', 'displayContentInIframe': false },
-            { 'title': 'preview', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/html', 'displayContentInIframe': false },
-            { 'title': 'history', 'apiURL': 'https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/md', 'displayContentInIframe': false }
-        ];
+    var tabData = {
+        "tabs": [
+            {
+                "title": "GDoc",
+                "apiURL": "https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/gdoc",
+                "displayContentInIframe": true
+            },
+            {
+                "title": "HTML",
+                "apiURL": "https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/html",
+                "displayContentInIframe": false
+            },
+            {
+                "title": ".md",
+                "apiURL": "https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/md",
+                "displayContentInIframe": false
+            },
+            {
+                "title": "preview",
+                "apiURL": "https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/html",
+                "displayContentInIframe": false
+            },
+            {
+                "title": "history",
+                "apiURL": "https://treeviewcomponentnodejsapp.azurewebsites.net/api/node/md",
+                "displayContentInIframe": false
+            }
+        ],
+        "defaultTab": 0
+    };
 
     res.send({ data: tabData });
 });
 
 app.get('/api/tags', function (req, res) {
-    var tagData = [
-        { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
-        { 'id': '2', 'name': 'FR', 'group': 'language', 'color': 'primary' },
-        { 'id': '3', 'name': 'GR', 'group': 'language', 'color': 'primary' },
-        { 'id': '4', 'name': 'CH', 'group': 'language', 'color': 'primary' },
-        { 'id': '5', 'name': 'novice', 'group': 'level', 'color': 'warn' },
-        { 'id': '6', 'name': 'intermediate', 'group': 'level', 'color': 'warn' },
-        { 'id': '7', 'name': 'pro', 'group': 'level', 'color': 'warn' },
-        { 'id': '8', 'name': 'expert', 'group': 'level', 'color': 'warn' },
-        { 'id': '9', 'name': 'coding', 'group': 'type', 'color': 'accent' },
-        { 'id': '10', 'name': 'developement', 'group': 'type', 'color': 'accent' },
-        { 'id': '11', 'name': 'testing', 'group': 'type', 'color': 'accent' },
-        { 'id': '12', 'name': 'production', 'group': 'type', 'color': 'accent' },
-        { 'id': '13', 'name': 'new', 'group': 'stage', 'color': 'primary' },
-        { 'id': '14', 'name': 'draft', 'group': 'stage', 'color': 'primary' },
-        { 'id': '15', 'name': 'review', 'group': 'stage', 'color': 'primary' },
-        { 'id': '16', 'name': 'completed', 'group': 'stage', 'color': 'primary' }
-    ];
-    res.send({ data: tagData });
+    console.log('GET Tags called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 12;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get All Tags",
+                "body": {
+                    "cmsOperation": "GetAllTags",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+   
 });
 
 app.get('/api/draftTags/:draftId', function (req, res) {
-    var draftTags = [
-        { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
-        { 'id': '5', 'name': 'novice', 'group': 'level', 'color': 'warn' },
-        { 'id': '9', 'name': 'coding', 'group': 'type', 'color': 'accent' },
-        { 'id': '13', 'name': 'new', 'group': 'stage', 'color': 'primary' }
-    ];
-    res.send({ data: draftTags });
+    console.log('GET Draft Tags called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 13;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Draft Tags",
+                "body": {
+                    "cmsOperation": "GetDraftTags",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+  
+});
+
+app.get('/api/NodeDrafts/:nodeID', function (req, res) {
+    console.log('GET Node Drafts  called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 15;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Node Drafts",
+                "body": {
+                    "cmsOperation": "GetNodeDrafts",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+
+});
+
+app.get('/api/updateDraftTags/:tagId', function (req, res) {
+    console.log('Update Draft Tags called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 14;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Update Draft Tags",
+                "body": {
+                    "cmsOperation": "UpdateDraftTags",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+
+});
+
+app.get('/api/distributionBranches', function (req, res) {
+    console.log('GET branches called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+       var responseID = 7;
+      setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Branches",
+                "body": {
+                    "cmsOperation": "GetDistributionBranches",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
 });
 
 app.get('/api/distributions/:id', function (req, res) {
-    console.log('GET projects called, sending response id ' + _responseId);
+    console.log('GET Distributions called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get project call');
     var projectId = req.params.id;
     console.log(projectId);
@@ -836,7 +1063,7 @@ app.get('/api/distributions/:id', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
             "notification": {
-                "title": "Get Projects",
+                "title": "Get Distributions",
                 "body": {
                     "cmsOperation": "GetDistributions",
                     "notificationTopic": "NA",
