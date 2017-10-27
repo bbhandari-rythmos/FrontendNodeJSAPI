@@ -188,10 +188,10 @@ var Emptydistributions = [
 ];
 
 var typeOfContentArray = [
-    { id: '1', name: 'Knowledge Base' },
-    { id: '2', name: 'Tutorials' },
-    { id: '3', name: 'Manuals' },
-    { id: '4', name: 'Script Ref' },
+    { key: '1', value: 'Knowledge Base' },
+    { key: '2', value: 'Tutorials' },
+    { key: '3', value: 'Manuals' },
+    { key: '4', value: 'Script Ref' },
 ];
 
 var projectArray = [{
