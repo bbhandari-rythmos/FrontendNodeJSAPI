@@ -639,7 +639,7 @@ var sendFCMNotification = function (pushMessage) {
 }
 
 app.get('/api/StaticData/TypeOfContent', function (req, res) {
-    res.send({ data: typeOfContentArray });
+    res.send(typeOfContentArray);
 });
 
 app.get('/api/Response/:respId', function (req, res) {
