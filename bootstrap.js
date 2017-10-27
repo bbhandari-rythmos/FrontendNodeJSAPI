@@ -638,7 +638,7 @@ var sendFCMNotification = function (pushMessage) {
     });
 }
 
-app.get('/api/StaticData/getTypeOfContent', function (req, res) {
+app.get('/api/StaticData/TypeOfContent', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
             "notification": {
