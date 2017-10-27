@@ -683,24 +683,24 @@ app.get('/api/Response/:respId', function (req, res) {
             break;
         case "8": // distribution Name exists
             tempData = false;
-            res.send({ data: tempData });
+            res.send({ content: tempData });
             break;
         case "9": // distribution Name not exists
             tempData = true;
-            res.send({ data: tempData });
+            res.send({ content: tempData });
             break;
         case "12": // get all Tags
-            res.send({ data: tagData });
+            res.send({ content: tagData });
             break;
         case "13": // get Draft Tags
-            res.send({ data: draftTags });
+            res.send({ content: draftTags });
             break;
         case "14": // repo url not exists
             tempData = true;
-            res.send({ data: tempData });
+            res.send({ content: tempData });
             break;
         case "15": // get Node Drafts
-            res.send({ data: drafts });
+            res.send({ content: drafts });
             break;
         default:
             break;
