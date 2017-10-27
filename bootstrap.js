@@ -639,23 +639,7 @@ var sendFCMNotification = function (pushMessage) {
 }
 
 app.get('/api/StaticData/TypeOfContent', function (req, res) {
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "add project",
-                "body": {
-                    "cmsOperation": "getTypeOfContent",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "3"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-    }, 10000);
-
-    res.send({ responseId: 3 });
+    res.send({ data: typeOfContentArray });
 });
 
 app.get('/api/Response/:respId', function (req, res) {
