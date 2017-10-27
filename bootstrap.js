@@ -709,7 +709,7 @@ app.get('/api/Response/:respId', function (req, res) {
 
 });
 
-app.get('/api/validateRepoUrl/:repoUrl', function (req, res) {
+app.get('/api/Project/ValidateRepository/:repoUrl', function (req, res) {
     var repoUrl = req.params.repoUrl;
     var tempResponseId = null;
     var tempProject = _.where(projectData, { repoUrl: repoUrl });
