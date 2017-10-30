@@ -709,6 +709,37 @@ app.get('/api/Response/:respId', function (req, res) {
 
 });
 
+app.get('/api/DistributionsForCreate/:id', function (req, res) {
+    console.log('GET Distributions called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get project call');
+    var projectId = req.params.id;
+    console.log(projectId);
+    var responseID = 5;
+    if (projectId === "test1") {
+        responseID = 6;
+    }
+
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Distributions",
+                "body": {
+                    "cmsOperation": "getDistributionsForCreate",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+});
+
+
+
 app.get('/api/Project/ValidateRepository/:repoUrl', function (req, res) {
     var repoUrl = req.params.repoUrl;
     var tempResponseId = null;
