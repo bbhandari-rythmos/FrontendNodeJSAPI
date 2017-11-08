@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
     if (req.method == 'OPTIONS') {
         res.send(200);
     } else {
-        next();
+        next(); 
     }
 });
 
