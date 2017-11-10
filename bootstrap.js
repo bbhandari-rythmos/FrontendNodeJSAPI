@@ -308,13 +308,13 @@ app.get('/api/Response/:respId', function (req, res) {
             res.send({ content: { drafts: TreeDrafts } });
             break;
         case "5": // get Tree Deafts
-            res.send({ content: { distributions: Emptydistributions } });
+            res.send({ content: Emptydistributions });
             break;
         case "6": // get Tree Deafts
-            res.send({ content: { distributions: distributions } });
+            res.send({ content: distributions });
             break;
         case "7"://get distribution Branches
-            res.send({ content: { distributionBranches: distributionBranches } });
+            res.send({ content: distributionBranches });
             break;
         case "8": // distribution Name exists
             tempData = false;
