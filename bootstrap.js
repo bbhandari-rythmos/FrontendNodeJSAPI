@@ -24,7 +24,6 @@ app.use(function (req, res, next) {
     }
 });
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -34,9 +33,6 @@ var serverKey = 'AAAAogRJ72o:APA91bEeeQ7JM8GdWOOX4ifD1_acP-vpcpX8YKQ6X-7PSRLXINE
 
 //var serverKey = "=AAAAwC9R64E:APA91bF8x_RKTJrsM5CZkrD9Uw_dDyjGK-aAI8EyuCyMzqoRte7F5ioFd2wp1C1-dOsUbQn3K_gKwLBO4Ho1_ztIbJJH4P7eIcNFFU-DrVbYrEcwuGbSEr3ZstzIFSRXfjWd_ZvDikbm";
 var auth = "key=" + serverKey;
-
-
-
 app.post('/api/Notification/DeviceRegister', function (req, res) {
     var token = req.body.FcmId;
     console.log('token ' + token);
@@ -376,8 +372,6 @@ app.get('/api/DistributionsForCreate/:id', function (req, res) {
     }, 5000)
     res.send({ responseId: responseID });
 });
-
-
 
 app.get('/api/Project/ValidateRepository/:repoUrl', function (req, res) {
     var repoUrl = req.params.repoUrl;
@@ -761,7 +755,6 @@ app.get('/api/DistributionsForCreate/:id', function (req, res) {
     }, 5000)
     res.send({ responseId: responseID });
 });
-
 
 app.get('/api/project/:id', function (req, res) {
     var projectId = req.query.id;
