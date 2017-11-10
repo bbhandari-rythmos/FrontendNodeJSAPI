@@ -5,7 +5,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     request = require('request'),
     _ = require('underscore'); 
-
+ 
 app.use(express.static(path.join(__dirname, 'app')));
 
 
@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
     if (req.method == 'OPTIONS') {
         res.send(200);
     } else {
-        next();
+        next(); 
     }
 });
 
