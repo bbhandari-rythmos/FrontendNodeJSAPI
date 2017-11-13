@@ -274,10 +274,10 @@ var TreeDrafts =
     ]
 
 var drafts = [
-    { "id": "1", "name": "Draft", "gDocUrl": "test" },
-    { "id": "2", "name": "Final", "gDocUrl": "test" },
-    { "id": "3", "name": "First Notes", "gDocUrl": "test" },
-    { "id": "4", "name": "WIP", "gDocUrl": "test" }];
+    { "DraftId": "1", "DraftName": "Draft", "GDocUrl": "test" },
+    { "DraftId": "2", "DraftName": "Final", "GDocUrl": "test" },
+    { "DraftId": "3", "DraftName": "First Notes", "GDocUrl": "test" },
+    { "DraftId": "4", "DraftName": "WIP", "GDocUrl": "test" }];
 
 var repositories = [
     { 'repositoryId': '1', 'repositoryName': 'EN' },
