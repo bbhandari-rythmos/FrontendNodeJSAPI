@@ -342,13 +342,13 @@ app.get('/api/Response/:respId', function (req, res) {
             res.send({ content: { projects: projectArray } });
             break;
         case "2": // get Tree Deafts
-            res.send({ content: { drafts: TreeDrafts } });
+            res.send({ content: { nodeList: TreeDrafts } });
             break;
         case "5": // get Tree Deafts
-            res.send({ content: Emptydistributions });
+            res.send({ content: { distributionList: Emptydistributions } });
             break;
         case "6": // get Tree Deafts
-            res.send({ content: distributions });
+            res.send({ content: { distributionList: distributions }});
             break;
         case "7"://get distribution Branches
             res.send({ content: distributionBranches });
@@ -372,7 +372,7 @@ app.get('/api/Response/:respId', function (req, res) {
             res.send({ content: tempData });
             break;
         case "15": // get Node Drafts
-            res.send({ content: drafts });
+            res.send({ content: { Drafts: drafts} });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
