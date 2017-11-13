@@ -626,7 +626,7 @@ app.get('/api/draftTags/:draftId', function (req, res) {
   
 });
 
-app.get('/api/NodeDrafts/:nodeID', function (req, res) {
+app.get('/api/nodes/:NodeId/drafts', function (req, res) {
     console.log('GET Node Drafts  called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 15;
