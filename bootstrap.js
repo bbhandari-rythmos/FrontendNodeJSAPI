@@ -4,8 +4,8 @@ var express = require('express'),
     server = require('http').createServer(app).listen(process.env.PORT || 8080),
     bodyParser = require('body-parser'),
     request = require('request'),
-    _ = require('underscore'); 
- 
+    _ = require('underscore');
+
 app.use(express.static(path.join(__dirname, 'app')));
 
 
@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
     if (req.method == 'OPTIONS') {
         res.send(200);
     } else {
-        next(); 
+        next();
     }
 });
 
@@ -86,6 +86,31 @@ app.get('/api/project', function (req, res) {
 
 });
 
+app.post('/api/project', function (req, res) {
+    
+        console.log('Create projects called, sending response id ' + _responseId);
+        console.log('Waiting for 30 seconds to simulate get project call');
+    
+        setTimeout(function () {
+            var pushMessage = {
+                "notification": {
+                    "title": "Create Projects",
+                    "body": {
+                        "cmsOperation": "CreateProject",
+                        "notificationTopic": "NA",
+                        "notificationType": 0,
+                        "responseId": "1"
+                    }
+                },
+                "to": _token
+            }
+            sendFCMNotification(pushMessage);
+    
+        }, 5000)
+        res.send({ responseId: "1" });
+    
+    });
+
 app.get('/api/Distributions/:id/nodes', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
@@ -117,7 +142,7 @@ var projectData = [
 var distributions = [
     {
         'distributionId': '5.0',
-        'distributionName':'5.0',
+        'distributionName': '5.0',
         'isDefault': false,
         'status': 'Completed'
     },
@@ -248,11 +273,18 @@ var TreeDrafts =
         { 'nodeId': 7, "nodeName": "Downloading...", 'parentId': 4 }
     ]
 
-var drafts =[
+var drafts = [
     { "id": "1", "name": "Draft", "gDocUrl": "test" },
     { "id": "2", "name": "Final", "gDocUrl": "test" },
     { "id": "3", "name": "First Notes", "gDocUrl": "test" },
-    { "id": "4", "name": "WIP", "gDocUrl": "test" }]
+    { "id": "4", "name": "WIP", "gDocUrl": "test" }];
+
+var repositories = [
+    { 'repositoryId': '1', 'repositoryName': 'EN' },
+    { 'repositoryId': '2', 'repositoryName': 'EN2' },
+    { 'repositoryId': '3', 'repositoryName': 'EN3' },
+    { 'repositoryId': '4', 'repositoryName': 'EN4' },
+];
 
 var sendFCMNotification = function (pushMessage) {
     console.log(JSON.stringify(pushMessage))
@@ -273,8 +305,29 @@ var sendFCMNotification = function (pushMessage) {
     });
 }
 
-app.get('/api/StaticData/TypeOfContent', function (req, res) {
+app.get('/api/StaticFields/DocumentationType', function (req, res) {
     res.send(typeOfContentArray);
+});
+
+app.get('/api/Repositories', function (req, res) {
+    
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "add project",
+                "body": {
+                    "cmsOperation": "GetRepositoryList",
+                    "notificationTopic":
+                    "NA", "notificationType": 0,
+                    "responseId": 51
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+    }, 10000);
+
+    res.send({ responseId: 51 });
 });
 
 app.get('/api/Response/:respId', function (req, res) {
@@ -283,22 +336,6 @@ app.get('/api/Response/:respId', function (req, res) {
     switch (respId) {
         case "3": //get content type
             tempData = typeOfContentArray;
-            res.send({ data: tempData });
-            break;
-        case "11": // repo url exists
-            tempData = false;
-            res.send({ data: tempData });
-            break;
-        case "10": // repo url not exists
-            tempData = true;
-            res.send({ data: tempData });
-            break;
-        case "21": // project exists
-            tempData = false;
-            res.send({ data: tempData });
-            break;
-        case "20": // projects not exists
-            tempData = true;
             res.send({ data: tempData });
             break;
         case "1": // get project
@@ -337,6 +374,9 @@ app.get('/api/Response/:respId', function (req, res) {
         case "15": // get Node Drafts
             res.send({ content: drafts });
             break;
+        case "51": // get repo
+            res.send({ content: { repositories: repositories } });
+            break;
         default:
             break;
     }
@@ -373,36 +413,6 @@ app.get('/api/DistributionsForCreate/:id', function (req, res) {
     res.send({ responseId: responseID });
 });
 
-app.get('/api/Project/ValidateRepository/:repoUrl', function (req, res) {
-    var repoUrl = req.params.repoUrl;
-    var tempResponseId = null;
-    var tempProject = _.where(projectData, { repoUrl: repoUrl });
-    if (tempProject.length > 0) {
-        tempResponseId = 11;
-    }
-    else {
-        tempResponseId = 10;
-    }
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "add project",
-                "body": {
-                    "cmsOperation": "validateRepoUrl",
-                    "notificationTopic":
-                    "NA", "notificationType": 0,
-                    "responseId": tempResponseId
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-    }, 10000);
-
-    res.send({ responseId: tempResponseId });
-
-});
-
 app.get('/api/Distribution/validateDistributionName/:distributionName', function (req, res) {
     var distributionName = req.params.distributionName;
     var tempResponseId = null;
@@ -431,34 +441,6 @@ app.get('/api/Distribution/validateDistributionName/:distributionName', function
 
     res.send({ responseId: tempResponseId });
 
-});
-
-app.get('/api/validateProjectName/:projectName', function (req, res) {
-    var projectName = req.params.projectName;
-    var tempResponseId = null;
-    var tempProject = _.where(projectData, { projectName: projectName });
-    if (tempProject.length > 0) {
-        tempResponseId = 21;
-    }
-    else {
-        tempResponseId = 20;
-    }
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "add project",
-                "body": {
-                    "cmsOperation": "validateProjectName",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": tempResponseId
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-    }, 10000);
-    res.send({ responseId: tempResponseId });
 });
 
 app.post('/api/doLogin', function (req, res) {
@@ -599,7 +581,7 @@ app.get('/api/tags', function (req, res) {
 
     }, 5000)
     res.send({ responseId: responseID });
-   
+
 });
 
 app.get('/api/draftTags/:draftId', function (req, res) {
@@ -623,7 +605,7 @@ app.get('/api/draftTags/:draftId', function (req, res) {
 
     }, 5000)
     res.send({ responseId: responseID });
-  
+
 });
 
 app.get('/api/NodeDrafts/:nodeID', function (req, res) {
@@ -677,8 +659,8 @@ app.get('/api/updateDraftTags/:tagId', function (req, res) {
 app.get('/api/distributionBranches', function (req, res) {
     console.log('GET branches called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
-       var responseID = 7;
-      setTimeout(function () {
+    var responseID = 7;
+    setTimeout(function () {
         var pushMessage = {
             "notification": {
                 "title": "Get Branches",
@@ -703,11 +685,10 @@ app.get('/api/Projects/:id/distributions', function (req, res) {
     var projectId = req.params.id;
     console.log(projectId);
     var responseID = 5;
-    if (projectId === "4")
-    {
+    if (projectId === "4") {
         responseID = 6;
     }
-    
+
     setTimeout(function () {
         var pushMessage = {
             "notification": {
