@@ -399,7 +399,7 @@ app.get('/api/Response/:respId', function (req, res) {
             res.send({ content: tempData });
             break;
         case "15": // get Node Drafts
-            res.send({ content: { Drafts: drafts } });
+            res.send({ content: { drafts: drafts } });
             break;
         case "16": // Accept Draft to Live
             res.send({ content: { status:'OK' } });
