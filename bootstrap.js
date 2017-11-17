@@ -374,6 +374,9 @@ app.get('/api/Response/:respId', function (req, res) {
         case "15": // get Node Drafts
             res.send({ content: { Drafts: drafts} });
             break;
+        case "16": // Accept Draft to Live
+            res.send({ content: { status:'OK' } });
+            break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
             break;
@@ -594,6 +597,30 @@ app.get('/api/draftTags/:draftId', function (req, res) {
                 "title": "Get Draft Tags",
                 "body": {
                     "cmsOperation": "GetDraftTags",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+
+});
+
+app.get('/api/Drafts/:draftId/AcceptDraftToLive', function (req, res) {
+    console.log('Accept to Live is called, sending response id ' + _responseId);
+    console.log('Waiting for 5 seconds to simulate get call');
+    var responseID = 16;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Accept Draft To Live",
+                "body": {
+                    "cmsOperation": "AcceptDraftToLive",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
