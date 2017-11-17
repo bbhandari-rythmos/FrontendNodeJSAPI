@@ -697,7 +697,7 @@ app.get('/api/nodes/:NodeId/drafts', function (req, res) {
             "notification": {
                 "title": "Get Node Drafts",
                 "body": {
-                    "cmsOperation": "GetNodeDrafts",
+                    "cmsOperation": "GetDraftsForNode",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
