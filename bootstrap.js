@@ -131,26 +131,6 @@ app.get('/api/Distributions/:id/nodes', function (req, res) {
     res.send({ responseId: "2" });
 });
 
-app.get('/api/nodes/:nodeId/drafts', function (req, res) {
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Get Drafts",
-                "body": {
-                    "cmsOperation": "GetDrafts",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "52"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
-    }, 5000)
-    res.send({ responseId: "52" });
-});
-
 app.post('/api/drafts', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
