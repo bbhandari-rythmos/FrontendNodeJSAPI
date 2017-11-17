@@ -87,29 +87,29 @@ app.get('/api/project', function (req, res) {
 });
 
 app.post('/api/project', function (req, res) {
-    
-        console.log('Create projects called, sending response id ' + _responseId);
-        console.log('Waiting for 30 seconds to simulate get project call');
-    
-        setTimeout(function () {
-            var pushMessage = {
-                "notification": {
-                    "title": "Create Projects",
-                    "body": {
-                        "cmsOperation": "CreateProject",
-                        "notificationTopic": "NA",
-                        "notificationType": 0,
-                        "responseId": "1"
-                    }
-                },
-                "to": _token
-            }
-            sendFCMNotification(pushMessage);
-    
-        }, 5000)
-        res.send({ responseId: "1" });
-    
-    });
+
+    console.log('Create projects called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get project call');
+
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Create Projects",
+                "body": {
+                    "cmsOperation": "CreateProject",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": "1"
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: "1" });
+
+});
 
 app.get('/api/Distributions/:id/nodes', function (req, res) {
     setTimeout(function () {
@@ -129,6 +129,46 @@ app.get('/api/Distributions/:id/nodes', function (req, res) {
 
     }, 5000)
     res.send({ responseId: "2" });
+});
+
+app.get('/api/nodes/:nodeId/drafts', function (req, res) {
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Drafts",
+                "body": {
+                    "cmsOperation": "GetDrafts",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": "52"
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: "52" });
+});
+
+app.post('/api/drafts', function (req, res) {
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Create Draft",
+                "body": {
+                    "cmsOperation": "CreateDraft",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": "53"
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: "53" });
 });
 
 var projectData = [
@@ -215,26 +255,27 @@ var typeOfContentArray = [
     { key: '4', value: 'Script Ref' },
 ];
 
-var projectArray = [{
-    _id: 1,
-    status: "",
-    projectName: "Unity Core User Manual"
-},
-{
-    _id: 2,
-    status: "",
-    projectName: "Unity Core User Manual 2"
-},
-{
-    _id: 3,
-    status: "",
-    projectName: "Unity Core User Manual 3"
-},
-{
-    _id: 4,
-    status: "",
-    projectName: "test1"
-}];
+var projectArray = [
+    {
+        _id: 1,
+        status: "",
+        projectName: "Unity Core User Manual"
+    },
+    {
+        _id: 2,
+        status: "",
+        projectName: "Unity Core User Manual 2"
+    },
+    {
+        _id: 3,
+        status: "",
+        projectName: "Unity Core User Manual 3"
+    },
+    {
+        _id: 4,
+        status: "",
+        projectName: "test1"
+    }];
 
 var tagData = [
     { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
@@ -279,6 +320,12 @@ var drafts = [
     { "draftId": "3", "draftName": "First Notes", "gDocUrl": "test" },
     { "draftId": "4", "draftName": "WIP", "gDocUrl": "test" }];
 
+var drafts1 = [
+    { "draftId": "12", "draftName": "Draft1", "gDocUrl": "test" },
+    { "draftId": "22", "draftName": "Final1", "gDocUrl": "test" },
+    { "draftId": "32", "draftName": "First Notes1", "gDocUrl": "test" },
+    { "draftId": "42", "draftName": "WIP1", "gDocUrl": "test" }];
+
 var repositories = [
     { 'repositoryId': '1', 'repositoryName': 'EN' },
     { 'repositoryId': '2', 'repositoryName': 'EN2' },
@@ -310,7 +357,7 @@ app.get('/api/StaticFields/DocumentationType', function (req, res) {
 });
 
 app.get('/api/Repositories', function (req, res) {
-    
+
     setTimeout(function () {
         var pushMessage = {
             "notification": {
@@ -318,7 +365,7 @@ app.get('/api/Repositories', function (req, res) {
                 "body": {
                     "cmsOperation": "GetRepositoryList",
                     "notificationTopic":
-                    "NA", "notificationType": 0,
+                        "NA", "notificationType": 0,
                     "responseId": 51
                 }
             },
@@ -348,7 +395,7 @@ app.get('/api/Response/:respId', function (req, res) {
             res.send({ content: { distributionList: Emptydistributions } });
             break;
         case "6": // get Tree Deafts
-            res.send({ content: { distributionList: distributions }});
+            res.send({ content: { distributionList: distributions } });
             break;
         case "7"://get distribution Branches
             res.send({ content: distributionBranches });
@@ -372,10 +419,16 @@ app.get('/api/Response/:respId', function (req, res) {
             res.send({ content: tempData });
             break;
         case "15": // get Node Drafts
-            res.send({ content: { Drafts: drafts} });
+            res.send({ content: { Drafts: drafts } });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
+            break;
+        case "52": // get drafts
+            res.send({ content: { drafts: drafts1 } });
+            break;
+        case "53": // get drafts
+            res.send({ content: { drafts: drafts1 } });
             break;
         default:
             break;
@@ -430,7 +483,7 @@ app.get('/api/Distribution/validateDistributionName/:distributionName', function
                 "body": {
                     "cmsOperation": "ValidateDistributionName",
                     "notificationTopic":
-                    "NA", "notificationType": 0,
+                        "NA", "notificationType": 0,
                     "responseId": tempResponseId
                 }
             },
@@ -742,152 +795,152 @@ app.get('/api/project/:id', function (req, res) {
     console.log('project id ' + projectId);
     var project = {
         'files':
-        [
-            {
-                'label': 'Working in Unity',
+            [
+                {
+                    'label': 'Working in Unity',
 
-                'expandedIcon': 'fa-folder-open',
-                'collapsedIcon': 'fa-folder',
-                'children': [
-                    {
-                        'label': 'Basics',
+                    'expandedIcon': 'fa-folder-open',
+                    'collapsedIcon': 'fa-folder',
+                    'children': [
+                        {
+                            'label': 'Basics',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Downloading and installing Unity',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Downloading and installing Unity',
 
-                                'expandedIcon': 'fa-folder-open',
-                                'collapsedIcon': 'fa-folder',
-                                'children': [
-                                    {
-                                        'label': 'Deploying Unity offline',
-                                        'icon': 'fa-file-word-o',
-                                        'data': 'Deploying Unity offline'
-                                    }
-                                ]
-                            },
-                            {
-                                'label': '2D or 3D projects',
-                                'icon': 'fa-file-word-o',
-                                'data': '2D or 3D projects'
-                            },
-                            {
-                                'label': 'Getting started',
+                                    'expandedIcon': 'fa-folder-open',
+                                    'collapsedIcon': 'fa-folder',
+                                    'children': [
+                                        {
+                                            'label': 'Deploying Unity offline',
+                                            'icon': 'fa-file-word-o',
+                                            'data': 'Deploying Unity offline'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'label': '2D or 3D projects',
+                                    'icon': 'fa-file-word-o',
+                                    'data': '2D or 3D projects'
+                                },
+                                {
+                                    'label': 'Getting started',
 
-                                'expandedIcon': 'fa-folder-open',
-                                'collapsedIcon': 'fa-folder',
-                                'children': [
-                                    {
-                                        'label': 'The Learn tab',
-                                        'icon': 'fa-file-word-o',
-                                        'data': 'The Learn tab'
-                                    }
-                                ]
-                            },
-                            {
-                                'label': 'Learning the interface',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Learning the interface'
-                            }
-                        ]
-                    },
-                    {
-                        'label': 'Asset Workflow',
+                                    'expandedIcon': 'fa-folder-open',
+                                    'collapsedIcon': 'fa-folder',
+                                    'children': [
+                                        {
+                                            'label': 'The Learn tab',
+                                            'icon': 'fa-file-word-o',
+                                            'data': 'The Learn tab'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'label': 'Learning the interface',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Learning the interface'
+                                }
+                            ]
+                        },
+                        {
+                            'label': 'Asset Workflow',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Primitive and Placeholder Objects',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Primitive and Placeholder Objects'
-                            },
-                            {
-                                'label': 'Importing Assets',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Importing Assets'
-                            },
-                            {
-                                'label': 'Imort Settings',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Imort Settings'
-                            },
-                            {
-                                'label': 'Importing from the Asset Store',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Importing from the Asset Store'
-                            },
-                            {
-                                'label': 'Asset Packages',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Asset Packages'
-                            },
-                            {
-                                'label': 'Standard Assets',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Standard Assets'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                'label': '2D',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Primitive and Placeholder Objects',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Primitive and Placeholder Objects'
+                                },
+                                {
+                                    'label': 'Importing Assets',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Importing Assets'
+                                },
+                                {
+                                    'label': 'Imort Settings',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Imort Settings'
+                                },
+                                {
+                                    'label': 'Importing from the Asset Store',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Importing from the Asset Store'
+                                },
+                                {
+                                    'label': 'Asset Packages',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Asset Packages'
+                                },
+                                {
+                                    'label': 'Standard Assets',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Standard Assets'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    'label': '2D',
 
-                'expandedIcon': 'fa-folder-open',
-                'collapsedIcon': 'fa-folder',
-                'children': [
-                    {
-                        'label': 'Gameplay in 2D',
-                        'icon': 'fa-file-image-o',
-                        'data': 'Gameplay in 2D'
-                    },
-                    {
-                        'label': 'Sprites',
+                    'expandedIcon': 'fa-folder-open',
+                    'collapsedIcon': 'fa-folder',
+                    'children': [
+                        {
+                            'label': 'Gameplay in 2D',
+                            'icon': 'fa-file-image-o',
+                            'data': 'Gameplay in 2D'
+                        },
+                        {
+                            'label': 'Sprites',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Sprite Creator',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Creator'
-                            },
-                            {
-                                'label': 'Sprite Editor',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Editor'
-                            },
-                            {
-                                'label': 'Sprite Masks',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Masks'
-                            }
-                        ]
-                    },
-                    {
-                        'label': 'Physics Reference 2D',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Sprite Creator',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Creator'
+                                },
+                                {
+                                    'label': 'Sprite Editor',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Editor'
+                                },
+                                {
+                                    'label': 'Sprite Masks',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Masks'
+                                }
+                            ]
+                        },
+                        {
+                            'label': 'Physics Reference 2D',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Physics 2D Settings',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Physics 2D Settings'
-                            },
-                            {
-                                'label': 'Rigidbody 2D',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Rigidbody 2D'
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Physics 2D Settings',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Physics 2D Settings'
+                                },
+                                {
+                                    'label': 'Rigidbody 2D',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Rigidbody 2D'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
         distributions: ['5.0', '5.1', '5.2', '5.3', '5.4'],
         languages: ['English', 'Español', 'Deutsch', 'Française']
     }
