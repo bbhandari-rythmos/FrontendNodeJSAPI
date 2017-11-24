@@ -237,22 +237,22 @@ var typeOfContentArray = [
 
 var projectArray = [
     {
-        _id: 1,
+        _id: "1",
         status: "",
         projectName: "Unity Core User Manual"
     },
     {
-        _id: 2,
+        _id: "2",
         status: "",
         projectName: "Unity Core User Manual 2"
     },
     {
-        _id: 3,
+        _id: "3",
         status: "",
         projectName: "Unity Core User Manual 3"
     },
     {
-        _id: 4,
+        _id: "4",
         status: "",
         projectName: "test1"
     }];
