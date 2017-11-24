@@ -285,13 +285,13 @@ var draftTags = [
 
 var TreeDrafts =
     [
-        { 'nodeId': 1, "nodeName": "Working in Unity", 'parentId': null },
-        { 'nodeId': 2, "nodeName": "Basics", 'parentId': 1 },
-        { 'nodeId': 3, "nodeName": "Getting started", 'parentId': 1 },
-        { 'nodeId': 4, "nodeName": "Downloading and installing Unity", 'parentId': 2 },
-        { 'nodeId': 5, "nodeName": "Work", 'parentId': null },
-        { 'nodeId': 6, "nodeName": "sampleParentNode", 'parentId': null },
-        { 'nodeId': 7, "nodeName": "Downloading...", 'parentId': 4 }
+        { 'nodeId': "1", "nodeName": "Working in Unity", 'parentId': null },
+        { 'nodeId': "2", "nodeName": "Basics", 'parentId': "1" },
+        { 'nodeId': "3", "nodeName": "Getting started", 'parentId': "1" },
+        { 'nodeId': "4", "nodeName": "Downloading and installing Unity", 'parentId': "2" },
+        { 'nodeId': "5", "nodeName": "Work", 'parentId': null },
+        { 'nodeId': "6", "nodeName": "sampleParentNode", 'parentId': null },
+        { 'nodeId': "7", "nodeName": "Downloading...", 'parentId': "4" }
     ]
 
 var drafts = [
