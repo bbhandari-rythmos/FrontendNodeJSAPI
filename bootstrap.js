@@ -8,7 +8,6 @@ var express = require('express'),
   
 app.use(express.static(path.join(__dirname, 'app')));
 
-
 var _token;
 var _responseId;
 
