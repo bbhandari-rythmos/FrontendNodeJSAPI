@@ -150,6 +150,47 @@ app.post('/api/drafts', function (req, res) {
     res.send({ responseId: "53" });
 });
 
+app.post('/api/tag/add', function (req, res) {
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Add Tag",
+                "body": {
+                    "cmsOperation": "AddTag",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": "10"
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: "10" });
+});
+
+app.post('/api/tag/remove', function (req, res) {
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Remove Tag",
+                "body": {
+                    "cmsOperation": "RemoveTag",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": "11"
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: "11" });
+});
+
+
 var projectData = [
     { 'id': '1', 'projectName': 'Unity1', 'repoUrl': 'Unity1.com' },
     { 'id': '2', 'projectName': 'Unity2', 'repoUrl': 'Unity2.com' },
@@ -386,6 +427,12 @@ app.get('/api/Response/:respId', function (req, res) {
         case "9": // distribution Name not exists
             tempData = true;
             res.send({ content: tempData });
+            break;
+        case "10": // Add Tag
+            res.send({ content: { status: 'OK' } });
+            break;
+        case "11": // Remove Tag
+            res.send({ content: { status: 'OK' } });
             break;
         case "12": // get all Tags
             res.send({ content: tagData });
