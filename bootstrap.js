@@ -298,29 +298,29 @@ var projectArray = [
     }];
 
 var tagData = [
-    { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
-    { 'id': '2', 'name': 'FR', 'group': 'language', 'color': 'primary' },
-    { 'id': '3', 'name': 'GR', 'group': 'language', 'color': 'primary' },
-    { 'id': '4', 'name': 'CH', 'group': 'language', 'color': 'primary' },
-    { 'id': '5', 'name': 'novice', 'group': 'level', 'color': 'warn' },
-    { 'id': '6', 'name': 'intermediate', 'group': 'level', 'color': 'warn' },
-    { 'id': '7', 'name': 'pro', 'group': 'level', 'color': 'warn' },
-    { 'id': '8', 'name': 'expert', 'group': 'level', 'color': 'warn' },
-    { 'id': '9', 'name': 'coding', 'group': 'type', 'color': 'accent' },
-    { 'id': '10', 'name': 'developement', 'group': 'type', 'color': 'accent' },
-    { 'id': '11', 'name': 'testing', 'group': 'type', 'color': 'accent' },
-    { 'id': '12', 'name': 'production', 'group': 'type', 'color': 'accent' },
-    { 'id': '13', 'name': 'new', 'group': 'stage', 'color': 'primary' },
-    { 'id': '14', 'name': 'draft', 'group': 'stage', 'color': 'primary' },
-    { 'id': '15', 'name': 'review', 'group': 'stage', 'color': 'primary' },
-    { 'id': '16', 'name': 'completed', 'group': 'stage', 'color': 'primary' }
+    { 'tagId': '1', 'tagName': 'EN', 'tagGroup': 'language', 'tagColor': 'primary' },
+    { 'tagId': '2', 'tagName': 'FR', 'tagGroup': 'language', 'tagColor': 'primary' },
+    { 'tagId': '3', 'tagName': 'GR', 'tagGroup': 'language', 'tagColor': 'primary' },
+    { 'tagId': '4', 'tagName': 'CH', 'tagGroup': 'language', 'tagColor': 'primary' },
+    { 'tagId': '5', 'tagName': 'novice', 'tagGroup': 'level', 'tagColor': 'warn' },
+    { 'tagId': '6', 'tagName': 'intermediate', 'tagGroup': 'level', 'tagColor': 'warn' },
+    { 'tagId': '7', 'tagName': 'pro', 'tagGroup': 'level', 'tagColor': 'warn' },
+    { 'tagId': '8', 'tagName': 'expert', 'tagGroup': 'level', 'tagColor': 'warn' },
+    { 'tagId': '9', 'tagName': 'coding', 'tagGroup': 'type', 'tagColor': 'accent' },
+    { 'tagId': '10', 'tagName': 'developement', 'tagGroup': 'type', 'tagColor': 'accent' },
+    { 'tagId': '11', 'tagName': 'testing', 'tagGroup': 'type', 'tagColor': 'accent' },
+    { 'tagId': '12', 'tagName': 'production', 'tagGroup': 'type', 'tagColor': 'accent' },
+    { 'tagId': '13', 'tagName': 'new', 'tagGroup': 'stage', 'tagColor': 'primary' },
+    { 'tagId': '14', 'tagName': 'draft', 'tagGroup': 'stage', 'tagColor': 'primary' },
+    { 'tagId': '15', 'tagName': 'review', 'tagGroup': 'stage', 'tagColor': 'primary' },
+    { 'tagId': '16', 'tagName': 'completed', 'tagGroup': 'stage', 'tagColor': 'primary' }
 ];
 
 var draftTags = [
-    { 'id': '1', 'name': 'EN', 'group': 'language', 'color': 'primary' },
-    { 'id': '5', 'name': 'novice', 'group': 'level', 'color': 'warn' },
-    { 'id': '9', 'name': 'coding', 'group': 'type', 'color': 'accent' },
-    { 'id': '13', 'name': 'new', 'group': 'stage', 'color': 'primary' }
+    { 'tagId': '1', 'tagName': 'EN', 'tagGroup': 'language', 'tagColor': 'primary' },
+    { 'tagId': '5', 'tagName': 'novice', 'tagGroup': 'level', 'tagColor': 'warn' },
+    { 'tagId': '9', 'tagName': 'coding', 'tagGroup': 'type', 'tagColor': 'accent' },
+    { 'tagId': '13', 'tagName': 'new', 'tagGroup': 'stage', 'tagColor': 'primary' }
 ];
 
 var TreeDrafts =
