@@ -116,7 +116,7 @@ app.get('/api/Distributions/:id/nodes', function (req, res) {
             "notification": {
                 "title": "Get Tree",
                 "body": {
-                    "cmsOperation": "GetTree",
+                    "cmsOperation": "GetNodesForDistribution",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": "2"
@@ -822,7 +822,7 @@ app.get('/api/Projects/:id/distributions', function (req, res) {
             "notification": {
                 "title": "Get Distributions",
                 "body": {
-                    "cmsOperation": "GetDistributions",
+                    "cmsOperation": "GetDistributionsForProject",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
