@@ -60,7 +60,7 @@ app.get('/api/ping', function (req, res) {
     res.send({ message: 'pong' });
 });
 
-app.get('/api/project', function (req, res) {
+app.get('/api/projects', function (req, res) {
 
     console.log('GET projects called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get project call');
@@ -169,7 +169,6 @@ app.post('/api/nodes/update', function (req, res) {
     }, 5000)
     res.send({ responseId: "17" });
 });
-
 
 app.post('/api/tag/add', function (req, res) {
     setTimeout(function () {
@@ -417,7 +416,7 @@ app.get('/api/Repositories', function (req, res) {
     res.send({ responseId: 51 });
 });
 
-app.get('/api/Response/:respId', function (req, res) {
+app.get('/api/Responses/:respId', function (req, res) {
     var respId = req.params.respId;
     var tempData = null;
     switch (respId) {
