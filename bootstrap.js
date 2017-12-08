@@ -150,6 +150,27 @@ app.post('/api/drafts', function (req, res) {
     res.send({ responseId: "53" });
 });
 
+app.post('/api/nodes/update', function (req, res) {
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Update Node",
+                "body": {
+                    "cmsOperation": "UpdateNode",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": "17"
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: "17" });
+});
+
+
 app.post('/api/tag/add', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
@@ -448,6 +469,9 @@ app.get('/api/Response/:respId', function (req, res) {
             break;
         case "16": // Accept Draft to Live
             res.send({ content: { status:'OK' } });
+            break;
+        case "17": // Update Draft
+            res.send({ content: { status: 'OK' } });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
