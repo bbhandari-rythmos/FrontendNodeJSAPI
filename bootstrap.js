@@ -607,7 +607,7 @@ app.post('/connect/token', function (req, res) {
     });
 });
 
-app.get('api/Drafts/:draftId/getDraftContentAsMarkdown', function (req, res) {
+app.get('/api/Drafts/:draftId/getDraftContentAsMarkdown', function (req, res) {
     console.log('GET Gdoc as MD is called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 18;
@@ -630,7 +630,7 @@ app.get('api/Drafts/:draftId/getDraftContentAsMarkdown', function (req, res) {
     res.send({ responseId: responseID });
 });
 
-app.get('api/Drafts/:draftId/getDraftContentAsHtml', function (req, res) {
+app.get('/api/Drafts/:draftId/getDraftContentAsHtml', function (req, res) {
     console.log('GET Gdoc as HTML is called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 19;
