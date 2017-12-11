@@ -5,9 +5,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     request = require('request'),
     _ = require('underscore');
- 
+
 app.use(express.static(path.join(__dirname, 'app')));
-  
+
 var _token;
 var _responseId;
 
@@ -257,6 +257,10 @@ var distributions = [
     }
 ];
 
+var FileContentAsHtml = '<h3>Related articles</h3>    <ul>              <li>          <a href="/hc/en-us/articles/206604236-Android-Library-Project-Native-Plugins-not-displaying-properly-in-Inspector-Window">Android Library Project (Native Plugins) not displaying properly in Inspector Window</a>        </li>              <li>          <a href="/hc/en-us/articles/206217436-Why-can-t-I-see-Shadows-on-some-of-my-Android-Devices-">Why can&#39;t I see Shadows on some of my Android Devices?</a>        </li>              <li>          <a href="/hc/en-us/articles/208246446-libhoudini-so-crashes-on-Android-x86-devices">libhoudini.so crashes on Android x86 devices</a>        </li>              <li>          <a href="/hc/en-us/articles/207942813-How-can-I-disable-Bitcode-support-">How can I disable Bitcode support?</a>        </li>              <li>          <a href="/hc/en-us/articles/209933103-Bitcode-Support-in-iOS-tvOS">Bitcode Support in iOS &amp; tvOS</a>        </li>          </ul>';
+
+var FileContentAsMarkdown = '### Related articles *   [Android Library Project (Native Plugins) not displaying properly in Inspector Window](/hc/en-us/articles/206604236-Android-Library-Project-Native-Plugins-not-displaying-properly-in-Inspector-Window)*   [Why can\'t I see Shadows on some of my Android Devices?](/hc/en-us/articles/206217436-Why-can-t-I-see-Shadows-on-some-of-my-Android-Devices-)*   [libhoudini.so crashes on Android x86 devices](/hc/en-us/articles/208246446-libhoudini-so-crashes-on-Android-x86-devices)*   [How can I disable Bitcode support?](/hc/en-us/articles/207942813-How-can-I-disable-Bitcode-support-)*   [Bitcode Support in iOS & tvOS](/hc/en-us/articles/209933103-Bitcode-Support-in-iOS-tvOS) ';
+
 var distributionBranches = [
     {
         'branchID': '1',
@@ -404,7 +408,7 @@ app.get('/api/Repositories', function (req, res) {
                 "body": {
                     "cmsOperation": "GetRepositoryList",
                     "notificationTopic":
-                        "NA", "notificationType": 0,
+                    "NA", "notificationType": 0,
                     "responseId": 51
                 }
             },
@@ -467,10 +471,16 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { drafts: drafts } });
             break;
         case "16": // Accept Draft to Live
-            res.send({ content: { status:'OK' } });
+            res.send({ content: { status: 'OK' } });
             break;
         case "17": // Update Draft
             res.send({ content: { status: 'OK' } });
+            break;
+        case "18": // get Tree Deafts
+            res.send({ content: { FileContentAsMarkdown: FileContentAsMarkdown } });
+            break;
+        case "19": // get Tree Deafts
+            res.send({ content: { FileContentAsHtml: FileContentAsHtml } });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
@@ -534,7 +544,7 @@ app.get('/api/Distribution/validateDistributionName/:distributionName', function
                 "body": {
                     "cmsOperation": "ValidateDistributionName",
                     "notificationTopic":
-                        "NA", "notificationType": 0,
+                    "NA", "notificationType": 0,
                     "responseId": tempResponseId
                 }
             },
@@ -597,36 +607,50 @@ app.post('/connect/token', function (req, res) {
     });
 });
 
-app.get('/api/node/gdoc/:draftId', function (req, res) {
-    var draftId = req.params.draftId;
-    console.log('draftId ' + draftId);
-    if (!draftId) {
-        res.send({ content: undefined });
-        return;
-    }
-    res.send({ content: 'https://docs.google.com/document/d/1RIHU4GBFX8_3N5_hxSGX1VgvO9mJ7BXfpmvTBBw--Qk/edit#heading=h.ot80o53sptxv' });
+app.get('api/Drafts/:draftId/getDraftContentAsMarkdown', function (req, res) {
+    console.log('GET Gdoc as MD is called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 18;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get DraftContent As Markdown",
+                "body": {
+                    "cmsOperation": "GetDraftContentAsMarkdown",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
 });
 
-app.get('/api/node/html/:draftId', function (req, res) {
-    var draftId = req.params.draftId;
-    console.log('draftId ' + draftId);
-    if (!draftId) {
-        res.send({ content: undefined });
-        return;
-    } else {
-        res.send({ content: ' <h3>Related articles</h3>    <ul>              <li>          <a href="/hc/en-us/articles/206604236-Android-Library-Project-Native-Plugins-not-displaying-properly-in-Inspector-Window">Android Library Project (Native Plugins) not displaying properly in Inspector Window</a>        </li>              <li>          <a href="/hc/en-us/articles/206217436-Why-can-t-I-see-Shadows-on-some-of-my-Android-Devices-">Why can&#39;t I see Shadows on some of my Android Devices?</a>        </li>              <li>          <a href="/hc/en-us/articles/208246446-libhoudini-so-crashes-on-Android-x86-devices">libhoudini.so crashes on Android x86 devices</a>        </li>              <li>          <a href="/hc/en-us/articles/207942813-How-can-I-disable-Bitcode-support-">How can I disable Bitcode support?</a>        </li>              <li>          <a href="/hc/en-us/articles/209933103-Bitcode-Support-in-iOS-tvOS">Bitcode Support in iOS &amp; tvOS</a>        </li>          </ul>' });
-    }
-});
+app.get('api/Drafts/:draftId/getDraftContentAsHtml', function (req, res) {
+    console.log('GET Gdoc as HTML is called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 19;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get DraftContent As HTML",
+                "body": {
+                    "cmsOperation": "GetDraftContentAsHtml",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
 
-app.get('/api/node/md/:draftId', function (req, res) {
-    var draftId = req.params.draftId;
-    console.log('draftId ' + draftId);
-    if (!draftId) {
-        res.send({ content: undefined });
-        return;
-    }
-    res.send({ content: '### Related articles *   [Android Library Project (Native Plugins) not displaying properly in Inspector Window](/hc/en-us/articles/206604236-Android-Library-Project-Native-Plugins-not-displaying-properly-in-Inspector-Window)*   [Why can\'t I see Shadows on some of my Android Devices?](/hc/en-us/articles/206217436-Why-can-t-I-see-Shadows-on-some-of-my-Android-Devices-)*   [libhoudini.so crashes on Android x86 devices](/hc/en-us/articles/208246446-libhoudini-so-crashes-on-Android-x86-devices)*   [How can I disable Bitcode support?](/hc/en-us/articles/207942813-How-can-I-disable-Bitcode-support-)*   [Bitcode Support in iOS & tvOS](/hc/en-us/articles/209933103-Bitcode-Support-in-iOS-tvOS) ' });
-
+    }, 5000)
+    res.send({ responseId: responseID });
 });
 
 app.get('/api/tabs', function (req, res) {
@@ -870,152 +894,152 @@ app.get('/api/project/:id', function (req, res) {
     console.log('project id ' + projectId);
     var project = {
         'files':
-            [
-                {
-                    'label': 'Working in Unity',
+        [
+            {
+                'label': 'Working in Unity',
 
-                    'expandedIcon': 'fa-folder-open',
-                    'collapsedIcon': 'fa-folder',
-                    'children': [
-                        {
-                            'label': 'Basics',
+                'expandedIcon': 'fa-folder-open',
+                'collapsedIcon': 'fa-folder',
+                'children': [
+                    {
+                        'label': 'Basics',
 
-                            'expandedIcon': 'fa-folder-open',
-                            'collapsedIcon': 'fa-folder',
-                            'children': [
-                                {
-                                    'label': 'Downloading and installing Unity',
+                        'expandedIcon': 'fa-folder-open',
+                        'collapsedIcon': 'fa-folder',
+                        'children': [
+                            {
+                                'label': 'Downloading and installing Unity',
 
-                                    'expandedIcon': 'fa-folder-open',
-                                    'collapsedIcon': 'fa-folder',
-                                    'children': [
-                                        {
-                                            'label': 'Deploying Unity offline',
-                                            'icon': 'fa-file-word-o',
-                                            'data': 'Deploying Unity offline'
-                                        }
-                                    ]
-                                },
-                                {
-                                    'label': '2D or 3D projects',
-                                    'icon': 'fa-file-word-o',
-                                    'data': '2D or 3D projects'
-                                },
-                                {
-                                    'label': 'Getting started',
+                                'expandedIcon': 'fa-folder-open',
+                                'collapsedIcon': 'fa-folder',
+                                'children': [
+                                    {
+                                        'label': 'Deploying Unity offline',
+                                        'icon': 'fa-file-word-o',
+                                        'data': 'Deploying Unity offline'
+                                    }
+                                ]
+                            },
+                            {
+                                'label': '2D or 3D projects',
+                                'icon': 'fa-file-word-o',
+                                'data': '2D or 3D projects'
+                            },
+                            {
+                                'label': 'Getting started',
 
-                                    'expandedIcon': 'fa-folder-open',
-                                    'collapsedIcon': 'fa-folder',
-                                    'children': [
-                                        {
-                                            'label': 'The Learn tab',
-                                            'icon': 'fa-file-word-o',
-                                            'data': 'The Learn tab'
-                                        }
-                                    ]
-                                },
-                                {
-                                    'label': 'Learning the interface',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Learning the interface'
-                                }
-                            ]
-                        },
-                        {
-                            'label': 'Asset Workflow',
+                                'expandedIcon': 'fa-folder-open',
+                                'collapsedIcon': 'fa-folder',
+                                'children': [
+                                    {
+                                        'label': 'The Learn tab',
+                                        'icon': 'fa-file-word-o',
+                                        'data': 'The Learn tab'
+                                    }
+                                ]
+                            },
+                            {
+                                'label': 'Learning the interface',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Learning the interface'
+                            }
+                        ]
+                    },
+                    {
+                        'label': 'Asset Workflow',
 
-                            'expandedIcon': 'fa-folder-open',
-                            'collapsedIcon': 'fa-folder',
-                            'children': [
-                                {
-                                    'label': 'Primitive and Placeholder Objects',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Primitive and Placeholder Objects'
-                                },
-                                {
-                                    'label': 'Importing Assets',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Importing Assets'
-                                },
-                                {
-                                    'label': 'Imort Settings',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Imort Settings'
-                                },
-                                {
-                                    'label': 'Importing from the Asset Store',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Importing from the Asset Store'
-                                },
-                                {
-                                    'label': 'Asset Packages',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Asset Packages'
-                                },
-                                {
-                                    'label': 'Standard Assets',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Standard Assets'
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    'label': '2D',
+                        'expandedIcon': 'fa-folder-open',
+                        'collapsedIcon': 'fa-folder',
+                        'children': [
+                            {
+                                'label': 'Primitive and Placeholder Objects',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Primitive and Placeholder Objects'
+                            },
+                            {
+                                'label': 'Importing Assets',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Importing Assets'
+                            },
+                            {
+                                'label': 'Imort Settings',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Imort Settings'
+                            },
+                            {
+                                'label': 'Importing from the Asset Store',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Importing from the Asset Store'
+                            },
+                            {
+                                'label': 'Asset Packages',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Asset Packages'
+                            },
+                            {
+                                'label': 'Standard Assets',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Standard Assets'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                'label': '2D',
 
-                    'expandedIcon': 'fa-folder-open',
-                    'collapsedIcon': 'fa-folder',
-                    'children': [
-                        {
-                            'label': 'Gameplay in 2D',
-                            'icon': 'fa-file-image-o',
-                            'data': 'Gameplay in 2D'
-                        },
-                        {
-                            'label': 'Sprites',
+                'expandedIcon': 'fa-folder-open',
+                'collapsedIcon': 'fa-folder',
+                'children': [
+                    {
+                        'label': 'Gameplay in 2D',
+                        'icon': 'fa-file-image-o',
+                        'data': 'Gameplay in 2D'
+                    },
+                    {
+                        'label': 'Sprites',
 
-                            'expandedIcon': 'fa-folder-open',
-                            'collapsedIcon': 'fa-folder',
-                            'children': [
-                                {
-                                    'label': 'Sprite Creator',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Sprite Creator'
-                                },
-                                {
-                                    'label': 'Sprite Editor',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Sprite Editor'
-                                },
-                                {
-                                    'label': 'Sprite Masks',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Sprite Masks'
-                                }
-                            ]
-                        },
-                        {
-                            'label': 'Physics Reference 2D',
+                        'expandedIcon': 'fa-folder-open',
+                        'collapsedIcon': 'fa-folder',
+                        'children': [
+                            {
+                                'label': 'Sprite Creator',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Sprite Creator'
+                            },
+                            {
+                                'label': 'Sprite Editor',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Sprite Editor'
+                            },
+                            {
+                                'label': 'Sprite Masks',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Sprite Masks'
+                            }
+                        ]
+                    },
+                    {
+                        'label': 'Physics Reference 2D',
 
-                            'expandedIcon': 'fa-folder-open',
-                            'collapsedIcon': 'fa-folder',
-                            'children': [
-                                {
-                                    'label': 'Physics 2D Settings',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Physics 2D Settings'
-                                },
-                                {
-                                    'label': 'Rigidbody 2D',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Rigidbody 2D'
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
+                        'expandedIcon': 'fa-folder-open',
+                        'collapsedIcon': 'fa-folder',
+                        'children': [
+                            {
+                                'label': 'Physics 2D Settings',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Physics 2D Settings'
+                            },
+                            {
+                                'label': 'Rigidbody 2D',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Rigidbody 2D'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
         distributions: ['5.0', '5.1', '5.2', '5.3', '5.4'],
         languages: ['English', 'Español', 'Deutsch', 'Française']
     }
