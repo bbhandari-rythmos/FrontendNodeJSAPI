@@ -358,10 +358,10 @@ var TreeDrafts =
     ]
 
 var drafts = [
-    { "draftId": "1", "draftName": "Draft", "gDocUrl": "test" },
-    { "draftId": "2", "draftName": "Final", "gDocUrl": "test" },
-    { "draftId": "3", "draftName": "First Notes", "gDocUrl": "test" },
-    { "draftId": "4", "draftName": "WIP", "gDocUrl": "test" }];
+    { "draftId": "1", "draftName": "Draft", "gDocUrl": "https://docs.google.com/document/d/1voStCF9kssLiTzPZKB9fTjSZlrzTIolT2f6abjmiJrg/edit" },
+    { "draftId": "2", "draftName": "Final", "gDocUrl": "https://docs.google.com/document/d/1voStCF9kssLiTzPZKB9fTjSZlrzTIolT2f6abjmiJrg/edit" },
+    { "draftId": "3", "draftName": "First Notes", "gDocUrl": "https://docs.google.com/document/d/1voStCF9kssLiTzPZKB9fTjSZlrzTIolT2f6abjmiJrg/edit" },
+    { "draftId": "4", "draftName": "WIP", "gDocUrl": "https://docs.google.com/document/d/1voStCF9kssLiTzPZKB9fTjSZlrzTIolT2f6abjmiJrg/edit" }];
 
 var drafts1 = [
     { "draftId": "12", "draftName": "Draft1", "gDocUrl": "test" },
