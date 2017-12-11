@@ -7,7 +7,7 @@ var express = require('express'),
     _ = require('underscore');
 
 app.use(express.static(path.join(__dirname, 'app')));
- 
+
 var _token;
 var _responseId;
 
@@ -482,6 +482,9 @@ app.get('/api/Responses/:respId', function (req, res) {
         case "19": // get Tree Deafts
             res.send({ content: { FileContentAsHtml: FileContentAsHtml } });
             break;
+        case "20": // GDoc Validation
+            res.send({ content: { GDocValidationErrors: 'GDoc Validations .......' } });
+            break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
             break;
@@ -640,6 +643,29 @@ app.get('/api/Drafts/:draftId/getDraftContentAsHtml', function (req, res) {
                 "title": "Get DraftContent As HTML",
                 "body": {
                     "cmsOperation": "GetDraftContentAsHtml",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+});
+
+app.get('/api/Drafts/:draftId/validateGDoc', function (req, res) {
+    console.log('Validate GDoc is called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 20;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "validate GDoc",
+                "body": {
+                    "cmsOperation": "ValidateGDoc",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
