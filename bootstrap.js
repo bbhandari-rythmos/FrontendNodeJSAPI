@@ -85,7 +85,7 @@ app.get('/api/projects', function (req, res) {
 
 });
 
-app.post('/api/project', function (req, res) {
+app.post('/api/projects', function (req, res) {
 
     console.log('Create projects called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get project call');
