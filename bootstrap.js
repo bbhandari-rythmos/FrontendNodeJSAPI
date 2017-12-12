@@ -851,7 +851,7 @@ app.get('/api/updateDraftTags/:tagId', function (req, res) {
 
 });
 
-app.get('/api/distributionBranches', function (req, res) {
+app.get('/api/Projects/:projectId/Branches', function (req, res) {
     console.log('GET branches called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 7;
