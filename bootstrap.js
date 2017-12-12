@@ -84,7 +84,7 @@ app.get('/api/projects', function (req, res) {
     res.send({ responseId: "1" });
 
 });
-
+ 
 app.post('/api/projects', function (req, res) {
 
     console.log('Create projects called, sending response id ' + _responseId);
