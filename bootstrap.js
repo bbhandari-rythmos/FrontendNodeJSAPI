@@ -59,7 +59,7 @@ app.post('/api/Notification/TopicUnregister', function (req, res) {
 app.get('/api/ping', function (req, res) {
     res.send({ message: 'pong' });
 });
-
+ 
 app.get('/api/projects', function (req, res) {
 
     console.log('GET projects called, sending response id ' + _responseId);
