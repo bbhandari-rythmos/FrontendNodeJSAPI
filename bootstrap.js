@@ -483,7 +483,24 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { FileContentAsHtml: FileContentAsHtml } });
             break;
         case "20": // GDoc Validation
-            res.send({ content: { GDocValidationErrors: 'GDoc Validations .......' } });
+            res.send({
+                content: {
+                    "isDraftContentValid": false,
+                    "extactedAssets": [
+                        {
+                            "assetId": "83d97228-fad4-4adf-bd9a-3207fc0fcfad",
+                            "isValid": false
+                        },
+                        {
+                            "assetId": "848a20ee-bc01-4539-9798-94e5ce7530ca",
+                            "isValid": true
+                        },
+                        {
+                            "assetId": "1d181ecb-3fbe-4994-ad00-6dd0f7b49176",
+                            "isValid": true
+                        }
+                    ]
+                }   });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
@@ -656,16 +673,16 @@ app.get('/api/Drafts/:draftId/getDraftContentAsHtml', function (req, res) {
     res.send({ responseId: responseID });
 });
 
-app.get('/api/Drafts/:draftId/validateGDoc', function (req, res) {
+app.get('/api/Drafts/:draftId/validatewipdraft', function (req, res) {
     console.log('Validate GDoc is called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 20;
     setTimeout(function () {
         var pushMessage = {
             "notification": {
-                "title": "validate GDoc",
+                "title": "Validate Draft Content",
                 "body": {
-                    "cmsOperation": "ValidateGDoc",
+                    "cmsOperation": "ValidateDraftContent",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
