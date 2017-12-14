@@ -150,6 +150,26 @@ app.post('/api/drafts', function (req, res) {
     res.send({ responseId: "53" });
 });
 
+app.post('/api/tagGroups', function (req, res) {
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Create Tag Group",
+                "body": {
+                    "cmsOperation": "CreateTagGroup",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": "22"
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: "22" });
+});
+
 app.post('/api/nodes/update', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
@@ -550,6 +570,9 @@ app.get('/api/Responses/:respId', function (req, res) {
             break;
         case "21": // get tag Groups
             res.send({ content: { tagGroups: tagGroups } });
+            break;
+        case "22": // Create Tag Group
+            res.send({ content: { status: 'OK' } });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
