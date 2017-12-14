@@ -339,6 +339,52 @@ var tagData = [
     { 'tagId': '16', 'tagName': 'completed', 'tagGroup': 'stage', 'tagColor': 'primary' }
 ];
 
+var tagGroups = [{
+    'ID': '1',
+    'Name': 'status',
+    'Colour': 'primary',
+    'Limit to One': true,
+    'Child nodes inherit': true,
+    'Display group name': true,
+    'Can create tags': true
+},
+{
+    'ID': '2',
+    'Name': 'Priority ',
+    'Colour': 'warn',
+    'Limit to One': true,
+    'Child nodes inherit': true,
+    'Display group name': true,
+    'Can create tags': true
+},
+{
+    'ID': '3',
+    'Name': 'Content ',
+    'Colour': 'accent',
+    'Limit to One': true,
+    'Child nodes inherit': true,
+    'Display group name': true,
+    'Can create tags': true
+},
+{
+    'ID': '4',
+    'Name': 'Difficulty Level',
+    'Colour': 'accent',
+    'Limit to One': true,
+    'Child nodes inherit': true,
+    'Display group name': true,
+    'Can create tags': true
+},
+{
+    'ID': '5',
+    'Name': 'type',
+    'Colour': 'warn',
+    'Limit to One': true,
+    'Child nodes inherit': true,
+    'Display group name': true,
+    'Can create tags': true
+}];
+
 var draftTags = [
     { 'tagId': '1', 'tagName': 'EN', 'tagGroup': 'language', 'tagColor': 'primary' },
     { 'tagId': '5', 'tagName': 'novice', 'tagGroup': 'level', 'tagColor': 'warn' },
@@ -501,6 +547,9 @@ app.get('/api/Responses/:respId', function (req, res) {
                         }
                     ]
                 }   });
+            break;
+        case "21": // get tag Groups
+            res.send({ content: { tagGroups: tagGroups } });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
@@ -741,6 +790,30 @@ app.get('/api/tags', function (req, res) {
                 "title": "Get All Tags",
                 "body": {
                     "cmsOperation": "GetAllTags",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+
+});
+
+app.get('/api/tags/tagGroups', function (req, res) {
+    console.log('GET Tag Groups called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 21;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Tag Groups",
+                "body": {
+                    "cmsOperation": "GetTagGroups",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
