@@ -385,7 +385,7 @@ var tagGroups = [{
     'childNodesInherit': true,
     'displayGroupName': true,
     'canCreateTag': false
-},
+}, 
 {
     'tagGroupId': '4',
     'tagGroupName': 'difficulty Level ',
