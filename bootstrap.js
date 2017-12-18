@@ -150,7 +150,7 @@ app.post('/api/drafts', function (req, res) {
     res.send({ responseId: "53" });
 });
 
-app.post('/api/tagGroup', function (req, res) {
+app.post('/api/tagGroups', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
             "notification": {
