@@ -360,49 +360,49 @@ var tagData = [
 ];
 
 var tagGroups = [{
-    'ID': '1',
-    'Name': 'status',
-    'Colour': 'primary',
-    'Limit to One': true,
-    'Child nodes inherit': true,
-    'Display group name': true,
-    'Can create tags': true
+    'tagGroupId': '1',
+    'tagGroupName': 'status ',
+    'colour': 'warn',
+    'limitToOne': true,
+    'childNodesInherit': false,
+    'displayGroupName': true,
+    'canCreateTags': false
 },
 {
-    'ID': '2',
-    'Name': 'Priority ',
-    'Colour': 'warn',
-    'Limit to One': true,
-    'Child nodes inherit': true,
-    'Display group name': true,
-    'Can create tags': true
+    'tagGroupId': '2',
+    'tagGroupName': 'Priority ',
+    'colour': 'warn',
+    'limitToOne': false,
+    'childNodesInherit': false,
+    'displayGroupName': true,
+    'canCreateTags': true
 },
 {
-    'ID': '3',
-    'Name': 'Content ',
-    'Colour': 'accent',
-    'Limit to One': true,
-    'Child nodes inherit': true,
-    'Display group name': true,
-    'Can create tags': true
+    'tagGroupId': '3',
+    'tagGroupName': 'content ',
+    'colour': 'warn',
+    'limitToOne': true,
+    'childNodesInherit': true,
+    'displayGroupName': true,
+    'canCreateTags': false
 },
 {
-    'ID': '4',
-    'Name': 'Difficulty Level',
-    'Colour': 'accent',
-    'Limit to One': true,
-    'Child nodes inherit': true,
-    'Display group name': true,
-    'Can create tags': true
+    'tagGroupId': '4',
+    'tagGroupName': 'difficulty Level ',
+    'colour': 'warn',
+    'limitToOne': true,
+    'childNodesInherit': false,
+    'displayGroupName': true,
+    'canCreateTags': true
 },
 {
-    'ID': '5',
-    'Name': 'type',
-    'Colour': 'warn',
-    'Limit to One': true,
-    'Child nodes inherit': true,
-    'Display group name': true,
-    'Can create tags': true
+    'tagGroupId': '5',
+    'tagGroupName': 'type ',
+    'colour': 'warn',
+    'limitToOne': true,
+    'childNodesInherit': true,
+    'displayGroupName': false,
+    'canCreateTags': true
 }];
 
 var draftTags = [
