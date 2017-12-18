@@ -150,7 +150,7 @@ app.post('/api/drafts', function (req, res) {
     res.send({ responseId: "53" });
 });
 
-app.post('/api/tagGroups', function (req, res) {
+app.post('/api/tagGroup', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
             "notification": {
@@ -827,7 +827,7 @@ app.get('/api/tags', function (req, res) {
 
 });
 
-app.get('/api/tags/tagGroups', function (req, res) {
+app.get('/api/tagGroups', function (req, res) {
     console.log('GET Tag Groups called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 21;
@@ -836,7 +836,7 @@ app.get('/api/tags/tagGroups', function (req, res) {
             "notification": {
                 "title": "Get Tag Groups",
                 "body": {
-                    "cmsOperation": "GetTagGroups",
+                    "cmsOperation": "GetAllTagGroups",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
