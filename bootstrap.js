@@ -366,7 +366,7 @@ var tagGroups = [{
     'limitToOne': true,
     'childNodesInherit': false,
     'displayGroupName': true,
-    'canCreateTags': false
+    'canCreateTag': false
 },
 {
     'tagGroupId': '2',
@@ -375,7 +375,7 @@ var tagGroups = [{
     'limitToOne': false,
     'childNodesInherit': false,
     'displayGroupName': true,
-    'canCreateTags': true
+    'canCreateTag': true
 },
 {
     'tagGroupId': '3',
@@ -384,7 +384,7 @@ var tagGroups = [{
     'limitToOne': true,
     'childNodesInherit': true,
     'displayGroupName': true,
-    'canCreateTags': false
+    'canCreateTag': false
 },
 {
     'tagGroupId': '4',
@@ -393,7 +393,7 @@ var tagGroups = [{
     'limitToOne': true,
     'childNodesInherit': false,
     'displayGroupName': true,
-    'canCreateTags': true
+    'canCreateTag': true
 },
 {
     'tagGroupId': '5',
@@ -402,7 +402,7 @@ var tagGroups = [{
     'limitToOne': true,
     'childNodesInherit': true,
     'displayGroupName': false,
-    'canCreateTags': true
+    'canCreateTag': true
 }];
 
 var draftTags = [
