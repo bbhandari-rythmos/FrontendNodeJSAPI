@@ -359,6 +359,15 @@ var tagData = [
     { 'tagId': '16', 'tagName': 'completed', 'tagGroup': 'stage', 'tagColor': 'primary' }
 ];
 
+var tags =
+    [{ 'tagId': '1', 'tagName': 'tag1', 'tagGroupId': '1' },
+    { 'tagId': '2', 'tagName': 'tag2', 'tagGroupId': '1' },
+    { 'tagId': '3', 'tagName': 'tag3', 'tagGroupId': '1' },
+    { 'tagId': '4', 'tagName': 'tag4', 'tagGroupId': '1' },
+    { 'tagId': '5', 'tagName': 'tag5', 'tagGroupId': '1' },
+    { 'tagId': '6', 'tagName': 'tag6', 'tagGroupId': '1' },
+    { 'tagId': '7', 'tagName': 'tag7', 'tagGroupId': '1' }]
+
 var tagGroups = [{
     'tagGroupId': '1',
     'tagGroupName': 'status ',
@@ -398,7 +407,7 @@ var tagGroups = [{
 {
     'tagGroupId': '5',
     'tagGroupName': 'type ',
-    'colour': 'warn',
+    'colour': 'primary',
     'limitToOne': true,
     'childNodesInherit': true,
     'displayGroupName': false,
@@ -523,8 +532,8 @@ app.get('/api/Responses/:respId', function (req, res) {
         case "11": // Remove Tag
             res.send({ content: { status: 'OK' } });
             break;
-        case "12": // get all Tags
-            res.send({ content: tagData });
+        case "12": // get all Tags for tagGroup
+            res.send({ content: { tags:tags } });
             break;
         case "13": // get Draft Tags
             res.send({ content: draftTags });
@@ -803,16 +812,16 @@ app.get('/api/tabs', function (req, res) {
     res.send({ data: tabData });
 });
 
-app.get('/api/tags', function (req, res) {
+app.get('/api/tags/:tagGroupId', function (req, res) {
     console.log('GET Tags called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 12;
     setTimeout(function () {
         var pushMessage = {
             "notification": {
-                "title": "Get All Tags",
+                "title": "Get Tags For TagGroup",
                 "body": {
-                    "cmsOperation": "GetAllTags",
+                    "cmsOperation": "GetTagsForTagGroup",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
