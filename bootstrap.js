@@ -833,7 +833,7 @@ app.get('/api/tabs', function (req, res) {
     res.send({ data: tabData });
 });
 
-app.get('/api/tags/:tagGroupId', function (req, res) {
+app.get('/api/tags/:tagGroupId/tags', function (req, res) {
     console.log('GET Tags called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 12;
