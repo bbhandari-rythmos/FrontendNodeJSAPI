@@ -363,10 +363,8 @@ var tags =
     [{ 'tagId': '1', 'tagName': 'tag1', 'tagGroupId': '1' },
     { 'tagId': '2', 'tagName': 'tag2', 'tagGroupId': '1' },
     { 'tagId': '3', 'tagName': 'tag3', 'tagGroupId': '1' },
-    { 'tagId': '4', 'tagName': 'tag4', 'tagGroupId': '1' },
-    { 'tagId': '5', 'tagName': 'tag5', 'tagGroupId': '1' },
-    { 'tagId': '6', 'tagName': 'tag6', 'tagGroupId': '1' },
-    { 'tagId': '7', 'tagName': 'tag7', 'tagGroupId': '1' }]
+    { 'tagId': '4', 'tagName': 'tag4', 'tagGroupId': '1' }
+  ]
 
 var tagGroups = [{
     'tagGroupId': '1',
