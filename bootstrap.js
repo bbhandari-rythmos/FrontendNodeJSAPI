@@ -536,7 +536,7 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { tags:tags } });
             break;
         case "13": // get Draft Tags
-            res.send({ content: draftTags });
+            res.send({ content: draftTags }); 
             break;
         case "14": // repo url not exists
             tempData = true;
