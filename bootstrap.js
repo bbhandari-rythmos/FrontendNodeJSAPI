@@ -386,6 +386,28 @@ var tags =
     { 'tagId': '4', 'tagName': 'tag4', 'tagGroupId': '1' }
   ]
 
+var nodeTags =
+    [{ 'tagId': '1', 'tagName': 'tag1', 'tagGroupId': '1' },
+{ 'tagId': '2', 'tagName': 'tag2', 'tagGroupId': '1' },
+{ 'tagId': '5', 'tagName': 'tag5', 'tagGroupId': '2' },
+{ 'tagId': '11', 'tagName': 'tag11', 'tagGroupId': '3' }
+]
+
+var projectTags =
+   [{ 'tagId': '1', 'tagName': 'tag1', 'tagGroupId': '1' },
+    { 'tagId': '2', 'tagName': 'tag2', 'tagGroupId': '1' },
+    { 'tagId': '3', 'tagName': 'tag3', 'tagGroupId': '1' },
+    { 'tagId': '4', 'tagName': 'tag4', 'tagGroupId': '1' },
+    { 'tagId': '5', 'tagName': 'tag5', 'tagGroupId': '2' },
+    { 'tagId': '6', 'tagName': 'tag6', 'tagGroupId': '2' },
+    { 'tagId': '7', 'tagName': 'tag7', 'tagGroupId': '2' },
+    { 'tagId': '8', 'tagName': 'tag8', 'tagGroupId': '2' },
+    { 'tagId': '9', 'tagName': 'tag9', 'tagGroupId': '3' },
+    { 'tagId': '10', 'tagName': 'tag10', 'tagGroupId': '3' },
+    { 'tagId': '11', 'tagName': 'tag11', 'tagGroupId': '3' },
+    { 'tagId': '12', 'tagName': 'tag12', 'tagGroupId': '3' }
+    ]
+
 var tagGroups = [{
     'tagGroupId': '1',
     'tagGroupName': 'status ',
@@ -603,6 +625,12 @@ app.get('/api/Responses/:respId', function (req, res) {
             break;
         case "23": // Create Tag 
             res.send({ content: { status: 'OK' } });
+            break;
+        case "24": // Create Tag 
+            res.send({ content: { tags: nodeTags } });
+            break;
+        case "25": // Create Tag 
+            res.send({ content: { tags: projectTags, tagGroups: tagGroups } });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
@@ -843,6 +871,54 @@ app.get('/api/tags/:tagGroupId/tags', function (req, res) {
                 "title": "Get Tags For TagGroup",
                 "body": {
                     "cmsOperation": "GetTagsForTagGroup",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+
+});
+
+app.get('/api/Nodes/:nodeId/tags', function (req, res) {
+    console.log('GET Tags for Node called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 24;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Tags For Node",
+                "body": {
+                    "cmsOperation": "GetTagsForNode",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+
+});
+
+app.get('/api/Projects/:projectId/tags', function (req, res) {
+    console.log('GET Tags for project called, sending response id ' + _responseId);
+    console.log('Waiting for 30 seconds to simulate get call');
+    var responseID = 25;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Tags For Node",
+                "body": {
+                    "cmsOperation": "GetTagsForProject",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
