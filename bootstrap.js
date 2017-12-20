@@ -825,7 +825,7 @@ app.get('/api/Drafts/:draftId/validatewipdraft', function (req, res) {
     }, 5000)
     res.send({ responseId: responseID });
 });
-
+ 
 app.get('/api/tabs', function (req, res) {
     var tabData = {
         "tabs": [
