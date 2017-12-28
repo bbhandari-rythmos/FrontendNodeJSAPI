@@ -351,10 +351,10 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { status: 'OK' } });
             break;
         case "18": // get Tree Deafts
-            res.send({ content: { FileContentAsMarkdown: FileContentAsMarkdown } });
+            res.send({ content: { contentAsMarkdown: FileContentAsMarkdown } });
             break;
         case "19": // get Tree Deafts
-            res.send({ content: { FileContentAsHtml: FileContentAsHtml } });
+            res.send({ content: { contentAsHtml: FileContentAsHtml } });
             break;
         case "20": // GDoc Validation
             res.send({
