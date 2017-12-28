@@ -401,6 +401,18 @@ app.get('/api/Responses/:respId', function (req, res) {
         case "53": // get drafts
             res.send({ content: { drafts: drafts1 } });
             break;
+        case "101": // upload assets
+            res.send({ content: { assets: [{ name: 'abc', src: '' }] } });
+            break;
+        case '102': // recent assets
+            res.send({ content: { assets: recentAssetArray } });
+            break;
+        case '103': // uploaded by me assets
+            res.send({ content: { assets: uploadedByMeAssetArray } });
+            break;
+        case '104': // get Asset By Id
+            res.send({ content: { asset: { name: 'abc', src: '' } } });
+            break;
         default:
             break;
     }
@@ -483,6 +495,7 @@ app.post('/api/doLogin', function (req, res) {
         method: 'POST'
     }, function (err, response, body) {
         if (err) {
+            res.send({ status: 0, token: '1wewqe1313s131313131313', profile: { firstName: userName, lastName: userName } });
             console.error("error in recaptcha " + err);
         } else {
             var bodyJSON = JSON.parse(body);
@@ -1052,6 +1065,74 @@ app.get('/api/project/:id', function (req, res) {
     res.send({ data: project });
 });
 
+app.post('/api/uploadAssets', function (req, res) {
+    console.log('base64:' + req.body.baseString);
+    var base64DataTemp = req.body.baseString.replace(/^data:image\/png;base64,/, "");
+    var filename = new Date().getMilliseconds().toString();
+    require("fs").writeFile(filename + ".png", base64DataTemp, 'base64', function (err) {
+        console.log(err);
+    });
+
+
+    var responseID = 101;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "UploadAsset",
+                "body": {
+                    "cmsOperation": "UploadAsset",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.post('/api/assets', function (req, res) {
+    var assetType = req.body.assetType;
+    var tabindex = req.body.tabindex;
+    var responseID;
+    console.log('assetType is: ' + assetType);
+    console.log('tabindex is: ' + tabindex);
+    if (assetType == 2) {
+        switch (tabindex) {
+            case 0:
+                responseID = 102; // recent assets
+                break;
+            case 1:
+                responseID = 103; // uploaded by me assets
+                break;
+        }
+    }
+
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Assets",
+                "body": {
+                    "cmsOperation": "GetAssets",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    setTimeout(function () {
+        res.send({ responseId: responseID });
+    }, 1000);
+})
+
 var projectData = [
     { 'id': '1', 'projectName': 'Unity1', 'repoUrl': 'Unity1.com' },
     { 'id': '2', 'projectName': 'Unity2', 'repoUrl': 'Unity2.com' },
@@ -1294,6 +1375,31 @@ var repositories = [
     { 'repositoryId': '4', 'repositoryName': 'EN4' },
 ];
 
+var recentAssetArray = [
+    { name: 'project3', url: 'assets/img/thumbnails/project3-thumb.jpg' },
+    { name: 'AreaLights.jpg', url: 'assets/img/thumbnails/AreaLights-thumb.jpg' },
+    { name: 'EmissiveMaterial.jpg', url: 'assets/img/thumbnails/EmissiveMaterial-thumb.jpg' },
+    { name: 'GraphicsIntroPic.jpg', url: 'assets/img/thumbnails/GraphicsIntroPic-thumb.jpg' },
+    { name: 'Light-Point-thumb.jpg', url: 'assets/img/thumbnails/Light-Point-thumb.jpg' },
+    { name: 'project1', url: 'assets/img/thumbnails/project1-thumb.jpg' },
+    { name: 'project2', url: 'assets/img/thumbnails/project2-thumb.jpg' },
+    { name: 'project2', url: 'assets/img/thumbnails/project2-thumb.jpg' },
+    { name: 'AreaLights.jpg', url: 'assets/img/thumbnails/AreaLights-thumb.jpg' },
+    { name: 'EmissiveMaterial.jpg', url: 'assets/img/thumbnails/EmissiveMaterial-thumb.jpg' },
+    { name: 'GraphicsIntroPic.jpg', url: 'assets/img/thumbnails/GraphicsIntroPic-thumb.jpg' },
+    { name: 'Light-Point-thumb.jpg', url: 'assets/img/thumbnails/Light-Point-thumb.jpg' }
+];
 
+var uploadedByMeAssetArray = [
+    { name: 'AreaLights.jpg', url: 'assets/img/thumbnails/AreaLights-thumb.jpg' },
+    { name: 'project3', url: 'assets/img/thumbnails/project3-thumb.jpg' },
+    { name: 'unity_presents', url: 'assets/img/thumbnails/unity_presents-thumb.jpg' },
+    { name: 'EmissiveMaterial.jpg', url: 'assets/img/thumbnails/EmissiveMaterial-thumb.jpg' },
+    { name: 'project2', url: 'assets/img/thumbnails/project2-thumb.jpg' },
+    { name: 'project1', url: 'assets/img/thumbnails/project1-thumb.jpg' },
+    { name: 'project2', url: 'assets/img/thumbnails/project2-thumb.jpg' },
+    { name: 'project3', url: 'assets/img/thumbnails/project3-thumb.jpg' },
+    { name: 'unity_presents', url: 'assets/img/thumbnails/unity_presents-thumb.jpg' }
+];
 
 console.log('server started');
