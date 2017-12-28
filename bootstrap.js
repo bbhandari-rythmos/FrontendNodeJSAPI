@@ -1263,10 +1263,10 @@ var tagData = [
 ];
 
 var tags =
-    [{ 'tagId': '1', 'tagName': 'tag1', 'tagGroupId': '1' },
-    { 'tagId': '2', 'tagName': 'tag2', 'tagGroupId': '1' },
-    { 'tagId': '3', 'tagName': 'tag3', 'tagGroupId': '1' },
-    { 'tagId': '4', 'tagName': 'tag4', 'tagGroupId': '1' }
+    [{ 'tagId': '1', 'tagName': 'tag1'},
+    { 'tagId': '2', 'tagName': 'tag2' },
+    { 'tagId': '3', 'tagName': 'tag3' },
+    { 'tagId': '4', 'tagName': 'tag4' }
     ]
 
 var nodeTags = [
@@ -1299,7 +1299,9 @@ var tagGroups = [
         'limitToOne': true,
         'childNodesInherit': false,
         'displayGroupName': true,
-        'canCreateTag': false
+        'public': false,
+        'publish': true,
+        'tags': tags
     },
     {
         'tagGroupId': '2',
@@ -1308,7 +1310,9 @@ var tagGroups = [
         'limitToOne': false,
         'childNodesInherit': false,
         'displayGroupName': true,
-        'canCreateTag': true
+        'public': false,
+        'publish': true,
+        'tags': tags
     },
     {
         'tagGroupId': '3',
@@ -1317,7 +1321,9 @@ var tagGroups = [
         'limitToOne': true,
         'childNodesInherit': true,
         'displayGroupName': true,
-        'canCreateTag': false
+        'public': false,
+        'publish': true,
+        'tags': tags
     },
     {
         'tagGroupId': '4',
@@ -1326,7 +1332,9 @@ var tagGroups = [
         'limitToOne': true,
         'childNodesInherit': false,
         'displayGroupName': true,
-        'canCreateTag': true
+        'public': false,
+        'publish': true,
+        'tags': tags
     },
     {
         'tagGroupId': '5',
@@ -1335,7 +1343,9 @@ var tagGroups = [
         'limitToOne': true,
         'childNodesInherit': true,
         'displayGroupName': false,
-        'canCreateTag': true
+        'public': false,
+        'publish': true,
+        'tags': tags
     }];
 
 var draftTags = [
