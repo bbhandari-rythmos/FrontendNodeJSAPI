@@ -576,7 +576,7 @@ app.get('/api/Drafts/:draftId/getDraftContentAsHtml', function (req, res) {
     res.send({ responseId: responseID });
 });
 
-app.get('/api/Drafts/:draftId/validatewipdraft', function (req, res) {
+app.get('/api/Drafts/:draftId/validate', function (req, res) {
     console.log('Validate GDoc is called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 20;
