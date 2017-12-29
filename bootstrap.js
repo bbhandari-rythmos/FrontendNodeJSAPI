@@ -14,7 +14,7 @@ var _responseId;
 app.use(function (req, res, next) {
     "use strict";
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, OPTIONS, DELETE');
     res.header('Access-Control-Allow-Headers', 'origin, content-type, Authorization');
     if (req.method == 'OPTIONS') {
         res.send(200);
@@ -411,7 +411,46 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { assets: uploadedByMeAssetArray } });
             break;
         case '104': // get Asset By Id
-            res.send({ content: { asset: { name: 'abc', src: '' } } });
+            res.send({
+                content: {
+                    asset:
+                        {
+                            'assetId': 'ASSET-123432',
+                            'assetType': 1,
+                            'fileName': 'BHUPENDRA TEST',
+                            'fileSize': '1000 KB',
+                            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                            'unityProjectSource': 'ABC',
+                            'instructionsToReCreateImage': 'NA',
+                            'depicted': 'NA',
+                            'altTitle': 'NA',
+                            'description': 'NA',
+                            'uploadedBy': 'BHUPENDRA',
+                            'uploadedDate': '10/10/2017'
+                        }
+                }
+            });
+            break;
+        case '105': // update properties
+            res.send({
+                content: {
+                    asset:
+                        {
+                            'assetId': 'ASSET-123432',
+                            'assetType': 1,
+                            'fileName': 'BHUPENDRA TEST',
+                            'fileSize': '1000 KB',
+                            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                            'unityProjectSource': 'Updated ',
+                            'instructionsToReCreateImage': 'Updated',
+                            'depicted': 'Updated',
+                            'altTitle': 'Updated',
+                            'description': 'Updated',
+                            'uploadedBy': 'BHUPENDRA',
+                            'uploadedDate': '10/10/2017'
+                        }
+                }
+            });
             break;
         default:
             break;
@@ -1065,7 +1104,7 @@ app.get('/api/project/:id', function (req, res) {
     res.send({ data: project });
 });
 
-app.post('/api/uploadAssets', function (req, res) {
+app.post('/api/Assets', function (req, res) {
     console.log('base64:' + req.body.baseString);
     var base64DataTemp = req.body.baseString.replace(/^data:image\/png;base64,/, "");
     var filename = new Date().getMilliseconds().toString();
@@ -1078,9 +1117,9 @@ app.post('/api/uploadAssets', function (req, res) {
     setTimeout(function () {
         var pushMessage = {
             "notification": {
-                "title": "UploadAsset",
+                "title": "Upload Asset",
                 "body": {
-                    "cmsOperation": "UploadAsset",
+                    "cmsOperation": "UpsertAsset",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
@@ -1094,21 +1133,48 @@ app.post('/api/uploadAssets', function (req, res) {
     res.send({ responseId: responseID });
 })
 
-app.post('/api/assets', function (req, res) {
+app.put('/api/Assets', function (req, res) {
+    console.log('base64:' + req.body.baseString);
+    var base64DataTemp = req.body.baseString.replace(/^data:image\/png;base64,/, "");
+    var filename = new Date().getMilliseconds().toString();
+    require("fs").writeFile(filename + ".png", base64DataTemp, 'base64', function (err) {
+        console.log(err);
+    });
+
+
+    var responseID = 101;
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Upsert Asset",
+                "body": {
+                    "cmsOperation": "UpsertAsset",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.post('/api/getassets', function (req, res) {
     var assetType = req.body.assetType;
     var tabindex = req.body.tabindex;
     var responseID;
     console.log('assetType is: ' + assetType);
     console.log('tabindex is: ' + tabindex);
-    if (assetType == 2) {
-        switch (tabindex) {
-            case 0:
-                responseID = 102; // recent assets
-                break;
-            case 1:
-                responseID = 103; // uploaded by me assets
-                break;
-        }
+    switch (tabindex) {
+        case 0:
+            responseID = 102; // recent assets
+            break;
+        case 1:
+            responseID = 103; // uploaded by me assets
+            break;
     }
 
     console.log('responseId is: ' + responseID);
@@ -1132,6 +1198,63 @@ app.post('/api/assets', function (req, res) {
         res.send({ responseId: responseID });
     }, 1000);
 })
+
+app.get('/api/assets/:id', function (req, res) {
+    var id = req.query.id;
+    console.log('id is: ' + id);
+
+    responseID = 104; // get asset
+
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Assets",
+                "body": {
+                    "cmsOperation": "GetAsset",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    setTimeout(function () {
+        res.send({ responseId: responseID });
+    }, 1000);
+})
+
+app.put('/api/assets/UpdateAssetProperties', function (req, res) {
+    var id = req.query.id;
+    console.log('id is: ' + id);
+
+    responseID = 105; // update asset
+
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Update Assets",
+                "body": {
+                    "cmsOperation": "UpdateAssetProperties",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    setTimeout(function () {
+        res.send({ responseId: responseID });
+    }, 1000);
+})
+
 
 var projectData = [
     { 'id': '1', 'projectName': 'Unity1', 'repoUrl': 'Unity1.com' },
@@ -1376,30 +1499,149 @@ var repositories = [
 ];
 
 var recentAssetArray = [
-    { name: 'project3', url: 'assets/img/thumbnails/project3-thumb.jpg' },
-    { name: 'AreaLights.jpg', url: 'assets/img/thumbnails/AreaLights-thumb.jpg' },
-    { name: 'EmissiveMaterial.jpg', url: 'assets/img/thumbnails/EmissiveMaterial-thumb.jpg' },
-    { name: 'GraphicsIntroPic.jpg', url: 'assets/img/thumbnails/GraphicsIntroPic-thumb.jpg' },
-    { name: 'Light-Point-thumb.jpg', url: 'assets/img/thumbnails/Light-Point-thumb.jpg' },
-    { name: 'project1', url: 'assets/img/thumbnails/project1-thumb.jpg' },
-    { name: 'project2', url: 'assets/img/thumbnails/project2-thumb.jpg' },
-    { name: 'project2', url: 'assets/img/thumbnails/project2-thumb.jpg' },
-    { name: 'AreaLights.jpg', url: 'assets/img/thumbnails/AreaLights-thumb.jpg' },
-    { name: 'EmissiveMaterial.jpg', url: 'assets/img/thumbnails/EmissiveMaterial-thumb.jpg' },
-    { name: 'GraphicsIntroPic.jpg', url: 'assets/img/thumbnails/GraphicsIntroPic-thumb.jpg' },
-    { name: 'Light-Point-thumb.jpg', url: 'assets/img/thumbnails/Light-Point-thumb.jpg' }
+    {
+        'assetId': '1',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '6',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/AreaLights-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '2',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/unity_presents-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '3',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/project2-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '4',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '5',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/project1-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    }
 ];
 
 var uploadedByMeAssetArray = [
-    { name: 'AreaLights.jpg', url: 'assets/img/thumbnails/AreaLights-thumb.jpg' },
-    { name: 'project3', url: 'assets/img/thumbnails/project3-thumb.jpg' },
-    { name: 'unity_presents', url: 'assets/img/thumbnails/unity_presents-thumb.jpg' },
-    { name: 'EmissiveMaterial.jpg', url: 'assets/img/thumbnails/EmissiveMaterial-thumb.jpg' },
-    { name: 'project2', url: 'assets/img/thumbnails/project2-thumb.jpg' },
-    { name: 'project1', url: 'assets/img/thumbnails/project1-thumb.jpg' },
-    { name: 'project2', url: 'assets/img/thumbnails/project2-thumb.jpg' },
-    { name: 'project3', url: 'assets/img/thumbnails/project3-thumb.jpg' },
-    { name: 'unity_presents', url: 'assets/img/thumbnails/unity_presents-thumb.jpg' }
+    {
+        'assetId': '8',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/project1-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '9',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/unity_presents-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '10',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/EmissiveMaterial-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '11',
+        'assetType': 1,
+        'fileName': 'BHUPENDRA TEST',
+        'fileSize': '1000 KB',
+        'assetContent': 'assets/img/thumbnails/project2-thumb.jpg',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'BHUPENDRA',
+        'uploadedDate': '10/10/2017'
+    }
 ];
 
 console.log('server started');
