@@ -351,10 +351,10 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { status: 'OK' } });
             break;
         case "18": // get Tree Deafts
-            res.send({ content: { FileContentAsMarkdown: FileContentAsMarkdown } });
+            res.send({ content: { contentAsMarkdown: FileContentAsMarkdown } });
             break;
         case "19": // get Tree Deafts
-            res.send({ content: { FileContentAsHtml: FileContentAsHtml } });
+            res.send({ content: { contentAsHtml: FileContentAsHtml } });
             break;
         case "20": // GDoc Validation
             res.send({
@@ -569,7 +569,7 @@ app.post('/connect/token', function (req, res) {
     });
 });
 
-app.get('/api/Drafts/:draftId/getDraftContentAsMarkdown', function (req, res) {
+app.get('/api/Drafts/:draftId/md', function (req, res) {
     console.log('GET Gdoc as MD is called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 18;
@@ -592,7 +592,7 @@ app.get('/api/Drafts/:draftId/getDraftContentAsMarkdown', function (req, res) {
     res.send({ responseId: responseID });
 });
 
-app.get('/api/Drafts/:draftId/getDraftContentAsHtml', function (req, res) {
+app.get('/api/Drafts/:draftId/html', function (req, res) {
     console.log('GET Gdoc as HTML is called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 19;
@@ -615,7 +615,7 @@ app.get('/api/Drafts/:draftId/getDraftContentAsHtml', function (req, res) {
     res.send({ responseId: responseID });
 });
 
-app.get('/api/Drafts/:draftId/validatewipdraft', function (req, res) {
+app.get('/api/Drafts/:draftId/validate', function (req, res) {
     console.log('Validate GDoc is called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 20;
@@ -1386,10 +1386,10 @@ var tagData = [
 ];
 
 var tags =
-    [{ 'tagId': '1', 'tagName': 'tag1', 'tagGroupId': '1' },
-    { 'tagId': '2', 'tagName': 'tag2', 'tagGroupId': '1' },
-    { 'tagId': '3', 'tagName': 'tag3', 'tagGroupId': '1' },
-    { 'tagId': '4', 'tagName': 'tag4', 'tagGroupId': '1' }
+    [{ 'tagId': '1', 'tagName': 'tag1'},
+    { 'tagId': '2', 'tagName': 'tag2' },
+    { 'tagId': '3', 'tagName': 'tag3' },
+    { 'tagId': '4', 'tagName': 'tag4' }
     ]
 
 var nodeTags = [
@@ -1422,7 +1422,9 @@ var tagGroups = [
         'limitToOne': true,
         'childNodesInherit': false,
         'displayGroupName': true,
-        'canCreateTag': false
+        'public': false,
+        'publish': true,
+        'tags': tags
     },
     {
         'tagGroupId': '2',
@@ -1431,7 +1433,9 @@ var tagGroups = [
         'limitToOne': false,
         'childNodesInherit': false,
         'displayGroupName': true,
-        'canCreateTag': true
+        'public': false,
+        'publish': true,
+        'tags': tags
     },
     {
         'tagGroupId': '3',
@@ -1440,7 +1444,9 @@ var tagGroups = [
         'limitToOne': true,
         'childNodesInherit': true,
         'displayGroupName': true,
-        'canCreateTag': false
+        'public': false,
+        'publish': true,
+        'tags': tags
     },
     {
         'tagGroupId': '4',
@@ -1449,7 +1455,9 @@ var tagGroups = [
         'limitToOne': true,
         'childNodesInherit': false,
         'displayGroupName': true,
-        'canCreateTag': true
+        'public': false,
+        'publish': true,
+        'tags': tags
     },
     {
         'tagGroupId': '5',
@@ -1458,7 +1466,9 @@ var tagGroups = [
         'limitToOne': true,
         'childNodesInherit': true,
         'displayGroupName': false,
-        'canCreateTag': true
+        'public': false,
+        'publish': true,
+        'tags': tags
     }];
 
 var draftTags = [
