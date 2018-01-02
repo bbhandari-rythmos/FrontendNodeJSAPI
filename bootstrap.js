@@ -402,7 +402,24 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { drafts: drafts1 } });
             break;
         case "101": // upload assets
-            res.send({ content: { assets: [{ name: 'abc', src: '' }] } });
+            res.send({
+                content: {
+                    assets: [{
+                        'assetId': '12',
+                        'assetType': 1,
+                        'fileName': 'New Asset',
+                        'fileSize': '1020 KB',
+                        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                        'unityProjectSource': 'added ',
+                        'instructionsToReCreateImage': 'added',
+                        'depicted': 'added',
+                        'altTitle': 'added',
+                        'description': 'added',
+                        'uploadedBy': 'BHUPENDRA',
+                        'uploadedDate': '10/10/2017'
+                    }]
+                }
+            });
             break;
         case '102': // recent assets
             res.send({ content: { assets: recentAssetArray } });
@@ -415,7 +432,7 @@ app.get('/api/Responses/:respId', function (req, res) {
                 content: {
                     asset:
                         {
-                            'assetId': 'ASSET-123432',
+                            'assetId': '11',
                             'assetType': 1,
                             'fileName': 'BHUPENDRA TEST',
                             'fileSize': '1000 KB',
@@ -436,7 +453,7 @@ app.get('/api/Responses/:respId', function (req, res) {
                 content: {
                     asset:
                         {
-                            'assetId': 'ASSET-123432',
+                            'assetId': '11',
                             'assetType': 1,
                             'fileName': 'BHUPENDRA TEST',
                             'fileSize': '1000 KB',
@@ -1386,7 +1403,7 @@ var tagData = [
 ];
 
 var tags =
-    [{ 'tagId': '1', 'tagName': 'tag1'},
+    [{ 'tagId': '1', 'tagName': 'tag1' },
     { 'tagId': '2', 'tagName': 'tag2' },
     { 'tagId': '3', 'tagName': 'tag3' },
     { 'tagId': '4', 'tagName': 'tag4' }
@@ -1510,7 +1527,7 @@ var repositories = [
 
 var recentAssetArray = [
     {
-        'assetId': '1',
+        'assetId': '11',
         'assetType': 1,
         'fileName': 'BHUPENDRA TEST',
         'fileSize': '1000 KB',
