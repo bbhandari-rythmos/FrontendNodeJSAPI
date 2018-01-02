@@ -404,7 +404,7 @@ app.get('/api/Responses/:respId', function (req, res) {
         case "101": // upload assets
             res.send({
                 content: {
-                    assets: [{
+                    asset: {
                         'assetId': '12',
                         'assetType': 1,
                         'fileName': 'New Asset',
@@ -417,7 +417,7 @@ app.get('/api/Responses/:respId', function (req, res) {
                         'description': 'added',
                         'uploadedBy': 'BHUPENDRA',
                         'uploadedDate': '10/10/2017'
-                    }]
+                    }
                 }
             });
             break;
@@ -466,6 +466,26 @@ app.get('/api/Responses/:respId', function (req, res) {
                             'uploadedBy': 'BHUPENDRA',
                             'uploadedDate': '10/10/2017'
                         }
+                }
+            });
+            break;
+        case "106": // put assets
+            res.send({
+                content: {
+                    asset: {
+                        'assetId': '12',
+                        'assetType': 1,
+                        'fileName': 'New Asset',
+                        'fileSize': '1020 KB',
+                        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                        'unityProjectSource': 'added ',
+                        'instructionsToReCreateImage': 'added',
+                        'depicted': 'added',
+                        'altTitle': 'added',
+                        'description': 'added',
+                        'uploadedBy': 'BHUPENDRA',
+                        'uploadedDate': '10/10/2017'
+                    }
                 }
             });
             break;
@@ -1159,7 +1179,7 @@ app.put('/api/Assets', function (req, res) {
     });
 
 
-    var responseID = 101;
+    var responseID = 106;
     setTimeout(function () {
         var pushMessage = {
             "notification": {
