@@ -1373,7 +1373,7 @@ app.put('/api/assets/UpdateAssetProperties', function (req, res) {
     }, 1000);
 })
 
-app.get('api/Projects/:projectId/tagGroups', function (req, res) {
+app.get('/api/Projects/:projectId/tagGroups', function (req, res) {
     var id = req.query.id;
     responseID = 26; 
     console.log('responseId is: ' + responseID);
