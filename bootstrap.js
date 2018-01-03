@@ -401,12 +401,12 @@ app.get('/api/Responses/:respId', function (req, res) {
         case "53": // get drafts
             res.send({ content: { drafts: drafts1 } });
             break;
-        case "101": // upload assets
+        case "101": // upload assets image
             res.send({
                 content: {
                     asset: {
                         'assetId': '12',
-                        'assetType': 1,
+                        'assetType': 2,
                         'fileName': 'New Asset',
                         'fileSize': '1020 KB',
                         'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
@@ -421,40 +421,83 @@ app.get('/api/Responses/:respId', function (req, res) {
                 }
             });
             break;
-        case '102': // recent assets
-            res.send({ content: { assets: recentAssetArray } });
+        case "109": // upload assets code
+            res.send({
+                content: {
+                    asset: {
+                        'assetId': '18',
+                        'assetType': 1,
+                        'fileName': 'na',
+                        'fileSize': '1000 KB',
+                        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
+                        'unityProjectSource': 'ABC',
+                        'instructionsToReCreateImage': 'NA',
+                        'depicted': 'NA',
+                        'altTitle': 'NA',
+                        'description': 'NA',
+                        'uploadedBy': 'Manish',
+                        'uploadedDate': '10/10/2017'
+                    }
+                }
+            });
             break;
-        case '103': // uploaded by me assets
-            res.send({ content: { assets: uploadedByMeAssetArray } });
+        case "106": // put assets image
+            res.send({
+                content: {
+                    asset: {
+                        'assetId': '11116',
+                        'assetType': 2,
+                        'fileName': 'Update Asset',
+                        'fileSize': '1020 KB',
+                        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                        'unityProjectSource': 'update ',
+                        'instructionsToReCreateImage': 'update',
+                        'depicted': 'update',
+                        'altTitle': 'update',
+                        'description': 'update',
+                        'uploadedBy': 'BHUPENDRA',
+                        'uploadedDate': '10/10/2017'
+                    }
+                }
+            });
+            break;
+
+        case '102': // recent assets image
+            var assetTemp = _.where(assetArray, { assetType: 2 });
+            res.send({ content: { assets: assetTemp } });
+            break;
+        case '103': // uploaded by me assets imaGE
+            var assetTemp = _.where(assetArray, { assetType: 2 });
+            var assets = _.where(assetTemp, { uploadedBy: 'BHUPENDRA' });
+            res.send({ content: { assets: assets } });
             break;
         case '104': // get Asset By Id
             res.send({
                 content: {
-                    asset:
-                        {
-                            'assetId': '11',
-                            'assetType': 1,
-                            'fileName': 'BHUPENDRA TEST',
-                            'fileSize': '1000 KB',
-                            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
-                            'unityProjectSource': 'ABC',
-                            'instructionsToReCreateImage': 'NA',
-                            'depicted': 'NA',
-                            'altTitle': 'NA',
-                            'description': 'NA',
-                            'uploadedBy': 'BHUPENDRA',
-                            'uploadedDate': '10/10/2017'
-                        }
+                    asset: {
+                        'assetId': '11116',
+                        'assetType': 2,
+                        'fileName': 'Update Asset',
+                        'fileSize': '1020 KB',
+                        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                        'unityProjectSource': 'update ',
+                        'instructionsToReCreateImage': 'update',
+                        'depicted': 'update',
+                        'altTitle': 'update',
+                        'description': 'update',
+                        'uploadedBy': 'BHUPENDRA',
+                        'uploadedDate': '10/10/2017'
+                    }
                 }
             });
             break;
-        case '105': // update properties
+        case '105': // update properties image
             res.send({
                 content: {
                     asset:
                         {
                             'assetId': '11',
-                            'assetType': 1,
+                            'assetType': 2,
                             'fileName': 'BHUPENDRA TEST',
                             'fileSize': '1000 KB',
                             'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
@@ -469,25 +512,55 @@ app.get('/api/Responses/:respId', function (req, res) {
                 }
             });
             break;
-        case "106": // put assets
+
+        case "107": // get recentcode block assets
+            var assetTemp = _.where(assetArray, { assetType: 1 });
+            res.send({ content: { assets: assetTemp } });
+            break;
+        case "108": // get code block assets
             res.send({
                 content: {
                     asset: {
-                        'assetId': '12',
+                        'assetId': '11117',
                         'assetType': 1,
-                        'fileName': 'New Asset',
-                        'fileSize': '1020 KB',
-                        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
-                        'unityProjectSource': 'added ',
-                        'instructionsToReCreateImage': 'added',
-                        'depicted': 'added',
-                        'altTitle': 'added',
-                        'description': 'added',
+                        'fileName': 'test',
+                        'fileSize': '1000 KB',
+                        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
+                        'unityProjectSource': 'ABC',
+                        'instructionsToReCreateImage': 'NA',
+                        'depicted': 'NA',
+                        'altTitle': 'NA',
+                        'description': 'NA',
                         'uploadedBy': 'BHUPENDRA',
                         'uploadedDate': '10/10/2017'
                     }
                 }
             });
+            break;
+        case "110": // put assets code
+            res.send({
+                content: {
+                    asset: {
+                        'assetId': '11117',
+                        'assetType': 1,
+                        'fileName': 'test',
+                        'fileSize': '1000 KB',
+                        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
+                        'unityProjectSource': 'ABC',
+                        'instructionsToReCreateImage': 'NA',
+                        'depicted': 'NA',
+                        'altTitle': 'NA',
+                        'description': 'NA',
+                        'uploadedBy': 'BHUPENDRA',
+                        'uploadedDate': '10/10/2017'
+                    }
+                }
+            });
+            break;
+        case "111": // get my block assets
+            var assetTemp = _.where(assetArray, { assetType: 1 });
+            var assets = _.where(assetTemp, { uploadedBy: 'BHUPENDRA' });
+            res.send({ content: { assets: assets } });
             break;
         default:
             break;
@@ -1142,15 +1215,9 @@ app.get('/api/project/:id', function (req, res) {
 });
 
 app.post('/api/Assets', function (req, res) {
-    console.log('base64:' + req.body.baseString);
-    var base64DataTemp = req.body.baseString.replace(/^data:image\/png;base64,/, "");
-    var filename = new Date().getMilliseconds().toString();
-    require("fs").writeFile(filename + ".png", base64DataTemp, 'base64', function (err) {
-        console.log(err);
-    });
 
-
-    var responseID = 101;
+    var AssetType = req.body.assetType;
+    var responseID = AssetType == 2 ? 101 : 109;
     setTimeout(function () {
         var pushMessage = {
             "notification": {
@@ -1171,15 +1238,8 @@ app.post('/api/Assets', function (req, res) {
 })
 
 app.put('/api/Assets', function (req, res) {
-    console.log('base64:' + req.body.baseString);
-    var base64DataTemp = req.body.baseString.replace(/^data:image\/png;base64,/, "");
-    var filename = new Date().getMilliseconds().toString();
-    require("fs").writeFile(filename + ".png", base64DataTemp, 'base64', function (err) {
-        console.log(err);
-    });
-
-
-    var responseID = 106;
+    var AssetType = req.body.assetType;
+    var responseID = AssetType == 2 ? 106 : 110;
     setTimeout(function () {
         var pushMessage = {
             "notification": {
@@ -1205,15 +1265,26 @@ app.post('/api/getassets', function (req, res) {
     var responseID;
     console.log('assetType is: ' + assetType);
     console.log('tabindex is: ' + tabindex);
-    switch (tabindex) {
-        case 0:
-            responseID = 102; // recent assets
-            break;
-        case 1:
-            responseID = 103; // uploaded by me assets
-            break;
+    if (assetType === 1) { //code blocks
+        switch (tabindex) {
+            case 0:
+                responseID = 107; // recent assets
+                break;
+            case 1:
+                responseID = 111; // uploaded by me assets
+                break;
+        }
     }
-
+    else { // image
+        switch (tabindex) {
+            case 0:
+                responseID = 102; // recent assets
+                break;
+            case 1:
+                responseID = 103; // uploaded by me assets
+                break;
+        }
+    }
     console.log('responseId is: ' + responseID);
     setTimeout(function () {
         var pushMessage = {
@@ -1237,10 +1308,14 @@ app.post('/api/getassets', function (req, res) {
 })
 
 app.get('/api/assets/:id', function (req, res) {
-    var id = req.query.id;
+    var id = req.params.id;
     console.log('id is: ' + id);
 
-    responseID = 104; // get asset
+    var asset = _.where(assetArray, { assetId: id });
+    if (asset[0].assetType == 2)
+        responseID = 104; // get asset image
+    else
+        responseID = 108; //code block
 
     console.log('responseId is: ' + responseID);
     setTimeout(function () {
@@ -1545,10 +1620,10 @@ var repositories = [
     { 'repositoryId': '4', 'repositoryName': 'EN4' },
 ];
 
-var recentAssetArray = [
+var assetArray = [
     {
-        'assetId': '11',
-        'assetType': 1,
+        'assetId': '11111',
+        'assetType': 2,
         'fileName': 'BHUPENDRA TEST',
         'fileSize': '1000 KB',
         'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
@@ -1557,14 +1632,14 @@ var recentAssetArray = [
         'depicted': 'NA',
         'altTitle': 'NA',
         'description': 'NA',
-        'uploadedBy': 'BHUPENDRA',
+        'uploadedBy': 'Unity I',
         'uploadedDate': '10/10/2017'
     },
     {
-        'assetId': '6',
-        'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
-        'fileSize': '1000 KB',
+        'assetId': '11112',
+        'assetType': 2,
+        'fileName': 'Unity II',
+        'fileSize': '10 KB',
         'assetContent': 'assets/img/thumbnails/AreaLights-thumb.jpg',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
@@ -1575,10 +1650,10 @@ var recentAssetArray = [
         'uploadedDate': '10/10/2017'
     },
     {
-        'assetId': '2',
-        'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
-        'fileSize': '1000 KB',
+        'assetId': '11113',
+        'assetType': 2,
+        'fileName': 'Unity III',
+        'fileSize': '100 KB',
         'assetContent': 'assets/img/thumbnails/unity_presents-thumb.jpg',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
@@ -1589,55 +1664,38 @@ var recentAssetArray = [
         'uploadedDate': '10/10/2017'
     },
     {
-        'assetId': '3',
-        'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
-        'fileSize': '1000 KB',
+        'assetId': '11114',
+        'assetType': 2,
+        'fileName': 'Unity IV',
+        'fileSize': '1020 KB',
         'assetContent': 'assets/img/thumbnails/project2-thumb.jpg',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
         'depicted': 'NA',
         'altTitle': 'NA',
         'description': 'NA',
-        'uploadedBy': 'BHUPENDRA',
+        'uploadedBy': 'Manish',
         'uploadedDate': '10/10/2017'
     },
     {
-        'assetId': '4',
-        'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
-        'fileSize': '1000 KB',
+        'assetId': '11115',
+        'assetType': 2,
+        'fileName': 'Unity V',
+        'fileSize': '1300 KB',
         'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
         'depicted': 'NA',
         'altTitle': 'NA',
         'description': 'NA',
-        'uploadedBy': 'BHUPENDRA',
+        'uploadedBy': 'Manish',
         'uploadedDate': '10/10/2017'
     },
     {
-        'assetId': '5',
-        'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
-        'fileSize': '1000 KB',
-        'assetContent': 'assets/img/thumbnails/project1-thumb.jpg',
-        'unityProjectSource': 'ABC',
-        'instructionsToReCreateImage': 'NA',
-        'depicted': 'NA',
-        'altTitle': 'NA',
-        'description': 'NA',
-        'uploadedBy': 'BHUPENDRA',
-        'uploadedDate': '10/10/2017'
-    }
-];
-
-var uploadedByMeAssetArray = [
-    {
-        'assetId': '8',
-        'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
-        'fileSize': '1000 KB',
+        'assetId': '11116',
+        'assetType': 2,
+        'fileName': 'code',
+        'fileSize': '1800 KB',
         'assetContent': 'assets/img/thumbnails/project1-thumb.jpg',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
@@ -1648,11 +1706,11 @@ var uploadedByMeAssetArray = [
         'uploadedDate': '10/10/2017'
     },
     {
-        'assetId': '9',
+        'assetId': '11117',
         'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
+        'fileName': 'test',
         'fileSize': '1000 KB',
-        'assetContent': 'assets/img/thumbnails/unity_presents-thumb.jpg',
+        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
         'depicted': 'NA',
@@ -1662,11 +1720,11 @@ var uploadedByMeAssetArray = [
         'uploadedDate': '10/10/2017'
     },
     {
-        'assetId': '10',
+        'assetId': '11118',
         'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
+        'fileName': 'na',
         'fileSize': '1000 KB',
-        'assetContent': 'assets/img/thumbnails/EmissiveMaterial-thumb.jpg',
+        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
         'depicted': 'NA',
@@ -1676,17 +1734,31 @@ var uploadedByMeAssetArray = [
         'uploadedDate': '10/10/2017'
     },
     {
-        'assetId': '11',
+        'assetId': '11119',
         'assetType': 1,
-        'fileName': 'BHUPENDRA TEST',
+        'fileName': 'na',
         'fileSize': '1000 KB',
-        'assetContent': 'assets/img/thumbnails/project2-thumb.jpg',
+        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
         'depicted': 'NA',
         'altTitle': 'NA',
         'description': 'NA',
-        'uploadedBy': 'BHUPENDRA',
+        'uploadedBy': 'Manish',
+        'uploadedDate': '10/10/2017'
+    },
+    {
+        'assetId': '11120',
+        'assetType': 1,
+        'fileName': 'na',
+        'fileSize': '1000 KB',
+        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
+        'unityProjectSource': 'ABC',
+        'instructionsToReCreateImage': 'NA',
+        'depicted': 'NA',
+        'altTitle': 'NA',
+        'description': 'NA',
+        'uploadedBy': 'Manish',
         'uploadedDate': '10/10/2017'
     }
 ];
