@@ -819,7 +819,7 @@ app.get('/api/tags/:tagGroupId/tags', function (req, res) {
 
 });
 
-app.get('/api/Nodes/:nodeId/tags', function (req, res) {
+app.get('/api/Nodes/:nodeId/tags1', function (req, res) {
     console.log('GET Tags for Node called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 24;
