@@ -398,7 +398,13 @@ app.get('/api/Responses/:respId', function (req, res) {
         case "26": // get tag Groups for Project
             res.send({ content: { tagGroupIds: ['1', '2', '4'] } });
             break;
-        case "51": // get repo
+        case "29": // add tagGroups to project
+            res.send({ content: { status: 'OK' } });
+            break;
+        case "28": // get tag Groups for Project
+            res.send({ content: { tagIds: ['1', '2', '12','13'] } });
+            break;
+                    case "51": // get repo
             res.send({ content: { repositories: repositories } });
             break;
         case "52": // get drafts
@@ -1407,6 +1413,53 @@ app.put('/api/Projects/AddTagGroupsToProject', function (req, res) {
                 "title": "Add TagGroups to Project",
                 "body": {
                     "cmsOperation": "AddTagGroupsToProject",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.get('/api/nodes/:nodeId/tags', function (req, res) {
+    var id = req.query.id;
+    responseID = 28;
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "get Tags for Node",
+                "body": {
+                    "cmsOperation": "GetTagsForNode",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.put('/api/nodes/AddTagsToNode', function (req, res) {
+    var id = req.query.id;
+    responseID = 29;
+
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Add Tags to Node",
+                "body": {
+                    "cmsOperation": "AddTagsToNode",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
