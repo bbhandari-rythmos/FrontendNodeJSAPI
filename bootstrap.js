@@ -1393,9 +1393,7 @@ app.get('/api/Projects/:projectId/tagGroups', function (req, res) {
         sendFCMNotification(pushMessage);
 
     }, 5000)
-    setTimeout(function () {
-        res.send({ responseId: responseID });
-    }, 1000);
+    res.send({ responseId: responseID });
 })
 
 app.put('/api/Projects/AddTagGroupsToProject', function (req, res) {
@@ -1419,9 +1417,7 @@ app.put('/api/Projects/AddTagGroupsToProject', function (req, res) {
         sendFCMNotification(pushMessage);
 
     }, 5000)
-    setTimeout(function () {
-        res.send({ responseId: responseID });
-    }, 1000);
+    res.send({ responseId: responseID });
 })
 
 var projectData = [
