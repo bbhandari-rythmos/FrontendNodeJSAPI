@@ -393,7 +393,7 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { tags: projectTags, tagGroups: tagGroups } });
             break;
         case "27": // add tagGroups to project
-            res.send({ content: { status:'OK' } });
+            res.send({ content: { status: 'OK' } });
             break;
         case "26": // get tag Groups for Project
             res.send({ content: { tagGroupIds: ['1', '2', '4'] } });
@@ -402,9 +402,9 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { status: 'OK' } });
             break;
         case "28": // get tag Groups for Project
-            res.send({ content: { tagIds: ['1', '2', '12','13'] } });
+            res.send({ content: { tagIds: ['1', '2', '12', '13'] } });
             break;
-                    case "51": // get repo
+        case "51": // get repo
             res.send({ content: { repositories: repositories } });
             break;
         case "52": // get drafts
@@ -1381,7 +1381,7 @@ app.put('/api/assets/UpdateAssetProperties', function (req, res) {
 
 app.get('/api/Projects/:projectId/tagGroups', function (req, res) {
     var id = req.query.id;
-    responseID = 26; 
+    responseID = 26;
     console.log('responseId is: ' + responseID);
     setTimeout(function () {
         var pushMessage = {
@@ -1404,7 +1404,7 @@ app.get('/api/Projects/:projectId/tagGroups', function (req, res) {
 
 app.put('/api/Projects/AddTagGroupsToProject', function (req, res) {
     var id = req.query.id;
-    responseID = 27; 
+    responseID = 27;
 
     console.log('responseId is: ' + responseID);
     setTimeout(function () {
