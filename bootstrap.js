@@ -393,10 +393,16 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { tags: projectTags, tagGroups: tagGroups } });
             break;
         case "27": // add tagGroups to project
-            res.send({ content: { status:'OK' } });
+            res.send({ content: { status: 'OK' } });
             break;
         case "26": // get tag Groups for Project
             res.send({ content: { tagGroupIds: ['1', '2', '4'] } });
+            break;
+        case "29": // add tagGroups to project
+            res.send({ content: { status: 'OK' } });
+            break;
+        case "28": // get tag Groups for Project
+            res.send({ content: { tagIds: ['1', '2', '12', '13'] } });
             break;
         case "51": // get repo
             res.send({ content: { repositories: repositories } });
@@ -813,7 +819,7 @@ app.get('/api/tags/:tagGroupId/tags', function (req, res) {
 
 });
 
-app.get('/api/Nodes/:nodeId/tags', function (req, res) {
+app.get('/api/Nodes/:nodeId/tags1', function (req, res) {
     console.log('GET Tags for Node called, sending response id ' + _responseId);
     console.log('Waiting for 30 seconds to simulate get call');
     var responseID = 24;
@@ -1375,7 +1381,7 @@ app.put('/api/assets/UpdateAssetProperties', function (req, res) {
 
 app.get('/api/Projects/:projectId/tagGroups', function (req, res) {
     var id = req.query.id;
-    responseID = 26; 
+    responseID = 26;
     console.log('responseId is: ' + responseID);
     setTimeout(function () {
         var pushMessage = {
@@ -1398,7 +1404,7 @@ app.get('/api/Projects/:projectId/tagGroups', function (req, res) {
 
 app.put('/api/Projects/AddTagGroupsToProject', function (req, res) {
     var id = req.query.id;
-    responseID = 27; 
+    responseID = 27;
 
     console.log('responseId is: ' + responseID);
     setTimeout(function () {
@@ -1407,6 +1413,53 @@ app.put('/api/Projects/AddTagGroupsToProject', function (req, res) {
                 "title": "Add TagGroups to Project",
                 "body": {
                     "cmsOperation": "AddTagGroupsToProject",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.get('/api/nodes/:nodeId/tags', function (req, res) {
+    var id = req.query.id;
+    responseID = 28;
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "get Tags for Node",
+                "body": {
+                    "cmsOperation": "GetTagsForNode",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.put('/api/nodes/AddTagsToNode', function (req, res) {
+    var id = req.query.id;
+    responseID = 29;
+
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Add Tags to Node",
+                "body": {
+                    "cmsOperation": "AddTagsToNode",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
@@ -1648,13 +1701,13 @@ var draftTags = [
 
 var TreeDrafts =
     [
-        { 'nodeId': "1", "nodeName": "Working in Unity", 'parentId': null },
-        { 'nodeId': "2", "nodeName": "Basics", 'parentId': "1" },
-        { 'nodeId': "3", "nodeName": "Getting started", 'parentId': "1" },
-        { 'nodeId': "4", "nodeName": "Downloading and installing Unity", 'parentId': "2" },
-        { 'nodeId': "5", "nodeName": "Work", 'parentId': null },
-        { 'nodeId': "6", "nodeName": "sampleParentNode", 'parentId': null },
-        { 'nodeId': "7", "nodeName": "Downloading...", 'parentId': "4" }
+        { 'nodeId': "1", "nodeName": "Working in Unity", 'parentId': null, 'tagIds': ['1', '13', '12', '11', '43'] },
+        { 'nodeId': "2", "nodeName": "Basics", 'parentId': "1", 'tagIds': ['1', '42', '12', '11', '43'] },
+        { 'nodeId': "3", "nodeName": "Getting started", 'parentId': "1", 'tagIds': ['11', '13', '12', '3']  },
+        { 'nodeId': "4", "nodeName": "Downloading and installing Unity", 'parentId': "2", 'tagIds': ['1', '12', '3']  },
+        { 'nodeId': "5", "nodeName": "Work", 'parentId': null, 'tagIds': ['1', '11', '13'] },
+        { 'nodeId': "6", "nodeName": "sampleParentNode", 'parentId': null, 'tagIds': ['41', '42', '43'] },
+        { 'nodeId': "7", "nodeName": "Downloading...", 'parentId': "4", 'tagIds': ['11', '12', '3'] }
     ]
 
 var drafts = [
