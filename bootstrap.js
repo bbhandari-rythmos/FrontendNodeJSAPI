@@ -1276,7 +1276,7 @@ app.put('/api/Assets', function (req, res) {
 
 app.post('/api/getassets', function (req, res) {
     var assetType = req.body.assetType;
-    var tabindex = req.body.tabindex;
+    var tabindex = req.body.filterQuery;
     var responseID;
     console.log('assetType is: ' + assetType);
     console.log('tabindex is: ' + tabindex);
@@ -1484,7 +1484,7 @@ app.get('/api/getOperations', function (req, res) {
             "notification": {
                 "title": "Get Operation",
                 "body": {
-                    "cmsOperation": "GetOperation",
+                    "cmsOperation": "GetOperationList",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
@@ -1905,10 +1905,12 @@ var operationStatusArray = [
         cmsOperation: 'UpsertAsset',
         description: '',
         status: 1,
+        operationContent: 'Asset 1',
         content: {
             'assetId': '11116',
             'assetType': 2,
-            'fileName': 'Update Asset',
+            'fileName': 'Asset 1',
+            
             'fileSize': '1020 KB',
             'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
             'unityProjectSource': 'update ',
@@ -1925,6 +1927,7 @@ var operationStatusArray = [
         cmsOperation: 'UpsertAsset',
         description: '',
         status: 2,
+        operationContent: 'Asset 2',
         content: {
             'assetId': '11116',
             'assetType': 2,
@@ -1945,6 +1948,7 @@ var operationStatusArray = [
         cmsOperation: 'UpsertAsset',
         description: '',
         status: 3,
+        operationContent: 'Asset 3',
         content: {
             'assetId': '11116',
             'assetType': 2,
@@ -1965,6 +1969,7 @@ var operationStatusArray = [
         cmsOperation: 'UpdateAssetProperties',
         description: '',
         status: 1,
+        operationContent: 'Asset 4',
         content: {
             'assetId': '11116',
             'assetType': 2,
@@ -1985,6 +1990,7 @@ var operationStatusArray = [
         cmsOperation: 'UpsertAsset',
         description: '',
         status: 1,
+        operationContent: 'Asset 5',
         content: {
             'assetId': '11116',
             'assetType': 2,
