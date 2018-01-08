@@ -7,7 +7,7 @@ var express = require('express'),
     _ = require('underscore');
 
 app.use(express.static(path.join(__dirname, 'app')));
-
+ 
 var _token;
 var _responseId;
 
