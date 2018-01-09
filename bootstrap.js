@@ -282,7 +282,7 @@ app.get('/api/Repositories', function (req, res) {
                 "body": {
                     "cmsOperation": "GetRepositoryList",
                     "notificationTopic":
-                    "NA", "notificationType": 0,
+                        "NA", "notificationType": 0,
                     "responseId": 51
                 }
             },
@@ -441,7 +441,7 @@ app.get('/api/Responses/:respId', function (req, res) {
                         'assetType': 1,
                         'fileName': 'na',
                         'fileSize': '1000 KB',
-                        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
+                        'assetContent': codeContent,//'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
                         'unityProjectSource': 'ABC',
                         'instructionsToReCreateImage': 'NA',
                         'depicted': 'NA',
@@ -507,20 +507,20 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({
                 content: {
                     asset:
-                    {
-                        'assetId': '11',
-                        'assetType': 2,
-                        'fileName': 'BHUPENDRA TEST',
-                        'fileSize': '1000 KB',
-                        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
-                        'unityProjectSource': 'Updated ',
-                        'instructionsToReCreateImage': 'Updated',
-                        'depicted': 'Updated',
-                        'altTitle': 'Updated',
-                        'description': 'Updated',
-                        'uploadedBy': 'BHUPENDRA',
-                        'uploadedDate': '10/10/2017'
-                    }
+                        {
+                            'assetId': '11',
+                            'assetType': 2,
+                            'fileName': 'BHUPENDRA TEST',
+                            'fileSize': '1000 KB',
+                            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                            'unityProjectSource': 'Updated ',
+                            'instructionsToReCreateImage': 'Updated',
+                            'depicted': 'Updated',
+                            'altTitle': 'Updated',
+                            'description': 'Updated',
+                            'uploadedBy': 'BHUPENDRA',
+                            'uploadedDate': '10/10/2017'
+                        }
                 }
             });
             break;
@@ -537,7 +537,7 @@ app.get('/api/Responses/:respId', function (req, res) {
                         'assetType': 1,
                         'fileName': 'test',
                         'fileSize': '1000 KB',
-                        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
+                        'assetContent': codeContent,//'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
                         'unityProjectSource': 'ABC',
                         'instructionsToReCreateImage': 'NA',
                         'depicted': 'NA',
@@ -557,7 +557,7 @@ app.get('/api/Responses/:respId', function (req, res) {
                         'assetType': 1,
                         'fileName': 'test',
                         'fileSize': '1000 KB',
-                        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
+                        'assetContent': codeContent,//'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
                         'unityProjectSource': 'ABC',
                         'instructionsToReCreateImage': 'NA',
                         'depicted': 'NA',
@@ -573,6 +573,9 @@ app.get('/api/Responses/:respId', function (req, res) {
             var assetTemp = _.where(assetArray, { assetType: 1 });
             var assets = _.where(assetTemp, { uploadedBy: 'BHUPENDRA' });
             res.send({ content: { assets: assets } });
+            break;
+        case "112": // get operation data
+            res.send({ content: operationStatusArray });
             break;
         default:
             break;
@@ -627,7 +630,7 @@ app.get('/api/Distribution/validateDistributionName/:distributionName', function
                 "body": {
                     "cmsOperation": "ValidateDistributionName",
                     "notificationTopic":
-                    "NA", "notificationType": 0,
+                        "NA", "notificationType": 0,
                     "responseId": tempResponseId
                 }
             },
@@ -1073,152 +1076,152 @@ app.get('/api/project/:id', function (req, res) {
     console.log('project id ' + projectId);
     var project = {
         'files':
-        [
-            {
-                'label': 'Working in Unity',
+            [
+                {
+                    'label': 'Working in Unity',
 
-                'expandedIcon': 'fa-folder-open',
-                'collapsedIcon': 'fa-folder',
-                'children': [
-                    {
-                        'label': 'Basics',
+                    'expandedIcon': 'fa-folder-open',
+                    'collapsedIcon': 'fa-folder',
+                    'children': [
+                        {
+                            'label': 'Basics',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Downloading and installing Unity',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Downloading and installing Unity',
 
-                                'expandedIcon': 'fa-folder-open',
-                                'collapsedIcon': 'fa-folder',
-                                'children': [
-                                    {
-                                        'label': 'Deploying Unity offline',
-                                        'icon': 'fa-file-word-o',
-                                        'data': 'Deploying Unity offline'
-                                    }
-                                ]
-                            },
-                            {
-                                'label': '2D or 3D projects',
-                                'icon': 'fa-file-word-o',
-                                'data': '2D or 3D projects'
-                            },
-                            {
-                                'label': 'Getting started',
+                                    'expandedIcon': 'fa-folder-open',
+                                    'collapsedIcon': 'fa-folder',
+                                    'children': [
+                                        {
+                                            'label': 'Deploying Unity offline',
+                                            'icon': 'fa-file-word-o',
+                                            'data': 'Deploying Unity offline'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'label': '2D or 3D projects',
+                                    'icon': 'fa-file-word-o',
+                                    'data': '2D or 3D projects'
+                                },
+                                {
+                                    'label': 'Getting started',
 
-                                'expandedIcon': 'fa-folder-open',
-                                'collapsedIcon': 'fa-folder',
-                                'children': [
-                                    {
-                                        'label': 'The Learn tab',
-                                        'icon': 'fa-file-word-o',
-                                        'data': 'The Learn tab'
-                                    }
-                                ]
-                            },
-                            {
-                                'label': 'Learning the interface',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Learning the interface'
-                            }
-                        ]
-                    },
-                    {
-                        'label': 'Asset Workflow',
+                                    'expandedIcon': 'fa-folder-open',
+                                    'collapsedIcon': 'fa-folder',
+                                    'children': [
+                                        {
+                                            'label': 'The Learn tab',
+                                            'icon': 'fa-file-word-o',
+                                            'data': 'The Learn tab'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'label': 'Learning the interface',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Learning the interface'
+                                }
+                            ]
+                        },
+                        {
+                            'label': 'Asset Workflow',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Primitive and Placeholder Objects',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Primitive and Placeholder Objects'
-                            },
-                            {
-                                'label': 'Importing Assets',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Importing Assets'
-                            },
-                            {
-                                'label': 'Imort Settings',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Imort Settings'
-                            },
-                            {
-                                'label': 'Importing from the Asset Store',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Importing from the Asset Store'
-                            },
-                            {
-                                'label': 'Asset Packages',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Asset Packages'
-                            },
-                            {
-                                'label': 'Standard Assets',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Standard Assets'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                'label': '2D',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Primitive and Placeholder Objects',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Primitive and Placeholder Objects'
+                                },
+                                {
+                                    'label': 'Importing Assets',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Importing Assets'
+                                },
+                                {
+                                    'label': 'Imort Settings',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Imort Settings'
+                                },
+                                {
+                                    'label': 'Importing from the Asset Store',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Importing from the Asset Store'
+                                },
+                                {
+                                    'label': 'Asset Packages',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Asset Packages'
+                                },
+                                {
+                                    'label': 'Standard Assets',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Standard Assets'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    'label': '2D',
 
-                'expandedIcon': 'fa-folder-open',
-                'collapsedIcon': 'fa-folder',
-                'children': [
-                    {
-                        'label': 'Gameplay in 2D',
-                        'icon': 'fa-file-image-o',
-                        'data': 'Gameplay in 2D'
-                    },
-                    {
-                        'label': 'Sprites',
+                    'expandedIcon': 'fa-folder-open',
+                    'collapsedIcon': 'fa-folder',
+                    'children': [
+                        {
+                            'label': 'Gameplay in 2D',
+                            'icon': 'fa-file-image-o',
+                            'data': 'Gameplay in 2D'
+                        },
+                        {
+                            'label': 'Sprites',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Sprite Creator',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Creator'
-                            },
-                            {
-                                'label': 'Sprite Editor',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Editor'
-                            },
-                            {
-                                'label': 'Sprite Masks',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Masks'
-                            }
-                        ]
-                    },
-                    {
-                        'label': 'Physics Reference 2D',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Sprite Creator',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Creator'
+                                },
+                                {
+                                    'label': 'Sprite Editor',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Editor'
+                                },
+                                {
+                                    'label': 'Sprite Masks',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Masks'
+                                }
+                            ]
+                        },
+                        {
+                            'label': 'Physics Reference 2D',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Physics 2D Settings',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Physics 2D Settings'
-                            },
-                            {
-                                'label': 'Rigidbody 2D',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Rigidbody 2D'
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Physics 2D Settings',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Physics 2D Settings'
+                                },
+                                {
+                                    'label': 'Rigidbody 2D',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Rigidbody 2D'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
         distributions: ['5.0', '5.1', '5.2', '5.3', '5.4'],
         languages: ['English', 'Español', 'Deutsch', 'Française']
     }
@@ -1273,7 +1276,7 @@ app.put('/api/Assets', function (req, res) {
 
 app.post('/api/getassets', function (req, res) {
     var assetType = req.body.assetType;
-    var tabindex = req.body.tabindex;
+    var tabindex = req.body.filterQuery;
     var responseID;
     console.log('assetType is: ' + assetType);
     console.log('tabindex is: ' + tabindex);
@@ -1460,6 +1463,28 @@ app.put('/api/nodes/AddTagsToNode', function (req, res) {
                 "title": "Add Tags to Node",
                 "body": {
                     "cmsOperation": "AddTagsToNode",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.get('/api/getOperations', function (req, res) {
+    responseID = 112;
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get Operation",
+                "body": {
+                    "cmsOperation": "GetOperationList",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
@@ -1703,8 +1728,8 @@ var TreeDrafts =
     [
         { 'nodeId': "1", "nodeName": "Working in Unity", 'parentId': null, 'tagIds': ['1', '13', '12', '11', '43'] },
         { 'nodeId': "2", "nodeName": "Basics", 'parentId': "1", 'tagIds': ['1', '42', '12', '11', '43'] },
-        { 'nodeId': "3", "nodeName": "Getting started", 'parentId': "1", 'tagIds': ['11', '13', '12', '3']  },
-        { 'nodeId': "4", "nodeName": "Downloading and installing Unity", 'parentId': "2", 'tagIds': ['1', '12', '3']  },
+        { 'nodeId': "3", "nodeName": "Getting started", 'parentId': "1", 'tagIds': ['11', '13', '12', '3'] },
+        { 'nodeId': "4", "nodeName": "Downloading and installing Unity", 'parentId': "2", 'tagIds': ['1', '12', '3'] },
         { 'nodeId': "5", "nodeName": "Work", 'parentId': null, 'tagIds': ['1', '11', '13'] },
         { 'nodeId': "6", "nodeName": "sampleParentNode", 'parentId': null, 'tagIds': ['41', '42', '43'] },
         { 'nodeId': "7", "nodeName": "Downloading...", 'parentId': "4", 'tagIds': ['11', '12', '3'] }
@@ -1861,7 +1886,7 @@ var assetArray = [
         'assetType': 1,
         'fileName': 'na',
         'fileSize': '1000 KB',
-        'assetContent': 'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
+        'assetContent': codeContent,//'using&nbsp;System;<br />using&nbsp;System.Reflection;<br /><br />namespace&nbsp;ConsoleApp01<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;ConsoleApp01<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;args)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Hello&nbsp;from&nbsp;ReactOS&nbsp;on&nbsp;"&nbsp;+&nbsp;Environment.MachineName&nbsp;+&nbsp;"!");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("OS&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.OSVersion);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Image&nbsp;runtime&nbsp;Version:&nbsp;"&nbsp;+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Environment&nbsp;Version:&nbsp;"&nbsp;+&nbsp;Environment.Version.ToString());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("Setup&nbsp;information:&nbsp;"&nbsp;+&nbsp;AppDomain.CurrentDomain.SetupInformation);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.Write("Press&nbsp;any&nbsp;key&nbsp;to&nbsp;continue...");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.ReadKey();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}',
         'unityProjectSource': 'ABC',
         'instructionsToReCreateImage': 'NA',
         'depicted': 'NA',
@@ -1872,4 +1897,116 @@ var assetArray = [
     }
 ];
 
+var codeContent = "using System;\r\nusing System.Reflection;\r\n\r\nnamespace ConsoleApp01\r\n{\r\n    public class ConsoleApp01\r\n    {\r\n        public static void Main(string[] args)\r\n        {\r\n            Console.WriteLine(\"\");\r\n            Console.WriteLine(\"\");\r\n            Console.WriteLine(\"Hello from ReactOS on \" + Environment.MachineName + \"!\");\r\n            Console.WriteLine(\"OS Version: \" + Environment.OSVersion);\r\n            Console.WriteLine(\"Image runtime Version: \" +\r\n                              Assembly.GetExecutingAssembly().ImageRuntimeVersion.ToString());\r\n            Console.WriteLine(\"Environment Version: \" + Environment.Version.ToString());\r\n            Console.WriteLine(\"Setup information: \" + AppDomain.CurrentDomain.SetupInformation);\r\n            Console.WriteLine(\"\");\r\n            Console.Write(\"Press any key to continue...\");\r\n            Console.ReadKey();\r\n        }\r\n    }\r\n}";
+
+var operationStatusArray = [
+    {
+        responseId: 101,
+        cmsOperation: 'UpsertAsset',
+        description: '',
+        status: 1,
+        operationContent: 'Asset 1',
+        content: {
+            'assetId': '11116',
+            'assetType': 2,
+            'fileName': 'Asset 1',
+            
+            'fileSize': '1020 KB',
+            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+            'unityProjectSource': 'update ',
+            'instructionsToReCreateImage': 'update',
+            'depicted': 'update',
+            'altTitle': 'update',
+            'description': 'update',
+            'uploadedBy': 'BHUPENDRA',
+            'uploadedDate': '10/10/2017'
+        }
+    },
+    {
+        responseId: 109,
+        cmsOperation: 'UpsertAsset',
+        description: '',
+        status: 2,
+        operationContent: 'Asset 2',
+        content: {
+            'assetId': '11116',
+            'assetType': 2,
+            'fileName': 'Update Asset',
+            'fileSize': '1020 KB',
+            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+            'unityProjectSource': 'update ',
+            'instructionsToReCreateImage': 'update',
+            'depicted': 'update',
+            'altTitle': 'update',
+            'description': 'update',
+            'uploadedBy': 'BHUPENDRA',
+            'uploadedDate': '10/10/2017'
+        }
+    },
+    {
+        responseId: 106,
+        cmsOperation: 'UpsertAsset',
+        description: '',
+        status: 3,
+        operationContent: 'Asset 3',
+        content: {
+            'assetId': '11116',
+            'assetType': 2,
+            'fileName': 'Update Asset',
+            'fileSize': '1020 KB',
+            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+            'unityProjectSource': 'update ',
+            'instructionsToReCreateImage': 'update',
+            'depicted': 'update',
+            'altTitle': 'update',
+            'description': 'update',
+            'uploadedBy': 'BHUPENDRA',
+            'uploadedDate': '10/10/2017'
+        }
+    },
+    {
+        responseId: 105,
+        cmsOperation: 'UpdateAssetProperties',
+        description: '',
+        status: 1,
+        operationContent: 'Asset 4',
+        content: {
+            'assetId': '11116',
+            'assetType': 2,
+            'fileName': 'Update Asset',
+            'fileSize': '1020 KB',
+            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+            'unityProjectSource': 'update ',
+            'instructionsToReCreateImage': 'update',
+            'depicted': 'update',
+            'altTitle': 'update',
+            'description': 'update',
+            'uploadedBy': 'BHUPENDRA',
+            'uploadedDate': '10/10/2017'
+        }
+    },
+    {
+        responseId: 110,
+        cmsOperation: 'UpsertAsset',
+        description: '',
+        status: 1,
+        operationContent: 'Asset 5',
+        content: {
+            'assetId': '11116',
+            'assetType': 2,
+            'fileName': 'Update Asset',
+            'fileSize': '1020 KB',
+            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+            'unityProjectSource': 'update ',
+            'instructionsToReCreateImage': 'update',
+            'depicted': 'update',
+            'altTitle': 'update',
+            'description': 'update',
+            'uploadedBy': 'BHUPENDRA',
+            'uploadedDate': '10/10/2017'
+        }
+    }
+];
+
 console.log('server started');
+
