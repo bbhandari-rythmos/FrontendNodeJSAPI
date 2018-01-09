@@ -7,7 +7,7 @@ var express = require('express'),
     _ = require('underscore');
 
 app.use(express.static(path.join(__dirname, 'app')));
- 
+
 var _token;
 var _responseId;
 
@@ -282,7 +282,7 @@ app.get('/api/Repositories', function (req, res) {
                 "body": {
                     "cmsOperation": "GetRepositoryList",
                     "notificationTopic":
-                        "NA", "notificationType": 0,
+                    "NA", "notificationType": 0,
                     "responseId": 51
                 }
             },
@@ -507,20 +507,20 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({
                 content: {
                     asset:
-                        {
-                            'assetId': '11',
-                            'assetType': 2,
-                            'fileName': 'BHUPENDRA TEST',
-                            'fileSize': '1000 KB',
-                            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
-                            'unityProjectSource': 'Updated ',
-                            'instructionsToReCreateImage': 'Updated',
-                            'depicted': 'Updated',
-                            'altTitle': 'Updated',
-                            'description': 'Updated',
-                            'uploadedBy': 'BHUPENDRA',
-                            'uploadedDate': '10/10/2017'
-                        }
+                    {
+                        'assetId': '11',
+                        'assetType': 2,
+                        'fileName': 'BHUPENDRA TEST',
+                        'fileSize': '1000 KB',
+                        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                        'unityProjectSource': 'Updated ',
+                        'instructionsToReCreateImage': 'Updated',
+                        'depicted': 'Updated',
+                        'altTitle': 'Updated',
+                        'description': 'Updated',
+                        'uploadedBy': 'BHUPENDRA',
+                        'uploadedDate': '10/10/2017'
+                    }
                 }
             });
             break;
@@ -630,7 +630,7 @@ app.get('/api/Distribution/validateDistributionName/:distributionName', function
                 "body": {
                     "cmsOperation": "ValidateDistributionName",
                     "notificationTopic":
-                        "NA", "notificationType": 0,
+                    "NA", "notificationType": 0,
                     "responseId": tempResponseId
                 }
             },
@@ -1018,12 +1018,8 @@ app.get('/api/Projects/:id/distributions', function (req, res) {
     console.log('Waiting for 30 seconds to simulate get project call');
     var projectId = req.params.id;
     console.log(projectId);
-    var responseID = 5;
-    if (projectId === "4") {
-        responseID = 6;
-    }
-
-    setTimeout(function () {
+    var responseID = 6;
+        setTimeout(function () {
         var pushMessage = {
             "notification": {
                 "title": "Get Distributions",
@@ -1076,152 +1072,152 @@ app.get('/api/project/:id', function (req, res) {
     console.log('project id ' + projectId);
     var project = {
         'files':
-            [
-                {
-                    'label': 'Working in Unity',
+        [
+            {
+                'label': 'Working in Unity',
 
-                    'expandedIcon': 'fa-folder-open',
-                    'collapsedIcon': 'fa-folder',
-                    'children': [
-                        {
-                            'label': 'Basics',
+                'expandedIcon': 'fa-folder-open',
+                'collapsedIcon': 'fa-folder',
+                'children': [
+                    {
+                        'label': 'Basics',
 
-                            'expandedIcon': 'fa-folder-open',
-                            'collapsedIcon': 'fa-folder',
-                            'children': [
-                                {
-                                    'label': 'Downloading and installing Unity',
+                        'expandedIcon': 'fa-folder-open',
+                        'collapsedIcon': 'fa-folder',
+                        'children': [
+                            {
+                                'label': 'Downloading and installing Unity',
 
-                                    'expandedIcon': 'fa-folder-open',
-                                    'collapsedIcon': 'fa-folder',
-                                    'children': [
-                                        {
-                                            'label': 'Deploying Unity offline',
-                                            'icon': 'fa-file-word-o',
-                                            'data': 'Deploying Unity offline'
-                                        }
-                                    ]
-                                },
-                                {
-                                    'label': '2D or 3D projects',
-                                    'icon': 'fa-file-word-o',
-                                    'data': '2D or 3D projects'
-                                },
-                                {
-                                    'label': 'Getting started',
+                                'expandedIcon': 'fa-folder-open',
+                                'collapsedIcon': 'fa-folder',
+                                'children': [
+                                    {
+                                        'label': 'Deploying Unity offline',
+                                        'icon': 'fa-file-word-o',
+                                        'data': 'Deploying Unity offline'
+                                    }
+                                ]
+                            },
+                            {
+                                'label': '2D or 3D projects',
+                                'icon': 'fa-file-word-o',
+                                'data': '2D or 3D projects'
+                            },
+                            {
+                                'label': 'Getting started',
 
-                                    'expandedIcon': 'fa-folder-open',
-                                    'collapsedIcon': 'fa-folder',
-                                    'children': [
-                                        {
-                                            'label': 'The Learn tab',
-                                            'icon': 'fa-file-word-o',
-                                            'data': 'The Learn tab'
-                                        }
-                                    ]
-                                },
-                                {
-                                    'label': 'Learning the interface',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Learning the interface'
-                                }
-                            ]
-                        },
-                        {
-                            'label': 'Asset Workflow',
+                                'expandedIcon': 'fa-folder-open',
+                                'collapsedIcon': 'fa-folder',
+                                'children': [
+                                    {
+                                        'label': 'The Learn tab',
+                                        'icon': 'fa-file-word-o',
+                                        'data': 'The Learn tab'
+                                    }
+                                ]
+                            },
+                            {
+                                'label': 'Learning the interface',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Learning the interface'
+                            }
+                        ]
+                    },
+                    {
+                        'label': 'Asset Workflow',
 
-                            'expandedIcon': 'fa-folder-open',
-                            'collapsedIcon': 'fa-folder',
-                            'children': [
-                                {
-                                    'label': 'Primitive and Placeholder Objects',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Primitive and Placeholder Objects'
-                                },
-                                {
-                                    'label': 'Importing Assets',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Importing Assets'
-                                },
-                                {
-                                    'label': 'Imort Settings',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Imort Settings'
-                                },
-                                {
-                                    'label': 'Importing from the Asset Store',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Importing from the Asset Store'
-                                },
-                                {
-                                    'label': 'Asset Packages',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Asset Packages'
-                                },
-                                {
-                                    'label': 'Standard Assets',
-                                    'icon': 'fa-file-word-o',
-                                    'data': 'Standard Assets'
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    'label': '2D',
+                        'expandedIcon': 'fa-folder-open',
+                        'collapsedIcon': 'fa-folder',
+                        'children': [
+                            {
+                                'label': 'Primitive and Placeholder Objects',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Primitive and Placeholder Objects'
+                            },
+                            {
+                                'label': 'Importing Assets',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Importing Assets'
+                            },
+                            {
+                                'label': 'Imort Settings',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Imort Settings'
+                            },
+                            {
+                                'label': 'Importing from the Asset Store',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Importing from the Asset Store'
+                            },
+                            {
+                                'label': 'Asset Packages',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Asset Packages'
+                            },
+                            {
+                                'label': 'Standard Assets',
+                                'icon': 'fa-file-word-o',
+                                'data': 'Standard Assets'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                'label': '2D',
 
-                    'expandedIcon': 'fa-folder-open',
-                    'collapsedIcon': 'fa-folder',
-                    'children': [
-                        {
-                            'label': 'Gameplay in 2D',
-                            'icon': 'fa-file-image-o',
-                            'data': 'Gameplay in 2D'
-                        },
-                        {
-                            'label': 'Sprites',
+                'expandedIcon': 'fa-folder-open',
+                'collapsedIcon': 'fa-folder',
+                'children': [
+                    {
+                        'label': 'Gameplay in 2D',
+                        'icon': 'fa-file-image-o',
+                        'data': 'Gameplay in 2D'
+                    },
+                    {
+                        'label': 'Sprites',
 
-                            'expandedIcon': 'fa-folder-open',
-                            'collapsedIcon': 'fa-folder',
-                            'children': [
-                                {
-                                    'label': 'Sprite Creator',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Sprite Creator'
-                                },
-                                {
-                                    'label': 'Sprite Editor',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Sprite Editor'
-                                },
-                                {
-                                    'label': 'Sprite Masks',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Sprite Masks'
-                                }
-                            ]
-                        },
-                        {
-                            'label': 'Physics Reference 2D',
+                        'expandedIcon': 'fa-folder-open',
+                        'collapsedIcon': 'fa-folder',
+                        'children': [
+                            {
+                                'label': 'Sprite Creator',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Sprite Creator'
+                            },
+                            {
+                                'label': 'Sprite Editor',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Sprite Editor'
+                            },
+                            {
+                                'label': 'Sprite Masks',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Sprite Masks'
+                            }
+                        ]
+                    },
+                    {
+                        'label': 'Physics Reference 2D',
 
-                            'expandedIcon': 'fa-folder-open',
-                            'collapsedIcon': 'fa-folder',
-                            'children': [
-                                {
-                                    'label': 'Physics 2D Settings',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Physics 2D Settings'
-                                },
-                                {
-                                    'label': 'Rigidbody 2D',
-                                    'icon': 'fa-file-image-o',
-                                    'data': 'Rigidbody 2D'
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ],
+                        'expandedIcon': 'fa-folder-open',
+                        'collapsedIcon': 'fa-folder',
+                        'children': [
+                            {
+                                'label': 'Physics 2D Settings',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Physics 2D Settings'
+                            },
+                            {
+                                'label': 'Rigidbody 2D',
+                                'icon': 'fa-file-image-o',
+                                'data': 'Rigidbody 2D'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
         distributions: ['5.0', '5.1', '5.2', '5.3', '5.4'],
         languages: ['English', 'Español', 'Deutsch', 'Française']
     }
@@ -1588,28 +1584,86 @@ var typeOfContentArray = [
 
 var projectArray = [
     {
-        _id: "1",
-        status: "",
-        projectName: "Unity Core User Manual",
-        tagGroupIds: ['1', '2']
+        'projectName': 'Unity Core User Manual',
+        'repositoryId': '1',
+        'repositoryName': null,
+        'description': 'Unity Core User Manual description',
+        'typeOfContent': 3,
+        'projectId': '1',
+        'tagGroupIds': ['1', '2'],
+        'status': 3
+    },
+
+    {
+        'projectName': 'Unity Core User Manual2',
+        'repositoryId': '1',
+        'repositoryName': null,
+        'description': 'Unity Core User Manual 2 description',
+        'typeOfContent': 3,
+        'projectId': '2',
+        'tagGroupIds': ['1', '3'],
+        'status': 1
     },
     {
-        _id: "2",
-        status: "",
-        projectName: "Unity Core User Manual 2",
-        tagGroupIds: ['1', '3']
+        'projectName': 'Unity Core User Manual3',
+        'repositoryId': '1',
+        'repositoryName': null,
+        'description': 'Unity Core User Manual  3 description',
+        'typeOfContent': 3,
+        'projectId': '3',
+        'tagGroupIds': ['2', '4'],
+        'status': 2
     },
     {
-        _id: "3",
-        status: "",
-        projectName: "Unity Core User Manual 3",
-        tagGroupIds: ['4', '2']
+        'projectName': 'Unity Core User Manual 4',
+        'repositoryId': '1',
+        'repositoryName': null,
+        'description': 'Unity Core User Manual 4 description',
+        'typeOfContent': 3,
+        'projectId': '4',
+        'tagGroupIds': ['1', '2', '5'],
+        'status': 0
     },
     {
-        _id: "4",
-        status: "",
-        projectName: "test1",
-        tagGroupIds: ['1', '2', '5']
+        'projectName': 'test1',
+        'repositoryId': '1',
+        'repositoryName': null,
+        'description': 'test1 description',
+        'typeOfContent': 3,
+        'projectId': '5',
+        'tagGroupIds': ['1', '2'],
+        'status': 2
+    },
+
+    {
+        'projectName': 'test2',
+        'repositoryId': '1',
+        'repositoryName': null,
+        'description': 'test2 description',
+        'typeOfContent': 3,
+        'projectId': '6',
+        'tagGroupIds': ['1', '3'],
+        'status': 1
+    },
+    {
+        'projectName': 'Unit01',
+        'repositoryId': '1',
+        'repositoryName': null,
+        'description': 'demo project',
+        'typeOfContent': 3,
+        'projectId': '7',
+        'tagGroupIds': ['2', '4'],
+        'status': 2
+    },
+    {
+        'projectName': 'unity02',
+        'repositoryId': '1',
+        'repositoryName': null,
+        'description': 'test project',
+        'typeOfContent': 3,
+        'projectId': '8',
+        'tagGroupIds': ['1', '2', '5'],
+        'status': 0
     }];
 
 var tagData = [
@@ -1910,7 +1964,7 @@ var operationStatusArray = [
             'assetId': '11116',
             'assetType': 2,
             'fileName': 'Asset 1',
-            
+
             'fileSize': '1020 KB',
             'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
             'unityProjectSource': 'update ',
