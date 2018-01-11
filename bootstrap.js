@@ -1589,7 +1589,7 @@ var projectArray = [
         'repositoryName': null,
         'description': 'Unity Core User Manual description',
         'typeOfContent': 3,
-        'projectId': '1',
+        '_id': '1',
         'tagGroupIds': ['1', '2'],
         'status': 3
     },
@@ -1600,7 +1600,7 @@ var projectArray = [
         'repositoryName': null,
         'description': 'Unity Core User Manual 2 description',
         'typeOfContent': 3,
-        'projectId': '2',
+        '_id': '2',
         'tagGroupIds': ['1', '3'],
         'status': 1
     },
@@ -1610,7 +1610,7 @@ var projectArray = [
         'repositoryName': null,
         'description': 'Unity Core User Manual  3 description',
         'typeOfContent': 3,
-        'projectId': '3',
+        '_id': '3',
         'tagGroupIds': ['2', '4'],
         'status': 2
     },
@@ -1620,7 +1620,7 @@ var projectArray = [
         'repositoryName': null,
         'description': 'Unity Core User Manual 4 description',
         'typeOfContent': 3,
-        'projectId': '4',
+        '_id': '4',
         'tagGroupIds': ['1', '2', '5'],
         'status': 0
     },
@@ -1630,7 +1630,7 @@ var projectArray = [
         'repositoryName': null,
         'description': 'test1 description',
         'typeOfContent': 3,
-        'projectId': '5',
+        '_id': '5',
         'tagGroupIds': ['1', '2'],
         'status': 2
     },
@@ -1641,7 +1641,7 @@ var projectArray = [
         'repositoryName': null,
         'description': 'test2 description',
         'typeOfContent': 3,
-        'projectId': '6',
+        '_id': '6',
         'tagGroupIds': ['1', '3'],
         'status': 1
     },
@@ -1651,7 +1651,7 @@ var projectArray = [
         'repositoryName': null,
         'description': 'demo project',
         'typeOfContent': 3,
-        'projectId': '7',
+        '_id': '7',
         'tagGroupIds': ['2', '4'],
         'status': 2
     },
@@ -1661,7 +1661,7 @@ var projectArray = [
         'repositoryName': null,
         'description': 'test project',
         'typeOfContent': 3,
-        'projectId': '8',
+        '_id': '8',
         'tagGroupIds': ['1', '2', '5'],
         'status': 0
     }];
