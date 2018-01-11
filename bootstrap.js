@@ -2008,5 +2008,62 @@ var operationStatusArray = [
     }
 ];
 
+var publishQueueArray = [
+    {
+      "publishQueueId": "67316f75-04fe-424c-a3ed-d36d5cc0c82c",
+      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+      "distributionName": "DocWorksDistributions-14Dec001",
+      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+      "publishedDate": 1515658639,
+      "publishStatus": 2,
+      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+    },
+    {
+      "publishQueueId": "44d56f3c-30b2-435b-a568-a0d73eb8ba05",
+      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+      "distributionName": "DocWorksDistributions-14Dec001",
+      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+      "publishedDate": 1515658881,
+      "publishStatus": 2,
+      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+    },
+    {
+      "publishQueueId": "5c915f78-edb0-43c0-af28-f5d8f9098ad6",
+      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+      "distributionName": "DocWorksDistributions-14Dec001",
+      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+      "publishedDate": 1515659680,
+      "publishStatus": 2,
+      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+    },
+    {
+      "publishQueueId": "44d5ceea-4c7c-4fba-809e-fece8846c488",
+      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+      "distributionName": "DocWorksDistributions-14Dec001",
+      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+      "publishedDate": 1515659680,
+      "publishStatus": 2,
+      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+    },
+    {
+      "publishQueueId": "5b7ed0a1-0b2f-4ae7-85a7-1ce429118544",
+      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+      "distributionName": "DocWorksDistributions-14Dec001",
+      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+      "publishedDate": 1515659681,
+      "publishStatus": 2,
+      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+    },
+    {
+      "publishQueueId": "c0a52d22-2025-447e-a5c8-3052b2ef3b89",
+      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+      "distributionName": "DocWorksDistributions-14Dec001",
+      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+      "publishedDate": 1515659682,
+      "publishStatus": 2,
+      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+    }
+  ];
+
 console.log('server started');
 
