@@ -282,7 +282,7 @@ app.get('/api/Repositories', function (req, res) {
                 "body": {
                     "cmsOperation": "GetRepositoryList",
                     "notificationTopic":
-                    "NA", "notificationType": 0,
+                        "NA", "notificationType": 0,
                     "responseId": 51
                 }
             },
@@ -507,20 +507,20 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({
                 content: {
                     asset:
-                    {
-                        'assetId': '11',
-                        'assetType': 2,
-                        'fileName': 'BHUPENDRA TEST',
-                        'fileSize': '1000 KB',
-                        'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
-                        'unityProjectSource': 'Updated ',
-                        'instructionsToReCreateImage': 'Updated',
-                        'depicted': 'Updated',
-                        'altTitle': 'Updated',
-                        'description': 'Updated',
-                        'uploadedBy': 'BHUPENDRA',
-                        'uploadedDate': '10/10/2017'
-                    }
+                        {
+                            'assetId': '11',
+                            'assetType': 2,
+                            'fileName': 'BHUPENDRA TEST',
+                            'fileSize': '1000 KB',
+                            'assetContent': 'assets/img/thumbnails/project3-thumb.jpg',
+                            'unityProjectSource': 'Updated ',
+                            'instructionsToReCreateImage': 'Updated',
+                            'depicted': 'Updated',
+                            'altTitle': 'Updated',
+                            'description': 'Updated',
+                            'uploadedBy': 'BHUPENDRA',
+                            'uploadedDate': '10/10/2017'
+                        }
                 }
             });
             break;
@@ -577,6 +577,24 @@ app.get('/api/Responses/:respId', function (req, res) {
         case "112": // get operation data
             res.send({ content: operationStatusArray });
             break;
+        case "113": // get publish queue
+            res.send({ content: { publishQueues: publishQueueArray } });
+            break;
+        case "114": //post publish quesue
+            res.send({
+                content: {
+                    publishQueue: {
+                        "publishQueueId": "67316f75-04fe-424c-a3ed-d36d5cc0c82c",
+                        "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+                        "distributionName": "DocWorksDistributions-14Dec001",
+                        "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+                        "publishedDate": 1515658639,
+                        "publishStatus": 2,
+                        "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+                    }
+                }
+            });
+            break;
         default:
             break;
     }
@@ -630,7 +648,7 @@ app.get('/api/Distribution/validateDistributionName/:distributionName', function
                 "body": {
                     "cmsOperation": "ValidateDistributionName",
                     "notificationTopic":
-                    "NA", "notificationType": 0,
+                        "NA", "notificationType": 0,
                     "responseId": tempResponseId
                 }
             },
@@ -1019,7 +1037,7 @@ app.get('/api/Projects/:id/distributions', function (req, res) {
     var projectId = req.params.id;
     console.log(projectId);
     var responseID = 6;
-        setTimeout(function () {
+    setTimeout(function () {
         var pushMessage = {
             "notification": {
                 "title": "Get Distributions",
@@ -1072,152 +1090,152 @@ app.get('/api/project/:id', function (req, res) {
     console.log('project id ' + projectId);
     var project = {
         'files':
-        [
-            {
-                'label': 'Working in Unity',
+            [
+                {
+                    'label': 'Working in Unity',
 
-                'expandedIcon': 'fa-folder-open',
-                'collapsedIcon': 'fa-folder',
-                'children': [
-                    {
-                        'label': 'Basics',
+                    'expandedIcon': 'fa-folder-open',
+                    'collapsedIcon': 'fa-folder',
+                    'children': [
+                        {
+                            'label': 'Basics',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Downloading and installing Unity',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Downloading and installing Unity',
 
-                                'expandedIcon': 'fa-folder-open',
-                                'collapsedIcon': 'fa-folder',
-                                'children': [
-                                    {
-                                        'label': 'Deploying Unity offline',
-                                        'icon': 'fa-file-word-o',
-                                        'data': 'Deploying Unity offline'
-                                    }
-                                ]
-                            },
-                            {
-                                'label': '2D or 3D projects',
-                                'icon': 'fa-file-word-o',
-                                'data': '2D or 3D projects'
-                            },
-                            {
-                                'label': 'Getting started',
+                                    'expandedIcon': 'fa-folder-open',
+                                    'collapsedIcon': 'fa-folder',
+                                    'children': [
+                                        {
+                                            'label': 'Deploying Unity offline',
+                                            'icon': 'fa-file-word-o',
+                                            'data': 'Deploying Unity offline'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'label': '2D or 3D projects',
+                                    'icon': 'fa-file-word-o',
+                                    'data': '2D or 3D projects'
+                                },
+                                {
+                                    'label': 'Getting started',
 
-                                'expandedIcon': 'fa-folder-open',
-                                'collapsedIcon': 'fa-folder',
-                                'children': [
-                                    {
-                                        'label': 'The Learn tab',
-                                        'icon': 'fa-file-word-o',
-                                        'data': 'The Learn tab'
-                                    }
-                                ]
-                            },
-                            {
-                                'label': 'Learning the interface',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Learning the interface'
-                            }
-                        ]
-                    },
-                    {
-                        'label': 'Asset Workflow',
+                                    'expandedIcon': 'fa-folder-open',
+                                    'collapsedIcon': 'fa-folder',
+                                    'children': [
+                                        {
+                                            'label': 'The Learn tab',
+                                            'icon': 'fa-file-word-o',
+                                            'data': 'The Learn tab'
+                                        }
+                                    ]
+                                },
+                                {
+                                    'label': 'Learning the interface',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Learning the interface'
+                                }
+                            ]
+                        },
+                        {
+                            'label': 'Asset Workflow',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Primitive and Placeholder Objects',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Primitive and Placeholder Objects'
-                            },
-                            {
-                                'label': 'Importing Assets',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Importing Assets'
-                            },
-                            {
-                                'label': 'Imort Settings',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Imort Settings'
-                            },
-                            {
-                                'label': 'Importing from the Asset Store',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Importing from the Asset Store'
-                            },
-                            {
-                                'label': 'Asset Packages',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Asset Packages'
-                            },
-                            {
-                                'label': 'Standard Assets',
-                                'icon': 'fa-file-word-o',
-                                'data': 'Standard Assets'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                'label': '2D',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Primitive and Placeholder Objects',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Primitive and Placeholder Objects'
+                                },
+                                {
+                                    'label': 'Importing Assets',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Importing Assets'
+                                },
+                                {
+                                    'label': 'Imort Settings',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Imort Settings'
+                                },
+                                {
+                                    'label': 'Importing from the Asset Store',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Importing from the Asset Store'
+                                },
+                                {
+                                    'label': 'Asset Packages',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Asset Packages'
+                                },
+                                {
+                                    'label': 'Standard Assets',
+                                    'icon': 'fa-file-word-o',
+                                    'data': 'Standard Assets'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    'label': '2D',
 
-                'expandedIcon': 'fa-folder-open',
-                'collapsedIcon': 'fa-folder',
-                'children': [
-                    {
-                        'label': 'Gameplay in 2D',
-                        'icon': 'fa-file-image-o',
-                        'data': 'Gameplay in 2D'
-                    },
-                    {
-                        'label': 'Sprites',
+                    'expandedIcon': 'fa-folder-open',
+                    'collapsedIcon': 'fa-folder',
+                    'children': [
+                        {
+                            'label': 'Gameplay in 2D',
+                            'icon': 'fa-file-image-o',
+                            'data': 'Gameplay in 2D'
+                        },
+                        {
+                            'label': 'Sprites',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Sprite Creator',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Creator'
-                            },
-                            {
-                                'label': 'Sprite Editor',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Editor'
-                            },
-                            {
-                                'label': 'Sprite Masks',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Sprite Masks'
-                            }
-                        ]
-                    },
-                    {
-                        'label': 'Physics Reference 2D',
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Sprite Creator',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Creator'
+                                },
+                                {
+                                    'label': 'Sprite Editor',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Editor'
+                                },
+                                {
+                                    'label': 'Sprite Masks',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Sprite Masks'
+                                }
+                            ]
+                        },
+                        {
+                            'label': 'Physics Reference 2D',
 
-                        'expandedIcon': 'fa-folder-open',
-                        'collapsedIcon': 'fa-folder',
-                        'children': [
-                            {
-                                'label': 'Physics 2D Settings',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Physics 2D Settings'
-                            },
-                            {
-                                'label': 'Rigidbody 2D',
-                                'icon': 'fa-file-image-o',
-                                'data': 'Rigidbody 2D'
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
+                            'expandedIcon': 'fa-folder-open',
+                            'collapsedIcon': 'fa-folder',
+                            'children': [
+                                {
+                                    'label': 'Physics 2D Settings',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Physics 2D Settings'
+                                },
+                                {
+                                    'label': 'Rigidbody 2D',
+                                    'icon': 'fa-file-image-o',
+                                    'data': 'Rigidbody 2D'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
         distributions: ['5.0', '5.1', '5.2', '5.3', '5.4'],
         languages: ['English', 'Español', 'Deutsch', 'Française']
     }
@@ -1481,6 +1499,50 @@ app.get('/api/getOperations', function (req, res) {
                 "title": "Get Operation",
                 "body": {
                     "cmsOperation": "GetOperationList",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.get('/api/Publishing/GetPublishQueues', function (req, res) {
+    responseID = 113;
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Get PublishQueues",
+                "body": {
+                    "cmsOperation": "GetPublishQueues",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.post('/api/Publishing/PublishDistribution', function (req, res) {
+    responseID = 114;
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Post PublishDistribution",
+                "body": {
+                    "cmsOperation": "PublishDistribution",
                     "notificationTopic": "NA",
                     "notificationType": 0,
                     "responseId": responseID
@@ -2064,60 +2126,60 @@ var operationStatusArray = [
 
 var publishQueueArray = [
     {
-      "publishQueueId": "67316f75-04fe-424c-a3ed-d36d5cc0c82c",
-      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
-      "distributionName": "DocWorksDistributions-14Dec001",
-      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
-      "publishedDate": 1515658639,
-      "publishStatus": 2,
-      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+        "publishQueueId": "67316f75-04fe-424c-a3ed-d36d5cc0c82c",
+        "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+        "distributionName": "DocWorksDistributions-14Dec001",
+        "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+        "publishedDate": 1515658639,
+        "publishStatus": 2,
+        "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
     },
     {
-      "publishQueueId": "44d56f3c-30b2-435b-a568-a0d73eb8ba05",
-      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
-      "distributionName": "DocWorksDistributions-14Dec001",
-      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
-      "publishedDate": 1515658881,
-      "publishStatus": 2,
-      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+        "publishQueueId": "44d56f3c-30b2-435b-a568-a0d73eb8ba05",
+        "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+        "distributionName": "DocWorksDistributions-14Dec001",
+        "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+        "publishedDate": 1515658881,
+        "publishStatus": 2,
+        "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
     },
     {
-      "publishQueueId": "5c915f78-edb0-43c0-af28-f5d8f9098ad6",
-      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
-      "distributionName": "DocWorksDistributions-14Dec001",
-      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
-      "publishedDate": 1515659680,
-      "publishStatus": 2,
-      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+        "publishQueueId": "5c915f78-edb0-43c0-af28-f5d8f9098ad6",
+        "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+        "distributionName": "DocWorksDistributions-14Dec001",
+        "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+        "publishedDate": 1515659680,
+        "publishStatus": 2,
+        "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
     },
     {
-      "publishQueueId": "44d5ceea-4c7c-4fba-809e-fece8846c488",
-      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
-      "distributionName": "DocWorksDistributions-14Dec001",
-      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
-      "publishedDate": 1515659680,
-      "publishStatus": 2,
-      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+        "publishQueueId": "44d5ceea-4c7c-4fba-809e-fece8846c488",
+        "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+        "distributionName": "DocWorksDistributions-14Dec001",
+        "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+        "publishedDate": 1515659680,
+        "publishStatus": 2,
+        "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
     },
     {
-      "publishQueueId": "5b7ed0a1-0b2f-4ae7-85a7-1ce429118544",
-      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
-      "distributionName": "DocWorksDistributions-14Dec001",
-      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
-      "publishedDate": 1515659681,
-      "publishStatus": 2,
-      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+        "publishQueueId": "5b7ed0a1-0b2f-4ae7-85a7-1ce429118544",
+        "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+        "distributionName": "DocWorksDistributions-14Dec001",
+        "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+        "publishedDate": 1515659681,
+        "publishStatus": 2,
+        "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
     },
     {
-      "publishQueueId": "c0a52d22-2025-447e-a5c8-3052b2ef3b89",
-      "projectName": "DocWorksMasterTemp-Project-14Dec-001",
-      "distributionName": "DocWorksDistributions-14Dec001",
-      "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
-      "publishedDate": 1515659682,
-      "publishStatus": 2,
-      "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
+        "publishQueueId": "c0a52d22-2025-447e-a5c8-3052b2ef3b89",
+        "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+        "distributionName": "DocWorksDistributions-14Dec001",
+        "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
+        "publishedDate": 1515659682,
+        "publishStatus": 2,
+        "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
     }
-  ];
+];
 
 console.log('server started');
 
