@@ -1513,8 +1513,7 @@ app.get('/api/getOperations', function (req, res) {
 })
 
 app.get('/api/Publishing/GetPublishQueues', function (req, res) {
-    responseID = 113;
-    console.log('responseId is: ' + responseID);
+    console.log('responseId is: 113');
     setTimeout(function () {
         var pushMessage = {
             "notification": {
@@ -1523,7 +1522,7 @@ app.get('/api/Publishing/GetPublishQueues', function (req, res) {
                     "cmsOperation": "GetPublishQueues",
                     "notificationTopic": "NA",
                     "notificationType": 0,
-                    "responseId": responseID
+                    "responseId": 113
                 }
             },
             "to": _token
@@ -1531,7 +1530,7 @@ app.get('/api/Publishing/GetPublishQueues', function (req, res) {
         sendFCMNotification(pushMessage);
 
     }, 5000)
-    res.send({ responseId: responseID });
+    res.send({ responseId: 113 });
 })
 
 app.post('/api/Publishing/PublishDistribution', function (req, res) {
