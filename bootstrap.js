@@ -9,35 +9,9 @@ var express = require('express'),
 app.use(express.static(path.join(__dirname, 'app')));
 
 const admin = require('firebase-admin');
-
 var serviceAccount = require("./unity3d-5c4ffb2c8348.json");
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-
+admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 var db = admin.firestore();
-
-var cityRef = db.collection('responses').doc('123');
-
-var setSf = cityRef.set({
-    responseId: '1234', status: 'SUCCESS-REMOTE1'
-});
-
-var getDoc = cityRef.get()
-    .then(doc => {
-        if (!doc.exists) {
-            console.log('No such document!');
-        } else {
-            console.log('Document data:', doc.data());
-        }
-    })
-    .catch(err => {
-        console.log('Error getting document', err);
-    });
-
-
-
 
 var _token;
 var _responseId;
@@ -90,6 +64,33 @@ app.post('/api/Notification/TopicUnregister', function (req, res) {
 app.get('/api/ping', function (req, res) {
     res.send({ message: 'pong' });
 });
+
+var sendFCMNotification = function (pushMessage) {
+    console.log(JSON.stringify(pushMessage))
+    request({
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": auth
+        },
+        uri: 'https://fcm.googleapis.com/fcm/send',
+        body: JSON.stringify(pushMessage),
+        method: 'POST'
+    }, function (err, res, body) {
+        if (err) {
+            console.error("error in sending push notification " + err);
+        } else {
+            console.info("push notification send successfully" + JSON.stringify(body));
+        }
+    });
+    console.log(pushMessage.notification.body.responseId)
+    
+    var docRef = db.collection('responses').doc(pushMessage.notification.body.responseId.toString());
+
+    var setResponse = docRef.set({
+        notification: pushMessage.notification
+    });
+
+}
 
 app.get('/api/projects', function (req, res) {
 
@@ -285,32 +286,6 @@ app.post('/api/tag/remove', function (req, res) {
     }, 5000)
     res.send({ responseId: "11" });
 });
-
-var sendFCMNotification = function (pushMessage) {
-    console.log(JSON.stringify(pushMessage))
-    request({
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": auth
-        },
-        uri: 'https://fcm.googleapis.com/fcm/send',
-        body: JSON.stringify(pushMessage),
-        method: 'POST'
-    }, function (err, res, body) {
-        if (err) {
-            console.error("error in sending push notification " + err);
-        } else {
-            console.info("push notification send successfully" + JSON.stringify(body));
-        }
-    });
-    console.log(pushMessage.notification.body.responseId)
-    var docRef = db.collection('responses').doc(pushMessage.notification.body.responseId.toString());
-
-    var setResponse = docRef.set({
-        notification: pushMessage.notification
-    });
-
-}
 
 app.get('/api/StaticFields/DocumentationType', function (req, res) {
     res.send(typeOfContentArray);
@@ -642,7 +617,7 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { nodeList: liveDraftNodeArray } });
             break;
         case "116":
-            res.send({ content: { projects: publishProjects } }); 
+            res.send({ content: { projects: publishProjects } });
             break;
         default:
             break;
