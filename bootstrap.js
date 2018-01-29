@@ -8,6 +8,37 @@ var express = require('express'),
 
 app.use(express.static(path.join(__dirname, 'app')));
 
+const admin = require('firebase-admin');
+
+var serviceAccount = require("./unity3d-5c4ffb2c8348.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
+
+var db = admin.firestore();
+
+var cityRef = db.collection('responses').doc('123');
+
+var setSf = cityRef.set({
+    responseId: '1234', status: 'SUCCESS-REMOTE1'
+});
+
+var getDoc = cityRef.get()
+    .then(doc => {
+        if (!doc.exists) {
+            console.log('No such document!');
+        } else {
+            console.log('Document data:', doc.data());
+        }
+    })
+    .catch(err => {
+        console.log('Error getting document', err);
+    });
+
+
+
+
 var _token;
 var _responseId;
 
@@ -104,7 +135,12 @@ app.post('/api/projects', function (req, res) {
             "to": _token
         }
         sendFCMNotification(pushMessage);
+        var docRef = db.collection('Project').doc('CreateProject');
 
+        var setResponse = docRef.set({
+            ticks: new Date().toTimeString(),
+            notification: pushMessage.notification
+        });
     }, 5000)
     res.send({ responseId: "1" });
 
@@ -267,6 +303,13 @@ var sendFCMNotification = function (pushMessage) {
             console.info("push notification send successfully" + JSON.stringify(body));
         }
     });
+    console.log(pushMessage.notification.body.responseId)
+    var docRef = db.collection('responses').doc(pushMessage.notification.body.responseId.toString());
+
+    var setResponse = docRef.set({
+        notification: pushMessage.notification
+    });
+
 }
 
 app.get('/api/StaticFields/DocumentationType', function (req, res) {
@@ -594,6 +637,12 @@ app.get('/api/Responses/:respId', function (req, res) {
                     }
                 }
             });
+            break;
+        case "115": // get live draft
+            res.send({ content: { nodeList: liveDraftNodeArray } });
+            break;
+        case "116":
+            res.send({ content: { projects: publishProjects } }); 
             break;
         default:
             break;
@@ -1555,6 +1604,51 @@ app.post('/api/Publishing/PublishDistribution', function (req, res) {
     res.send({ responseId: responseID });
 })
 
+app.get('/api/Publishing/GetNodesForLiveDraftsAfterDistributionPublish/:nodeId', function (req, res) {
+    responseID = 115;
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Post PublishDistribution",
+                "body": {
+                    "cmsOperation": "GetNodesForLiveDraftsAfterDistributionPublish",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+app.get('/api/Publishing/GetDistributionsQueuedForPublish', function (req, res) {
+    responseID = 116;
+    console.log('responseId is: ' + responseID);
+    setTimeout(function () {
+        var pushMessage = {
+            "notification": {
+                "title": "Post PublishDistribution",
+                "body": {
+                    "cmsOperation": "GetDistributionsQueuedForPublish",
+                    "notificationTopic": "NA",
+                    "notificationType": 0,
+                    "responseId": responseID
+                }
+            },
+            "to": _token
+        }
+        sendFCMNotification(pushMessage);
+
+    }, 5000)
+    res.send({ responseId: responseID });
+})
+
+
 var projectData = [
     { 'id': '1', 'projectName': 'Unity1', 'repoUrl': 'Unity1.com' },
     { 'id': '2', 'projectName': 'Unity2', 'repoUrl': 'Unity2.com' },
@@ -2171,13 +2265,128 @@ var publishQueueArray = [
     },
     {
         "publishQueueId": "c0a52d22-2025-447e-a5c8-3052b2ef3b89",
-        "projectName": "DocWorksMasterTemp-Project-14Dec-001",
+        "projectName": "asd",
         "distributionName": "DocWorksDistributions-14Dec001",
         "publishedBy": "S-1-5-21-1210654208-2246142303-2829877410-17601",
         "publishedDate": 1515659682,
         "publishStatus": 2,
         "zipFileLink": "https://googledocmdstorage.blob.core.windows.net/cmspublishingstaging/Manuals/2018.1/Manuals_2018.1.zip"
     }
+];
+
+var liveDraftNodeArray = [
+    {
+        "nodeId": "5a5e1240334ee78790d27af9",
+        "nodeName": "UnityManual"
+    },
+    {
+        "nodeId": "5a5e1240334ee78790d27afa",
+        "nodeName": "UnityManual"
+    },
+    {
+        "nodeId": "5a5e1240334ee78790d27afb",
+        "nodeName": "ManualVersions"
+    },
+    {
+        "nodeId": "5a5e1240334ee78790d27afc",
+        "nodeName": "Switching between Unity versions"
+    },
+    {
+        "nodeId": "5a5e1240334ee78790d27afd",
+        "nodeName": "OfflineDocumentation"
+    },
+    {
+        "nodeId": "5a5e1240334ee78790d27afe",
+        "nodeName": "WhatsNew56"
+    },
+    {
+        "nodeId": "5a5e1240334ee78790d27aff",
+        "nodeName": "Leave Feedback"
+    },
+    {
+        "nodeId": "5a5e1240334ee78790d27b00",
+        "nodeName": "InstallingUnity"
+    },
+    {
+        "nodeId": "5a5e1240334ee78790d27b01",
+        "nodeName": "Deploying Unity Offline"
+    },
+    {
+        "nodeId": "5a5e122b334ee78790d27002",
+        "nodeName": "UnityManualWithDraftLevel3"
+    }
+];
+
+var publishProjects = [
+
+    {
+
+        "projectId": "5a619f497c78f958a80d8a53",
+
+        "projectName": "DocWorksMasterTemp-Project-19Jan-001",
+
+        "typeOfContent": 3,
+
+        "distributions": [
+
+            {
+
+                "distributionId": "5a619fc47c78f958a80d8a54",
+
+                "distributionName": "DocWorksDistributions-19Jan001",
+
+                "liveDraftsToBePublishedCount": 3
+
+            },
+
+            {
+
+                "distributionId": "5a657d50c10eb5315c25bb37",
+
+                "distributionName": "DocWorksDistributions-22Jan001",
+
+                "liveDraftsToBePublishedCount": 0
+
+            },
+
+            {
+
+                "distributionId": "5a657d6fc10eb5315c25bb53",
+
+                "distributionName": "DocWorksDistributions-22Jan002",
+
+                "liveDraftsToBePublishedCount": 0
+
+            }
+
+        ]
+
+    },
+
+    {
+
+        "projectId": "5a66babf171d946220736c23",
+
+        "projectName": "DocWorksMasterTemp-Project-23Jan-001",
+
+        "typeOfContent": 3,
+
+        "distributions": [
+
+            {
+
+                "distributionId": "5a66bb14171d946220736c24",
+
+                "distributionName": "DocWorksDistributions-23Jan001",
+
+                "liveDraftsToBePublishedCount": 0
+
+            }
+
+        ]
+
+    }
+
 ];
 
 console.log('server started');
