@@ -304,7 +304,7 @@ var sendFCMNotification = function (pushMessage) {
         }
     });
     console.log(pushMessage.notification.body.responseId)
-    var docRef = db.collection('responses').doc(pushMessage.notification.body.responseId.toString());
+    var docRef = db.collection('response').doc(pushMessage.notification.body.responseId.toString());
 
     var setResponse = docRef.set({
         cmsOperation: pushMessage.notification.body.cmsOperation
