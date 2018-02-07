@@ -9,35 +9,11 @@ var express = require('express'),
 app.use(express.static(path.join(__dirname, 'app')));
 
 const admin = require('firebase-admin');
-
 var serviceAccount = require("./unity3d-5c4ffb2c8348.json");
-
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
-
 var db = admin.firestore();
-
-var cityRef = db.collection('responses').doc('1');
-
-// var setSf = cityRef.set({
-//     responseId: '1234', status: 'SUCCESS-REMOTE1'
-// });
-
-var getDoc = cityRef.get()
-    .then(doc => {
-        if (!doc.exists) {
-            console.log('No such document!');
-        } else {
-            console.log('Document data:', doc.data());
-        }
-    })
-    .catch(err => {
-        console.log('Error getting document', err);
-    });
-
-
-
 
 var _token;
 var _responseId;
@@ -59,151 +35,75 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-var serverKey = 'AAAAogRJ72o:APA91bEeeQ7JM8GdWOOX4ifD1_acP-vpcpX8YKQ6X-7PSRLXINETjBAvNAiwdrqJrWhI8LWSxTyEdTeaw4B7stFyTnMEMPSw4AHxk_W13xigKJcrAAmJzP2DapbUecGfu7rCgAjWuSrk';
-
-//var serverKey = "=AAAAwC9R64E:APA91bF8x_RKTJrsM5CZkrD9Uw_dDyjGK-aAI8EyuCyMzqoRte7F5ioFd2wp1C1-dOsUbQn3K_gKwLBO4Ho1_ztIbJJH4P7eIcNFFU-DrVbYrEcwuGbSEr3ZstzIFSRXfjWd_ZvDikbm";
-var auth = "key=" + serverKey;
-app.post('/api/Notification/DeviceRegister', function (req, res) {
-    var token = req.body.FcmId;
-    console.log('token ' + token);
-
-    if (_token) {
-        console.log("_token exists: " + _token);
-        return;
-    }
-    _token = token;
-    res.send({ result: 'Success' });
-});
-
-app.post('/api/Notification/TopicRegister', function (req, res) {
-    var topic = req.body.topic;
-    console.log('subscribeTopic ' + topic);
-    res.send({ status: 'SUCCESS' });
-});
-
-app.post('/api/Notification/TopicUnregister', function (req, res) {
-    var topic = req.body.topic;
-    console.log('unsubscribeTopic ' + topic);
-    res.send({ status: 'SUCCESS' });
-});
-
 app.get('/api/ping', function (req, res) {
     res.send({ message: 'pong' });
 });
 
-app.get('/api/projects', function (req, res) {
-
-    console.log('GET projects called, sending response id ' + _responseId);
-    console.log('Waiting for 30 seconds to simulate get project call');
-
+var addResponsesToFireStore = function (cmsOperation, NotifcationType, Topic) {
+    var ticks = new Date().getTime();
+    var responseId = cmsOperation + ticks;
+    NotifcationType = NotifcationType ? NotifcationType : '0';
     setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Get Projects",
-                "body": {
-                    "cmsOperation": "GetProjects",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "1"
-                }
-            },
-            "to": _token
+        switch (NotifcationType) {
+            case '0':
+                var docRef = db.collection('Response').doc(responseId.toString());
+                var setResponse = docRef.set({
+                    CmsOperation: cmsOperation,
+                    responseId: responseId.toString()
+                });
+                break;
+            case '1':
+                var responseDocRef = db.collection('Response').doc(responseId.toString());
+                var setResponse = responseDocRef.set({
+                    CmsOperation: cmsOperation,
+                    responseId: responseId.toString()
+                });
+
+                var docRef = db.collection(Topic).doc(cmsOperation);
+                var setResponse = docRef.set({
+                    UpdatedTimeInEpoch: new Date().getTime(),
+                });
+                break;
         }
-        sendFCMNotification(pushMessage);
+    }, 5000);
+    return responseId;
+};
 
-    }, 5000)
-    res.send({ responseId: "1" });
-
+app.get('/api/projects', function (req, res) {
+    var responseId = addResponsesToFireStore('GetProjects', '0', '');
+    res.send({ responseId: responseId });
 });
 
 app.post('/api/projects', function (req, res) {
-
-    console.log('Create projects called, sending response id ' + _responseId);
-    console.log('Waiting for 30 seconds to simulate get project call');
-
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Create Projects",
-                "body": {
-                    "cmsOperation": "CreateProject",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "1"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-        var docRef = db.collection('Project').doc('CreateProject');
-
-        var setResponse = docRef.set({
-            ticks: new Date().toTimeString(),
-            notification: pushMessage.notification
-        });
-    }, 5000)
-    res.send({ responseId: "1" });
-
+    var responseId = addResponsesToFireStore('CreateProject', '1', 'Project');
+    res.send({ responseId: responseId });
 });
 
 app.get('/api/Distributions/:id/nodes', function (req, res) {
+    var ticks = new Date().getTime();
+    var responseId = 'GetNodesForDistribution' + ticks;
     setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Get Tree",
-                "body": {
-                    "cmsOperation": "GetNodesForDistribution",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "2"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
+        addResponsesToFireStore('GetNodesForDistribution', responseId);
     }, 5000)
-    res.send({ responseId: "2" });
+    res.send({ responseId: responseId });
 });
 
 app.post('/api/drafts', function (req, res) {
+    var ticks = new Date().getTime();
+    var responseId = 'CreateDraft' + ticks;
     setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Create Draft",
-                "body": {
-                    "cmsOperation": "CreateDraft",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "53"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
+        addResponsesToFireStore('CreateDraft', responseId);
     }, 5000)
-    res.send({ responseId: "53" });
+    res.send({ responseId: responseId });
 });
 
 app.post('/api/tagGroups', function (req, res) {
+    var ticks = new Date().getTime();
+    var responseId = 'CreateTagGroup' + ticks;
     setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Create Tag Group",
-                "body": {
-                    "cmsOperation": "CreateTagGroup",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "22"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
+        addResponsesToFireStore('CreateTagGroup', responseId);
     }, 5000)
-    res.send({ responseId: "22" });
+    res.send({ responseId: responseId });
 });
 
 app.post('/api/tags', function (req, res) {
@@ -287,25 +187,8 @@ app.post('/api/tag/remove', function (req, res) {
 });
 
 var sendFCMNotification = function (pushMessage) {
-    console.log(JSON.stringify(pushMessage))
-    request({
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": auth
-        },
-        uri: 'https://fcm.googleapis.com/fcm/send',
-        body: JSON.stringify(pushMessage),
-        method: 'POST'
-    }, function (err, res, body) {
-        if (err) {
-            console.error("error in sending push notification " + err);
-        } else {
-            console.info("push notification send successfully" + JSON.stringify(body));
-        }
-    });
     console.log(pushMessage.notification.body.responseId)
-    var docRef = db.collection('response').doc(pushMessage.notification.body.responseId.toString());
-
+    var docRef = db.collection('responses').doc(pushMessage.notification.body.responseId.toString());
     var setResponse = docRef.set({
         cmsOperation: pushMessage.notification.body.cmsOperation
     });
@@ -339,13 +222,17 @@ app.get('/api/Repositories', function (req, res) {
 
 app.get('/api/Responses/:respId', function (req, res) {
     var respId = req.params.respId;
+    //1517-9107-7161-2 = 13
+    var length = respId.length - 13;
+    var tt = respId.substring(0, length);
+    console.log(tt);
     var tempData = null;
-    switch (respId) {
+    switch (tt) {
         case "3": //get content type
             tempData = typeOfContentArray;
             res.send({ data: tempData });
             break;
-        case "1": // get project
+        case "GetProjects": // get project
             res.send({ content: { projects: projectArray } });
             break;
         case "2": // get Tree Deafts
@@ -642,7 +529,7 @@ app.get('/api/Responses/:respId', function (req, res) {
             res.send({ content: { nodeList: liveDraftNodeArray } });
             break;
         case "116":
-            res.send({ content: { projects: publishProjects } }); 
+            res.send({ content: { projects: publishProjects } });
             break;
         default:
             break;
