@@ -80,158 +80,56 @@ app.post('/api/projects', function (req, res) {
 });
 
 app.get('/api/Distributions/:id/nodes', function (req, res) {
-    var ticks = new Date().getTime();
-    var responseId = 'GetNodesForDistribution' + ticks;
-    setTimeout(function () {
-        addResponsesToFireStore('GetNodesForDistribution', responseId);
-    }, 5000)
+    var responseId = addResponsesToFireStore('GetNodesForDistribution', '0', '');
     res.send({ responseId: responseId });
 });
 
 app.post('/api/drafts', function (req, res) {
-    var ticks = new Date().getTime();
-    var responseId = 'CreateDraft' + ticks;
-    setTimeout(function () {
-        addResponsesToFireStore('CreateDraft', responseId);
-    }, 5000)
+    var responseId = addResponsesToFireStore('CreateDraft', '1', 'Draft');
     res.send({ responseId: responseId });
 });
 
 app.post('/api/tagGroups', function (req, res) {
-    var ticks = new Date().getTime();
-    var responseId = 'CreateTagGroup' + ticks;
-    setTimeout(function () {
-        addResponsesToFireStore('CreateTagGroup', responseId);
-    }, 5000)
+    var responseId = addResponsesToFireStore('CreateTagGroup', '1', 'TagGroup');
     res.send({ responseId: responseId });
 });
 
 app.post('/api/tags', function (req, res) {
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Create Tag ",
-                "body": {
-                    "cmsOperation": "CreateTag",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "23"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
-    }, 5000)
-    res.send({ responseId: "23" });
+    var responseId = addResponsesToFireStore('CreateTag', '1', 'TagGroup');
+    res.send({ responseId: responseId });
 });
 
 app.post('/api/nodes/update', function (req, res) {
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Update Node",
-                "body": {
-                    "cmsOperation": "UpdateNode",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "17"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
-    }, 5000)
-    res.send({ responseId: "17" });
+    var responseId = addResponsesToFireStore('UpdateNode', '1', 'Node');
+    res.send({ responseId: responseId });
 });
 
 app.post('/api/tag/add', function (req, res) {
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Add Tag",
-                "body": {
-                    "cmsOperation": "AddTag",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "10"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
-    }, 5000)
-    res.send({ responseId: "10" });
+    var responseId = addResponsesToFireStore('AddTag', '1', 'TagGroup');
+    res.send({ responseId: responseId });
 });
 
 app.post('/api/tag/remove', function (req, res) {
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Remove Tag",
-                "body": {
-                    "cmsOperation": "RemoveTag",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": "11"
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
-    }, 5000)
-    res.send({ responseId: "11" });
+    var responseId = addResponsesToFireStore('RemoveTag', '1', 'TagGroup');
+    res.send({ responseId: responseId });
 });
-
-var sendFCMNotification = function (pushMessage) {
-    console.log(pushMessage.notification.body.responseId)
-    var docRef = db.collection('responses').doc(pushMessage.notification.body.responseId.toString());
-    var setResponse = docRef.set({
-        cmsOperation: pushMessage.notification.body.cmsOperation
-    });
-
-}
 
 app.get('/api/StaticFields/DocumentationType', function (req, res) {
     res.send(typeOfContentArray);
 });
 
 app.get('/api/Repositories', function (req, res) {
-
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "add project",
-                "body": {
-                    "cmsOperation": "GetRepositoryList",
-                    "notificationTopic":
-                        "NA", "notificationType": 0,
-                    "responseId": 51
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-    }, 10000);
-
-    res.send({ responseId: 51 });
+    var responseId = addResponsesToFireStore('GetRepositoryList', '0', '');
+    res.send({ responseId: responseId });
 });
 
 app.get('/api/Responses/:respId', function (req, res) {
     var respId = req.params.respId;
-    //1517-9107-7161-2 = 13
     var length = respId.length - 13;
     var tt = respId.substring(0, length);
     console.log(tt);
     var tempData = null;
     switch (tt) {
-        case "3": //get content type
-            tempData = typeOfContentArray;
-            res.send({ data: tempData });
-            break;
         case "GetProjects": // get project
             res.send({ content: { projects: projectArray } });
             break;
