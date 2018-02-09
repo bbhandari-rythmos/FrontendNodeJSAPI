@@ -123,6 +123,37 @@ app.get('/api/Repositories', function (req, res) {
     res.send({ responseId: responseId });
 });
 
+app.get('/api/users/GetSystemAdmin', function (req, res) {
+    var responseId = addResponsesToFireStore('GetSystemAdmin', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/Users/GetUserDetails', function (req, res) {
+    var responseId = addResponsesToFireStore('GetUserDetails', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/Users/:userId/AssignOrRemoveSystemAdmin', function (req, res) {
+    var responseId = addResponsesToFireStore('AssignOrRemoveSystemAdmin', '1', 'User');
+    res.send({ responseId: responseId });
+});
+
+app.get('/api/Projects/:projectId/GetProjectAdmin', function (req, res) {
+    var responseId = addResponsesToFireStore('GetProjectAdmin', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/Users/GetUserDetailsForProject', function (req, res) {
+    var responseId = addResponsesToFireStore('GetUserDetailsForProject', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/Projects/:projectId/AssignOrRemoveProjectAdmin', function (req, res) {
+    var responseId = addResponsesToFireStore('AssignOrRemoveSystemAdmin', '1', 'User');
+    res.send({ responseId: responseId });
+});
+
+
 app.get('/api/Responses/:respId', function (req, res) {
     var respId = req.params.respId;
     var length = respId.length - 13;
@@ -133,6 +164,24 @@ app.get('/api/Responses/:respId', function (req, res) {
         case "GetProjects": // get project
             res.send({ content: { projects: projectArray } });
             break;
+        case "GetSystemAdmin"://get System Admins
+            res.send({ content: { userDetails: userDetails } });
+            break;
+        case "GetUserDetails":
+            res.send({ content: { userDetails: searchedUsers } });
+            break;
+        case "AssignOrRemoveSystemAdmin":
+            res.send({ content: { status: 'OK' } });
+            break
+        case "GetProjectAdmin"://get System Admins
+            res.send({ content: { userDetails: userDetails } });
+            break;
+        case "GetUserDetailsForProject":
+            res.send({ content: { userDetails: searchedUsers } });
+            break;
+        case "AssignOrRemoveProjectAdmin":
+            res.send({ content: { status: 'OK' } });
+            break
         case "2": // get Tree Deafts
             res.send({ content: { nodeList: TreeDrafts } });
             break;
@@ -205,7 +254,7 @@ app.get('/api/Responses/:respId', function (req, res) {
                 }
             });
             break;
-        case "21": // get tag Groups
+        case "GetAllTagGroupsAndTags": // get tag Groups
             res.send({ content: { tagGroups: tagGroups } });
             break;
         case "22": // Create Tag Group
@@ -723,27 +772,8 @@ app.get('/api/Projects/:projectId/tags', function (req, res) {
 });
 
 app.get('/api/tagGroups', function (req, res) {
-    console.log('GET Tag Groups called, sending response id ' + _responseId);
-    console.log('Waiting for 30 seconds to simulate get call');
-    var responseID = 21;
-    setTimeout(function () {
-        var pushMessage = {
-            "notification": {
-                "title": "Get Tag Groups",
-                "body": {
-                    "cmsOperation": "GetAllTagGroups",
-                    "notificationTopic": "NA",
-                    "notificationType": 0,
-                    "responseId": responseID
-                }
-            },
-            "to": _token
-        }
-        sendFCMNotification(pushMessage);
-
-    }, 5000)
-    res.send({ responseId: responseID });
-
+    var responseId = addResponsesToFireStore('GetAllTagGroupsAndTags', '0', '');
+    res.send({ responseId: responseId });
 });
 
 app.get('/api/draftTags/:draftId', function (req, res) {
@@ -1711,6 +1741,69 @@ var tagGroups = [
         'tags': tags
     }];
 
+var userDetails= [
+    {
+        "userId": "5a7980b349c7bd06003474c9",
+        "firstName": "Pavan",
+        "lastName": "Reddy",
+        "emailId": "pavanr@unitydevlab.local",
+        "createdBy": null,
+        "createdDate": 1517912243
+    },
+    {
+        "userId": "5a7980b349c7bd06003474c8",
+        "firstName": "Shashi",
+        "lastName": "Gunda",
+        "emailId": "shashig@unitydevlab.local",
+        "createdBy": null,
+        "createdDate": 1517912243
+    },
+    {
+        "userId": "5a7980b349c7bd06003474c7",
+        "firstName": "sahu",
+        "lastName": "mohit",
+        "emailId": "sahum@unitydevlab.local",
+        "createdBy": null,
+        "createdDate": 1517912243
+    },
+    {
+        "userId": "5a7980b349c7bd06003474c6",
+        "firstName": "bandari",
+        "lastName": "bupendra",
+        "emailId": "bandarib@unitydevlab.local",
+        "createdBy": null,
+        "createdDate": 1517912243
+    }
+
+] 
+
+var searchedUsers= [
+    {
+        "userId": "5a7980b349c7bd06003474c0",
+        "firstName": "Shashi",
+        "lastName": "Kiran",
+        "emailId": "shashik@unitydevlab.local",
+        "createdBy": null,
+        "createdDate": 1517912243
+    },
+    {
+        "userId": "5a7980b349c7bd06003474c1",
+        "firstName": "sahu",
+        "lastName": "ranjan",
+        "emailId": "sahur@unitydevlab.local",
+        "createdBy": null,
+        "createdDate": 1517912243
+    },
+    {
+        "userId": "5a7980b349c7bd06003474c6",
+        "firstName": "bandari",
+        "lastName": "bupendra",
+        "emailId": "bandarib@unitydevlab.local",
+        "createdBy": null,
+        "createdDate": 1517912243
+    }
+
+] 
 var draftTags = [
     { 'tagId': '1', 'tagName': 'EN', 'tagGroup': 'language', 'tagColor': 'primary' },
     { 'tagId': '5', 'tagName': 'novice', 'tagGroup': 'level', 'tagColor': 'warn' },
