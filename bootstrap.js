@@ -69,91 +69,6 @@ var addResponsesToFireStore = function (cmsOperation, NotifcationType, Topic) {
     return responseId;
 };
 
-app.get('/api/projects', function (req, res) {
-    var responseId = addResponsesToFireStore('GetProjects', '0', '');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/projects', function (req, res) {
-    var responseId = addResponsesToFireStore('CreateProject', '1', 'Project');
-    res.send({ responseId: responseId });
-});
-
-app.get('/api/Distributions/:id/nodes', function (req, res) {
-    var responseId = addResponsesToFireStore('GetNodesForDistribution', '0', '');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/drafts', function (req, res) {
-    var responseId = addResponsesToFireStore('CreateDraft', '1', 'Draft');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/tagGroups', function (req, res) {
-    var responseId = addResponsesToFireStore('CreateTagGroup', '1', 'TagGroup');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/tags', function (req, res) {
-    var responseId = addResponsesToFireStore('CreateTag', '1', 'TagGroup');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/nodes/update', function (req, res) {
-    var responseId = addResponsesToFireStore('UpdateNode', '1', 'Node');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/tag/add', function (req, res) {
-    var responseId = addResponsesToFireStore('AddTag', '1', 'TagGroup');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/tag/remove', function (req, res) {
-    var responseId = addResponsesToFireStore('RemoveTag', '1', 'TagGroup');
-    res.send({ responseId: responseId });
-});
-
-app.get('/api/StaticFields/DocumentationType', function (req, res) {
-    res.send(typeOfContentArray);
-});
-
-app.get('/api/Repositories', function (req, res) {
-    var responseId = addResponsesToFireStore('GetRepositoryList', '0', '');
-    res.send({ responseId: responseId });
-});
-
-app.get('/api/users/GetSystemAdmin', function (req, res) {
-    var responseId = addResponsesToFireStore('GetSystemAdmin', '0', '');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/Users/GetUserDetails', function (req, res) {
-    var responseId = addResponsesToFireStore('GetUserDetails', '0', '');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/Users/:userId/AssignOrRemoveSystemAdmin', function (req, res) {
-    var responseId = addResponsesToFireStore('AssignOrRemoveSystemAdmin', '1', 'User');
-    res.send({ responseId: responseId });
-});
-
-app.get('/api/Projects/:projectId/GetProjectAdmin', function (req, res) {
-    var responseId = addResponsesToFireStore('GetProjectAdmin', '0', '');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/Users/GetUserDetailsForProject', function (req, res) {
-    var responseId = addResponsesToFireStore('GetUserDetailsForProject', '0', '');
-    res.send({ responseId: responseId });
-});
-
-app.post('/api/Projects/:projectId/AssignOrRemoveProjectAdmin', function (req, res) {
-    var responseId = addResponsesToFireStore('AssignOrRemoveSystemAdmin', '1', 'User');
-    res.send({ responseId: responseId });
-});
-
-
 app.get('/api/Responses/:respId', function (req, res) {
     var respId = req.params.respId;
     var length = respId.length - 13;
@@ -481,8 +396,122 @@ app.get('/api/Responses/:respId', function (req, res) {
         default:
             break;
     }
+});
 
+app.get('/api/projects', function (req, res) {
+    var responseId = addResponsesToFireStore('GetProjects', '0', '');
+    res.send({ responseId: responseId });
+});
 
+app.post('/api/projects', function (req, res) {
+    var responseId = addResponsesToFireStore('CreateProject', '1', 'Project');
+    res.send({ responseId: responseId });
+});
+
+app.get('/api/Distributions/:id/nodes', function (req, res) {
+    var responseId = addResponsesToFireStore('GetNodesForDistribution', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/drafts', function (req, res) {
+    var responseId = addResponsesToFireStore('CreateDraft', '1', 'Draft');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/tagGroups', function (req, res) {
+    var responseId = addResponsesToFireStore('CreateTagGroup', '1', 'TagGroup');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/tags', function (req, res) {
+    var responseId = addResponsesToFireStore('CreateTag', '1', 'TagGroup');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/nodes/update', function (req, res) {
+    var responseId = addResponsesToFireStore('UpdateNode', '1', 'Node');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/tag/add', function (req, res) {
+    var responseId = addResponsesToFireStore('AddTag', '1', 'TagGroup');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/tag/remove', function (req, res) {
+    var responseId = addResponsesToFireStore('RemoveTag', '1', 'TagGroup');
+    res.send({ responseId: responseId });
+});
+
+app.get('/api/StaticFields/DocumentationType', function (req, res) {
+    res.send(typeOfContentArray);
+});
+
+app.get('/api/Repositories', function (req, res) {
+    var responseId = addResponsesToFireStore('GetRepositoryList', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.get('/api/users/GetSystemAdmin', function (req, res) {
+    var responseId = addResponsesToFireStore('GetSystemAdmin', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/Users/GetUserDetails', function (req, res) {
+    var responseId = addResponsesToFireStore('GetUserDetails', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/Users/:userId/AssignOrRemoveSystemAdmin', function (req, res) {
+    var responseId = addResponsesToFireStore('AssignOrRemoveSystemAdmin', '1', 'User');
+    res.send({ responseId: responseId });
+});
+
+app.get('/api/Projects/:projectId/GetProjectAdmin', function (req, res) {
+    var responseId = addResponsesToFireStore('GetProjectAdmin', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/Users/GetUserDetailsForProject', function (req, res) {
+    var responseId = addResponsesToFireStore('GetUserDetailsForProject', '0', '');
+    res.send({ responseId: responseId });
+});
+
+app.post('/api/Projects/:projectId/AssignOrRemoveProjectAdmin', function (req, res) {
+    var responseId = addResponsesToFireStore('AssignOrRemoveSystemAdmin', '1', 'User');
+    res.send({ responseId: responseId });
+});
+
+app.get('/api/RolesAndPermissions', function (req, res) {
+    res.send({
+        "isSystemAdmin": false,
+        "RolesAndPermissions": [
+            {
+                "roleId": "5a7aadf150541b15501b0a3d",
+                "name": "SystemAdmin",
+                "permissions": [
+                    "CreateProject",
+                    "CreateDistribution"
+                ]
+            },
+            {
+                "roleId": "5a7aadf150541a15501b0a3d",
+                "name": "ProjectAdmin",
+                "permissions": [
+                    "CreateProject",
+                    "CreateDistribution"
+                ]
+            },
+            {
+                "roleId": "5a7aadf150541a15501b0a3d",
+                "name": "Author",
+                "permissions": [
+                    "CreateProject",
+                    "CreateDistribution"
+                ]
+            }
+        ]
+    });
 });
 
 app.get('/api/DistributionsForCreate/:id', function (req, res) {
@@ -1463,7 +1492,9 @@ app.get('/api/Publishing/GetDistributionsQueuedForPublish', function (req, res) 
     res.send({ responseId: responseID });
 })
 
+var sendFCMNotification = function(asd){
 
+}
 var projectData = [
     { 'id': '1', 'projectName': 'Unity1', 'repoUrl': 'Unity1.com' },
     { 'id': '2', 'projectName': 'Unity2', 'repoUrl': 'Unity2.com' },
@@ -1741,7 +1772,7 @@ var tagGroups = [
         'tags': tags
     }];
 
-var userDetails= [
+var userDetails = [
     {
         "userId": "5a7980b349c7bd06003474c9",
         "firstName": "Pavan",
@@ -1775,9 +1806,9 @@ var userDetails= [
         "createdDate": 1517912243
     }
 
-] 
+]
 
-var searchedUsers= [
+var searchedUsers = [
     {
         "userId": "5a7980b349c7bd06003474c0",
         "firstName": "Shashi",
@@ -1803,7 +1834,7 @@ var searchedUsers= [
         "createdDate": 1517912243
     }
 
-] 
+]
 var draftTags = [
     { 'tagId': '1', 'tagName': 'EN', 'tagGroup': 'language', 'tagColor': 'primary' },
     { 'tagId': '5', 'tagName': 'novice', 'tagGroup': 'level', 'tagColor': 'warn' },
